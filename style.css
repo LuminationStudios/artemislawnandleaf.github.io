@@ -311,3 +311,54 @@ header {
 
 .contact-form input, .contact-form textarea { width: 92%; margin: 10px 0; padding: 10px; border: 2px solid #add8e6; border-radius: 12px; }
 .contact-form button { padding: 10px 20px; border: none; border-radius: 12px; background: linear-gradient(90deg, #ffb6c1, #add8e6); color: white; font-weight: bold; cursor: pointer; }
+
+/* Navbar centered */
+.navbar {
+  display: flex;
+  justify-content: center; /* Center the content */
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 15px 30px;
+  box-shadow: 0 4px 12px rgba(255,182,193,0.4), 0 4px 20px rgba(173,216,230,0.4);
+  border-radius: 0 0 20px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .nav-right {
+  display: flex;
+  gap: 30px;
+}
+
+/* Dropdown menu styled like other glow boxes */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 182, 193, 0.5), 0 0 30px rgba(173, 216, 230, 0.5);
+  padding: 10px;
+  min-width: 160px;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.dropdown-content a:hover {
+  background: rgba(255, 240, 245, 0.8);
+  box-shadow: 0 0 12px rgba(255, 182, 193, 0.6), 0 0 20px rgba(173, 216, 230, 0.6);
+}
+
+/* Keep dropdown visible on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
