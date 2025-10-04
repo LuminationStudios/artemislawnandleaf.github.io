@@ -4,7 +4,7 @@
 fetch("./websites.json")
   .then(response => response.json())
   .then(data => {
-    const container = document.querySelector("#websites-container");
+    const container = document.querySelector("#websites-grid");
     if (container) {
       data.forEach(project => {
         const card = document.createElement("div");
@@ -27,7 +27,7 @@ fetch("./websites.json")
 fetch("./roblox.json")
   .then(response => response.json())
   .then(data => {
-    const container = document.querySelector("#roblox-container");
+    const container = document.querySelector("#roblox-grid");
     if (container) {
       data.forEach(project => {
         const card = document.createElement("div");
@@ -43,6 +43,7 @@ fetch("./roblox.json")
     }
   })
   .catch(err => console.error("Error loading roblox.json:", err));
+
 
 // ===============================
 // Load Footer
