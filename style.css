@@ -1,0 +1,50 @@
+:root {
+  --bg: #FFF8F3;
+  --card: #FFF6EE;
+  --accent-1: #FFB88C;
+  --accent-2: #FFD27F;
+  --muted: #7C6B63;
+  --glow: 0 8px 24px rgba(255, 160, 90, 0.25);
+  --radius: 14px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* 🌸 Global button styles */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  transition: all 0.25s ease;
+  font-weight: 500;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: white;
+  box-shadow: var(--glow);
+  transform: translateY(-1px);
+}
+
+/* 🍁 Active page button */
+.btn.active {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: white;
+  box-shadow: var(--glow);
+}
+
+/* 🌿 Call-to-action */
+.btn.cta {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: white;
+  box-shadow: var(--glow);
+  font-weight: 600;
+}
+.btn.cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
