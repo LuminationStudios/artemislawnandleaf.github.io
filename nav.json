@@ -1,0 +1,9 @@
+{
+  "links": [
+    { "text": "Home", "href": "index.html" },
+    { "text": "Services", "href": "index.html#services" },
+    { "text": "Pricing", "href": "pricing.html" },
+    { "text": "About", "href": "about.html" },
+    { "text": "Contact", "href": "index.html#contact" }
+  ]
+}
