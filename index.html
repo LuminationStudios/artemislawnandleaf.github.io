@@ -40,6 +40,11 @@
     .contact .phone {font-weight: 700;}
     footer {margin-top: 36px; padding: 18px; border-radius: 12px; background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(250,245,240,0.6)); display: flex; justify-content: space-between; align-items: center;}
     @media (max-width: 880px) {.hero {grid-template-columns: 1fr;} nav {display: none;}}
+    nav a.active {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: white;
+  box-shadow: var(--glow);
+}
   </style>
 </head>
 <body>
@@ -49,10 +54,37 @@
         <div class="logo"><svg width="36" height="36" viewBox="0 0 24 24"><path fill="#FFB88C" d="M12 2c-1 2-4 4-6 6s-3 4 0 7 6 3 10 1 2-8-4-14z"/></svg></div>
         <div><div style="font-weight:700">Artemis Lawn & Leaf</div><div style="font-size:12px;color:#8b7a6f">Friendly seasonal yard cleanup</div></div>
       </div>
-      <nav>
-        <a class="btn cta" href="prices.html">Pricing</a>
-        <a class="btn cta" href="about.html">About</a>
-      </nav>
+<nav id="navbar"></nav>
+
+<script>
+  async function loadNavbar() {
+    try {
+      const res = await fetch('nav.json');
+      const data = await res.json();
+      const nav = document.getElementById('navbar');
+      const currentPage = window.location.pathname.split('/').pop();
+
+      data.links.forEach(link => {
+        const a = document.createElement('a');
+        a.textContent = link.text;
+        a.href = link.href;
+        a.classList.add('btn');
+
+        // Highlight active page
+        if (currentPage === link.href || (currentPage === '' && link.href === 'index.html')) {
+          a.classList.add('active');
+        }
+
+        nav.appendChild(a);
+      });
+    } catch (err) {
+      console.error('Error loading navbar:', err);
+    }
+  }
+
+  loadNavbar();
+</script>
+]
     </header>
     <main>
       <section id="home" class="hero">
