@@ -54,37 +54,8 @@
         <div class="logo"><svg width="36" height="36" viewBox="0 0 24 24"><path fill="#FFB88C" d="M12 2c-1 2-4 4-6 6s-3 4 0 7 6 3 10 1 2-8-4-14z"/></svg></div>
         <div><div style="font-weight:700">Artemis Lawn & Leaf</div><div style="font-size:12px;color:#8b7a6f">Friendly seasonal yard cleanup</div></div>
       </div>
-<nav id="navbar"></nav>
-
-<script>
-  async function loadNavbar() {
-    try {
-      const res = await fetch('nav.json');
-      const data = await res.json();
-      const nav = document.getElementById('navbar');
-      const currentPage = window.location.pathname.split('/').pop();
-
-      data.links.forEach(link => {
-        const a = document.createElement('a');
-        a.textContent = link.text;
-        a.href = link.href;
-        a.classList.add('btn');
-
-        // Highlight active page
-        if (currentPage === link.href || (currentPage === '' && link.href === 'index.html')) {
-          a.classList.add('active');
-        }
-
-        nav.appendChild(a);
-      });
-    } catch (err) {
-      console.error('Error loading navbar:', err);
-    }
-  }
-
-  loadNavbar();
-</script>
-]
+      <nav id="navbar"></nav>
+        <script src="navbar.js"></script>
     </header>
     <main>
       <section id="home" class="hero">
