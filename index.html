@@ -12,13 +12,13 @@
   <!-- 🌸 Shared stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Page-specific layout styles -->
   <style>
     html, body {
       height: 100%;
       background: var(--bg);
       margin: 0;
       color: var(--muted);
+      font-family: Inter, ui-sans-serif, system-ui;
     }
 
     .container {
@@ -107,8 +107,10 @@
       background: linear-gradient(180deg, #fffdf9, #fff7f1);
       box-shadow: 0 10px 30px rgba(200, 120, 60, 0.12);
       display: flex;
-      gap: 12px;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
+      gap: 12px;
     }
 
     .contact .avatar {
@@ -123,12 +125,21 @@
       font-weight: 700;
     }
 
-    .contact .info {
-      line-height: 1;
+    .quote-btn {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: var(--glow);
+      transition: all 0.2s ease;
     }
 
-    .contact .phone {
-      font-weight: 700;
+    .quote-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 184, 140, 0.4);
     }
 
     footer {
@@ -141,62 +152,58 @@
       align-items: center;
     }
 
+    /* 🌸 Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--glow);
+      width: 100%;
+      max-width: 400px;
+      text-align: left;
+    }
+
+    .modal-content input, .modal-content textarea, .modal-content select {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-family: inherit;
+    }
+
+    .modal-content button {
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .thankyou {
+      text-align: center;
+      padding: 20px;
+      display: none;
+      color: #4b3b34;
+    }
+
     @media (max-width: 880px) {
       .hero { grid-template-columns: 1fr; }
       nav { display: none; }
     }
-
-    .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: linear-gradient(180deg, #fffdf8, #fff5e9);
-  padding: 28px;
-  border-radius: 18px;
-  box-shadow: var(--glow);
-  width: 90%;
-  max-width: 420px;
-  position: relative;
-}
-
-.modal-content h2 {
-  margin-top: 0;
-  color: #7a5c3c;
-}
-
-.modal-content input,
-.modal-content textarea,
-.modal-content select {
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #e0c7aa;
-  background: #fffaf5;
-  font-size: 14px;
-}
-
-.modal-content button {
-  width: 100%;
-}
-
-.close {
-  position: absolute;
-  right: 12px;
-  top: 8px;
-  font-size: 22px;
-  cursor: pointer;
-  color: #a36d4d;
-}
-
   </style>
 </head>
 
@@ -214,7 +221,6 @@
           <div style="font-size:12px;color:#8b7a6f">Friendly seasonal yard cleanup</div>
         </div>
       </div>
-
       <nav id="navbar"></nav>
       <script src="navbar.js"></script>
     </header>
@@ -230,14 +236,12 @@
         <aside class="hero-card">
           <h3>Contact</h3>
           <div class="contact" id="contact-card">
-          <div class="avatar">AA</div>
-          <div class="info">
-          <div id="owner-name">Artemis Aldrich</div>
-          <div class="phone" id="owner-phone">Call or Text: (208)866-9846</div>
-          <div style="font-size:13px;color:#8b7a6f">Serving local neighborhoods</div>
+            <div class="avatar">AA</div>
+            <div id="owner-name">Artemis Aldrich</div>
+            <div class="phone" id="owner-phone">(208)866-9846</div>
+            <div style="font-size:13px;color:#8b7a6f">Serving local neighborhoods</div>
+            <button class="quote-btn" id="quoteBtn">Get Quote</button>
           </div>
-      </div>
-            <button class="btn cta" id="quoteBtn">Get Quote</button>
         </aside>
       </section>
 
@@ -253,11 +257,29 @@
     </footer>
   </div>
 
+  <!-- 🌿 Quote Modal -->
+  <div class="modal" id="quoteModal">
+    <div class="modal-content">
+      <h3>Request a Quote</h3>
+      <form id="quoteForm">
+        <input type="text" placeholder="Your Name" required />
+        <input type="text" placeholder="Phone or Email" required />
+        <select required>
+          <option value="">Select Service</option>
+          <option>Full Lawn Leaf Removal</option>
+          <option>One-time Cleanup</option>
+          <option>Snow</option>
+          <option>Junk Removal</option>
+        </select>
+        <textarea rows="3" placeholder="Additional details..."></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <div class="thankyou" id="thankYouMsg">✨ Thank you! We'll get back to you soon. ✨</div>
+    </div>
+  </div>
+
   <script>
     const SITE = {
-      businessName: "Artemis Lawn and Leaf",
-      owner: "Artemis Aldrich",
-      phone: "Call or Text: (208)866-9846",
       services: [
         { title: "Full Lawn Leaf Removal", desc: "Raking, bagging, and hauling—complete yard cleanups." },
         { title: "One-time Cleanups", desc: "Perfect for post-storm or pre-holiday yard prep." },
@@ -275,35 +297,39 @@
       el.innerHTML = `<h3>${s.title}</h3><p>${s.desc}</p>`;
       servicesGrid.appendChild(el);
     });
+
+    // 🌸 Modal Logic
+    const modal = document.getElementById('quoteModal');
+    const quoteBtn = document.getElementById('quoteBtn');
+    const form = document.getElementById('quoteForm');
+    const thankYou = document.getElementById('thankYouMsg');
+
+    quoteBtn.onclick = () => modal.style.display = 'flex';
+    window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
+
+    // 🌿 Replace this with your Apps Script Web App URL
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const [name, contact, service, message] = Array.from(e.target.elements).map(i => i.value);
+
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, contact, service, message })
+      });
+
+      form.style.display = "none";
+      thankYou.style.display = "block";
+      setTimeout(() => {
+        modal.style.display = "none";
+        thankYou.style.display = "none";
+        form.reset();
+        form.style.display = "block";
+      }, 3000);
+    });
   </script>
-
-  <!-- 🌿 Quote Form Modal -->
-<!-- <div id="quoteModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Request a Quote</h2>
-    <form id="quoteForm">
-      <label>Name</label>
-      <input type="text" required placeholder="Your name">
-
-      <label>Phone or Email</label>
-      <input type="text" required placeholder="How can we reach you?">
-
-      <label>Service</label>
-      <select>
-        <option>Leaf Cleanup</option>
-        <option>One-Time Cleanup</option>
-        <option>Snow Removal</option>
-        <option>Junk Removal</option>
-      </select>
-
-      <label>Message</label>
-      <textarea placeholder="Tell us about your yard..."></textarea>
-
-      <button type="submit" class="btn cta">Send Request</button>
-    </form>
-  </div> -->
-  
-</div>
 </body>
 </html>
