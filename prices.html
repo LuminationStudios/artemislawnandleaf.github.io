@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Artemis Lawn & Leaf</title>
-  <meta name="description" content="Artemis Lawn & Leaf — fast, friendly leaf removal and yard cleanup" />
+  <title>Pricing — Artemis Leaf & Lawn</title>
+  <meta name="description" content="Artemis Leaf & Lawn Pricing — affordable seasonal yard care and cleanup options" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23D97706' d='M12 2C8 6 6 9 6 12s2 6 6 8c4-2 6-6 6-8s-2-6-6-10z'/%3E%3C/svg%3E">
   <style>
     :root {
@@ -12,94 +12,120 @@
       --card: #FFF6EE;
       --accent-1: #FFB88C;
       --accent-2: #FFD27F;
-      --accent-3: #C7E8D2;
       --muted: #7C6B63;
-      --glass: rgba(255, 255, 255, 0.6);
       --glow: 0 8px 24px rgba(255, 160, 90, 0.25);
       --radius: 14px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    html, body {height: 100%; background: var(--bg); margin: 0; color: var(--muted);}
+    html, body {margin: 0; background: var(--bg); color: var(--muted);}
     .container {max-width: 1100px; margin: 0 auto; padding: 28px;}
     header {display: flex; align-items: center; justify-content: space-between; padding: 12px 0;}
-    .brand {display: flex; gap: 12px; align-items: center;}
-    .logo {width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); box-shadow: var(--glow);}
-    nav {display: flex; gap: 14px; align-items: center;}
-    a.btn {padding: 8px 14px; border-radius: 10px; text-decoration: none; background: transparent;}
+    .brand {display: flex; align-items: center; gap: 12px;}
+    .logo {width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); display: flex; align-items: center; justify-content: center; box-shadow: var(--glow);}
+    nav {display: flex; gap: 14px;}
+    a.btn {padding: 8px 14px; border-radius: 10px; text-decoration: none; color: var(--muted);}
     a.cta {background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: white; box-shadow: var(--glow);}
-    .hero {display: grid; grid-template-columns: 1fr 380px; gap: 28px; padding: 28px 0; align-items: center;}
-    .hero-card {background: linear-gradient(180deg, var(--card), var(--glass)); border-radius: var(--radius); padding: 28px; box-shadow: var(--glow); backdrop-filter: blur(6px);}
-    h1 {font-size: 36px; margin: 0 0 8px;}
-    p.lead {margin: 0 0 18px; color: #5b4c45;}
-    .services {display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 18px;}
-    .service {border-radius: 12px; padding: 18px; background: white; box-shadow: 0 8px 18px rgba(150, 110, 80, 0.08);}
-    .service h3 {margin: 0 0 8px;}
-    .contact {border-radius: 12px; padding: 18px; background: linear-gradient(180deg, #fffdf9, #fff7f1); box-shadow: 0 10px 30px rgba(200, 120, 60, 0.12); display: flex; gap: 12px; align-items: center;}
-    .contact .avatar {width: 64px; height: 64px; border-radius: 12px; background: linear-gradient(180deg, var(--accent-1), var(--accent-2)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;}
-    .contact .info {line-height: 1;}
-    .contact .phone {font-weight: 700;}
+    h1 {font-size: 36px; margin-bottom: 8px;}
+    p.lead {margin: 0 0 24px; color: #5b4c45;}
+    .pricing-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;}
+    .card {background: var(--card); border-radius: var(--radius); box-shadow: var(--glow); padding: 24px; text-align: center; transition: transform 0.2s ease;}
+    .card:hover {transform: translateY(-3px);}
+    .card h2 {margin: 0 0 6px;}
+    .card p {margin: 0 0 12px; color: #5b4c45;}
+    .price {font-size: 22px; font-weight: 700; color: #a1682a; margin-bottom: 14px;}
+    .tiers {display: flex; flex-direction: column; gap: 8px;}
+    .tier {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 10px rgba(150, 110, 80, 0.08);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .tier:hover {
+      box-shadow: 0 0 14px rgba(255, 190, 130, 0.6), 0 0 8px rgba(255, 190, 130, 0.3);
+      transform: translateY(-2px);
+    }
     footer {margin-top: 36px; padding: 18px; border-radius: 12px; background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(250,245,240,0.6)); display: flex; justify-content: space-between; align-items: center;}
-    @media (max-width: 880px) {.hero {grid-template-columns: 1fr;} nav {display: none;}}
+    @media (max-width: 880px) {nav {display: none;}}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div class="brand">
-        <div class="logo"><svg width="36" height="36" viewBox="0 0 24 24"><path fill="#FFB88C" d="M12 2c-1 2-4 4-6 6s-3 4 0 7 6 3 10 1 2-8-4-14z"/></svg></div>
-        <div><div style="font-weight:700">Artemis Lawn & Leaf</div><div style="font-size:12px;color:#8b7a6f">Friendly seasonal yard cleanup</div></div>
-      </div>
-      <nav></nav>
-    </header>
-    <main>
-      <section id="home" class="hero">
-        <div class="hero-card">
-          <h1>Fast & friendly leaf removal</h1>
-          <p class="lead">We clear leaves and other debris to make your yard ready for the season. Reliable same-week service in your neighborhood.</p>
-          <div class="services" id="services-list"></div>
+        <div class="logo">
+          <svg width="36" height="36" viewBox="0 0 24 24"><path fill="#FFB88C" d="M12 2c-1 2-4 4-6 6s-3 4 0 7 6 3 10 1 2-8-4-14z"/></svg>
         </div>
-        <aside class="hero-card">
-          <h3>Contact</h3>
-          <div class="contact" id="contact-card">
-            <div class="avatar">AA</div>
-            <div class="info">
-              <div id="owner-name">Artemis Aldrich</div>
-              <div class="phone" id="owner-phone">(208)866-9846</div>
-              <div style="font-size:13px;color:#8b7a6f">Serving local neighborhoods</div>
-            </div>
+        <div>
+          <div style="font-weight:700">Artemis Leaf & Lawn</div>
+          <div style="font-size:12px;color:#8b7a6f">Friendly seasonal yard cleanup</div>
+        </div>
+      </div>
+      <nav>
+        <a class="btn cta" href="#home">Home</a>
+        <a class="btn cta" href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Pricing</h1>
+      <p class="lead">Affordable, transparent seasonal cleanup packages to fit any yard or budget.</p>
+
+      <div class="pricing-grid">
+        <div class="card">
+          <h2>Leaf Cleanup</h2>
+          <p>Complete yard raking, bagging, and leaf removal.</p>
+          <div class="price">Starting at $79</div>
+          <div class="tiers">
+            <div class="tier">🍂 Basic — Small yard cleanup</div>
+            <div class="tier">🍁 Plus — Medium yard, bag & haul</div>
+            <div class="tier">🌳 Premium — Full property + disposal</div>
           </div>
-        </aside>
-      </section>
-      <section id="services">
-        <h2>Services</h2>
-        <div class="services" id="services-grid"></div>
-      </section>
+        </div>
+
+        <div class="card">
+          <h2>One-Time Cleanups</h2>
+          <p>Perfect for post-storm or seasonal refreshes.</p>
+          <div class="price">Starting at $99</div>
+          <div class="tiers">
+            <div class="tier">🍂 Basic — Quick debris pickup</div>
+            <div class="tier">🍁 Plus — Lawn & pathway cleanup</div>
+            <div class="tier">🌳 Premium — Full yard detailing</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Snow Removal</h2>
+          <p>Driveways, walkways, and entryways cleared fast.</p>
+          <div class="price">Starting at $119</div>
+          <div class="tiers">
+            <div class="tier">❄️ Basic — Walkway clearing</div>
+            <div class="tier">⛄ Plus — Walk + driveway</div>
+            <div class="tier">🌨️ Premium — Full property + salting</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Junk Removal</h2>
+          <p>Haul away old yard waste, furniture, or debris.</p>
+          <div class="price">Starting at $149</div>
+          <div class="tiers">
+            <div class="tier">🪵 Basic — 1 pickup load</div>
+            <div class="tier">🚛 Plus — Medium load + cleanup</div>
+            <div class="tier">🏠 Premium — Full property removal</div>
+          </div>
+        </div>
+      </div>
     </main>
+
     <footer>
-      <div>© <span id="year"></span> Artemis Lawn & Leaf</div>
+      <div>© <span id="year"></span> Artemis Leaf & Lawn</div>
       <div>Seasonal yard care & leaf removal</div>
     </footer>
   </div>
+
   <script>
-    const SITE = {
-      businessName: "Artemis Lawn and Leaf",
-      owner: "Artemis Aldrich",
-      phone: "(208)866-9846",
-      services: [
-        {title: "Full Lawn Leaf Removal", desc: "Raking, bagging, and hauling—complete yard cleanups."},
-        {title: "One-time Cleanups", desc: "Perfect for post-storm or pre-holiday yard prep."},
-        {title: "Snow", desc: "Shoveling walks and salting to prevent ice."},
-        {title: "Junk Removal", desc: "Ask us about Junk Removal too!"}
-      ]
-    };
     document.getElementById('year').textContent = new Date().getFullYear();
-    const servicesGrid = document.getElementById('services-grid');
-    SITE.services.forEach(s => {
-      const el = document.createElement('div');
-      el.className = 'service';
-      el.innerHTML = `<h3>${s.title}</h3><p>${s.desc}</p>`;
-      servicesGrid.appendChild(el);
-    });
   </script>
 </body>
 </html>
