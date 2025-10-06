@@ -145,6 +145,58 @@
       .hero { grid-template-columns: 1fr; }
       nav { display: none; }
     }
+
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: linear-gradient(180deg, #fffdf8, #fff5e9);
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: var(--glow);
+  width: 90%;
+  max-width: 420px;
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #7a5c3c;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e0c7aa;
+  background: #fffaf5;
+  font-size: 14px;
+}
+
+.modal-content button {
+  width: 100%;
+}
+
+.close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #a36d4d;
+}
+
   </style>
 </head>
 
@@ -178,13 +230,14 @@
         <aside class="hero-card">
           <h3>Contact</h3>
           <div class="contact" id="contact-card">
-            <div class="avatar">AA</div>
-            <div class="info">
-              <div id="owner-name">Artemis Aldrich</div>
-              <div class="phone" id="owner-phone">(208)866-9846</div>
-              <div style="font-size:13px;color:#8b7a6f">Serving local neighborhoods</div>
-            </div>
+          <div class="avatar">AA</div>
+          <div class="info">
+          <div id="owner-name">Artemis Aldrich</div>
+          <div class="phone" id="owner-phone">Call or Text: (208)866-9846</div>
+          <div style="font-size:13px;color:#8b7a6f">Serving local neighborhoods</div>
           </div>
+      </div>
+            <button class="btn cta" id="quoteBtn">Get Quote</button>
         </aside>
       </section>
 
@@ -204,7 +257,7 @@
     const SITE = {
       businessName: "Artemis Lawn and Leaf",
       owner: "Artemis Aldrich",
-      phone: "(208)866-9846",
+      phone: "Call or Text: (208)866-9846",
       services: [
         { title: "Full Lawn Leaf Removal", desc: "Raking, bagging, and hauling—complete yard cleanups." },
         { title: "One-time Cleanups", desc: "Perfect for post-storm or pre-holiday yard prep." },
@@ -223,5 +276,34 @@
       servicesGrid.appendChild(el);
     });
   </script>
+
+  <!-- 🌿 Quote Form Modal -->
+<!-- <div id="quoteModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Request a Quote</h2>
+    <form id="quoteForm">
+      <label>Name</label>
+      <input type="text" required placeholder="Your name">
+
+      <label>Phone or Email</label>
+      <input type="text" required placeholder="How can we reach you?">
+
+      <label>Service</label>
+      <select>
+        <option>Leaf Cleanup</option>
+        <option>One-Time Cleanup</option>
+        <option>Snow Removal</option>
+        <option>Junk Removal</option>
+      </select>
+
+      <label>Message</label>
+      <textarea placeholder="Tell us about your yard..."></textarea>
+
+      <button type="submit" class="btn cta">Send Request</button>
+    </form>
+  </div> -->
+  
+</div>
 </body>
 </html>
