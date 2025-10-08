@@ -6,8 +6,6 @@
   <title>Pricing — Artemis Leaf & Lawn</title>
   <meta name="description" content="Artemis Leaf & Lawn Pricing — affordable seasonal yard care and cleanup options" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23D97706' d='M12 2C8 6 6 9 6 12s2 6 6 8c4-2 6-6 6-8s-2-6-6-10z'/%3E%3C/svg%3E">
-
-  <!-- Shared site styles -->
   <link rel="stylesheet" href="style.css" />
 
   <style>
@@ -31,13 +29,56 @@
       box-shadow: var(--glow);
       padding: 24px;
       text-align: center;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .card:hover {transform: translateY(-3px);}
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(255, 180, 100, 0.4);
+    }
+
     .card h2 {margin: 0 0 6px;}
     .card p {margin: 0 0 12px; color: #5b4c45;}
-    .price {font-size: 22px; font-weight: 700; color: #a1682a; margin-bottom: 14px;}
+
+    .price {
+      font-size: 22px;
+      font-weight: 700;
+      color: #a1682a;
+      margin-bottom: 14px;
+      transition: all 0.3s ease;
+    }
+
+    /* 🌸 Hidden button appears on hover */
+    .quote-btn {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: var(--glow);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .price {
+      transform: translateY(-6px) scale(0.95);
+      opacity: 0.7;
+    }
+
+    .card:hover .quote-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quote-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
 
     .tiers {display: flex; flex-direction: column; gap: 8px;}
     .tier {
@@ -63,11 +104,60 @@
       align-items: center;
     }
 
+    /* 🌸 Modal styles (reused from homepage) */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--glow);
+      width: 100%;
+      max-width: 400px;
+      text-align: left;
+    }
+
+    .modal-content input, .modal-content textarea, .modal-content select {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-family: inherit;
+    }
+
+    .modal-content button {
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .thankyou {
+      text-align: center;
+      padding: 20px;
+      display: none;
+      color: #4b3b34;
+    }
+
     @media (max-width: 880px) {
       nav {display: none;}
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <header>
@@ -95,6 +185,7 @@
           <h2>Leaf Cleanup</h2>
           <p>Complete yard raking, bagging, and leaf removal.</p>
           <div class="price">Starting at $79</div>
+          <button class="quote-btn">Get Quote</button>
           <div class="tiers">
             <div class="tier">🍂 Basic — Small yard cleanup</div>
             <div class="tier">🍁 Plus — Medium yard, bag & haul</div>
@@ -106,6 +197,7 @@
           <h2>One-Time Cleanups</h2>
           <p>Perfect for post-storm or seasonal refreshes.</p>
           <div class="price">Starting at $99</div>
+          <button class="quote-btn">Get Quote</button>
           <div class="tiers">
             <div class="tier">🍂 Basic — Quick debris pickup</div>
             <div class="tier">🍁 Plus — Lawn & pathway cleanup</div>
@@ -117,6 +209,7 @@
           <h2>Snow Removal</h2>
           <p>Driveways, walkways, and entryways cleared fast.</p>
           <div class="price">Starting at $119</div>
+          <button class="quote-btn">Get Quote</button>
           <div class="tiers">
             <div class="tier">❄️ Basic — Walkway clearing</div>
             <div class="tier">⛄ Plus — Walk + driveway</div>
@@ -128,6 +221,7 @@
           <h2>Junk Removal</h2>
           <p>Haul away old yard waste, furniture, or debris.</p>
           <div class="price">Starting at $149</div>
+          <button class="quote-btn">Get Quote</button>
           <div class="tiers">
             <div class="tier">🪵 Basic — 1 pickup load</div>
             <div class="tier">🚛 Plus — Medium load + cleanup</div>
@@ -143,8 +237,65 @@
     </footer>
   </div>
 
+  <!-- 🌿 Quote Modal (reused from homepage) -->
+  <div class="modal" id="quoteModal">
+    <div class="modal-content">
+      <h3>Request a Quote</h3>
+      <form id="quoteForm">
+        <input type="text" placeholder="Your Name" required />
+        <input type="text" placeholder="Phone or Email" required />
+        <select required>
+          <option value="">Select Service</option>
+          <option>Full Lawn Leaf Removal</option>
+          <option>One-time Cleanup</option>
+          <option>Snow Removal</option>
+          <option>Junk Removal</option>
+        </select>
+        <textarea rows="3" placeholder="Additional Details..."></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <div class="thankyou" id="thankYouMsg">✨ Thank you! We'll get back to you soon. ✨</div>
+    </div>
+  </div>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Modal logic
+    const modal = document.getElementById('quoteModal');
+    const form = document.getElementById('quoteForm');
+    const thankYou = document.getElementById('thankYouMsg');
+    const quoteButtons = document.querySelectorAll('.quote-btn');
+
+    quoteButtons.forEach(btn => {
+      btn.addEventListener('click', () => modal.style.display = 'flex');
+    });
+
+    window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
+
+    // Google Script integration
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const [name, contact, service, message] = Array.from(e.target.elements).map(i => i.value);
+
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, contact, service, message })
+      });
+
+      form.style.display = "none";
+      thankYou.style.display = "block";
+      setTimeout(() => {
+        modal.style.display = "none";
+        thankYou.style.display = "none";
+        form.reset();
+        form.style.display = "block";
+      }, 3000);
+    });
   </script>
 </body>
 </html>
