@@ -1,8 +1,8 @@
 {
   "nav": [
     {"label": "Home", "href": "index.html"},
-    {"label": "Pricing", "href": "prices.html"},
-    {"label": "About", "href": "about.html"}
+    {"label": "Pricing", "href": ""},
+    {"label": "About", "href": ""}
   ],
   "footer": {
     "text": "© 2025 Artemis Lawn & Leaf — Friendly seasonal yard care"
