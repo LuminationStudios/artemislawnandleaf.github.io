@@ -6,8 +6,198 @@
   <title>Artemis Lawn & Leaf</title>
   <meta name="description" content="Artemis Leaf & Lawn — fast, friendly leaf removal and yard cleanup" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23D97706' d='M12 2C8 6 6 9 6 12s2 6 6 8c4-2 6-6 6-8s-2-6-6-10z'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.css" />
   <script src="navbar.js" defer></script>
+
+  <style>
+    :root {
+      --bg: #FFF8F3;
+      --card: #FFF6EE;
+      --accent-1: #FFB88C;
+      --accent-2: #FFD27F;
+      --muted: #7C6B63;
+      --glow: 0 8px 24px rgba(255, 160, 90, 0.25);
+      --radius: 14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    body {
+      background: linear-gradient(180deg, #FFF8F3 0%, #FFEFE1 100%);
+      color: var(--muted);
+      margin: 0;
+      font-family: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 250, 245, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 16px 28px;
+      box-shadow: var(--glow);
+      border-radius: 0 0 var(--radius) var(--radius);
+      transition: background 0.3s ease;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(4px);
+      transition: all 0.25s ease;
+      font-weight: 500;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      box-shadow: var(--glow);
+      transform: translateY(-1px);
+    }
+
+    .btn.active {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      box-shadow: var(--glow);
+    }
+
+    .btn.cta, .quote-btn {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      box-shadow: var(--glow);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn.cta:hover, .quote-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    h1, h2, h3 {
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--glow);
+      margin: 14px 0;
+    }
+
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--glow);
+      width: 100%;
+      max-width: 400px;
+      text-align: left;
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-content input, 
+    .modal-content textarea, 
+    .modal-content select {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-family: inherit;
+    }
+
+    .close {
+      float: right;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .close:hover {
+      color: #333;
+    }
+
+    footer {
+      background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,245,235,0.7));
+      padding: 18px;
+      text-align: center;
+      color: var(--muted);
+      border-radius: var(--radius);
+      box-shadow: var(--glow);
+      margin: 30px 0 10px;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -45,10 +235,10 @@
     </section>
   </main>
 
-  <footer id="footer"></footer>
+  <footer id="footer">© 2025 Artemis Leaf & Lawn</footer>
 
   <!-- Quote Modal -->
-  <div id="quoteModal" class="modal" style="display:none;">
+  <div id="quoteModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>Request a Quote</h2>
@@ -80,34 +270,43 @@
   </div>
 
   <script>
-    // ✨ Modal logic
     const modal = document.getElementById("quoteModal");
     const btn = document.getElementById("quoteBtn");
     const span = document.querySelector(".close");
     const form = document.getElementById("quoteForm");
     const thankYou = document.getElementById("thankYou");
 
-    btn.onclick = () => (modal.style.display = "block");
+    btn.onclick = () => (modal.style.display = "flex");
     span.onclick = () => (modal.style.display = "none");
     window.onclick = e => { if (e.target == modal) modal.style.display = "none"; };
 
-    // ✨ Replace this with your Google Web App URL
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
+    const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL";
 
     form.addEventListener("submit", async e => {
       e.preventDefault();
-
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
+      const data = Object.fromEntries(new FormData(form).entries());
 
       try {
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
+        // Send to Google Sheet
+        await fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(data)
         });
 
-        console.log("Response:", await response.text());
+        // Send to Discord
+        await fetch(DISCORD_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content: `📬 **New Quote Request!**
+**Name:** ${data.name}
+**Contact:** ${data.contact}
+**Service:** ${data.service}
+**Message:** ${data.message || "None"}`
+          })
+        });
 
         form.style.display = "none";
         thankYou.style.display = "block";
