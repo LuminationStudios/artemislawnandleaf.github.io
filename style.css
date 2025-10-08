@@ -37,14 +37,51 @@
   box-shadow: var(--glow);
 }
 
-/* 🌿 Call-to-action */
-.btn.cta {
+/* 🌿 Call-to-action (Quote Button) */
+.btn.cta, .quote-btn {
   background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
   color: white;
   box-shadow: var(--glow);
   font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
-.btn.cta:hover {
+
+.btn.cta:hover, .quote-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.1);
+}
+
+/* 🪻 Center the quote button inside the contact card */
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.quote-btn {
+  margin-top: 8px;
+  align-self: center;
+}
+
+/* 🌿 Optional polish for hero & footer */
+body {
+  background: var(--bg);
+  color: var(--muted);
+  margin: 0;
+  font-family: inherit;
+}
+
+footer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,245,235,0.7));
+  padding: 18px;
+  text-align: center;
+  color: var(--muted);
+  border-radius: var(--radius);
+  box-shadow: var(--glow);
+  margin-top: 28px;
 }
