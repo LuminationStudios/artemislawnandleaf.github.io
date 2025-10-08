@@ -1,0 +1,56 @@
+/* layout.css — Navbar + Footer Styling */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 250, 245, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 16px 28px;
+  box-shadow: var(--glow);
+  border-radius: 0 0 var(--radius) var(--radius);
+  transition: background 0.3s ease;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+}
+
+/* 🌸 Footer */
+footer {
+  text-align: center;
+  padding: 2em;
+  font-size: 0.9em;
+  color: var(--muted);
+  background: rgba(255, 250, 245, 0.6);
+  border-top: 1px solid rgba(255, 200, 160, 0.3);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* 📱 Responsive layout for small screens */
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
