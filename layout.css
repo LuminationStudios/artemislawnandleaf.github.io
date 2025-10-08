@@ -1,0 +1,19 @@
+:root {
+  --bg: #FFF8F3;
+  --card: #FFF6EE;
+  --accent-1: #FFB88C;
+  --accent-2: #FFD27F;
+  --muted: #7C6B63;
+  --glow: 0 8px 24px rgba(255, 160, 90, 0.25);
+  --radius: 14px;
+  font-family: Inter, ui-sans-serif, system-ui;
+}
+
+body { background: var(--bg); margin: 0; color: var(--muted); font-family: inherit; }
+header { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 250, 245, 0.85); padding: 16px 28px; box-shadow: var(--glow); border-radius: 0 0 var(--radius) var(--radius); }
+.logo { font-weight: 700; font-size: 20px; color: var(--muted); }
+nav { display: flex; gap: 10px; }
+.btn { padding: 8px 16px; border-radius: var(--radius); text-decoration: none; background: rgba(255,255,255,0.4); color: var(--muted); transition: all 0.25s ease; }
+.btn:hover, .btn.active { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: white; box-shadow: var(--glow); }
+footer { text-align: center; padding: 18px; margin-top: 40px; border-radius: var(--radius); background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,245,235,0.7)); box-shadow: var(--glow); }
+.card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--glow); margin: 14px 0; }
