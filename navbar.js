@@ -11,10 +11,10 @@ async function loadJSON(path) {
 
 async function initSite() {
   const [headerData, bodyData, servicesData, footerData] = await Promise.all([
-    loadJSON("./data/header.json"),
-    loadJSON("./data/body.json"),
-    loadJSON("./data/services.json"),
-    loadJSON("./data/footer.json")
+    loadJSON("header.json"),
+    loadJSON("body.json"),
+    loadJSON("services.json"),
+    loadJSON("footer.json")
   ]);
 
   // Header
@@ -22,7 +22,7 @@ async function initSite() {
     document.getElementById("brand").innerHTML = `
       <div class="logo">${headerData.brand.logo || "🍂"}</div>
       <div>
-        <div style="font-weight:700">${headerData.brand.name || "Artemis Leaf & Lawn"}</div>
+        <div style="font-weight:700">${headerData.brand.name || "Artemis Lawn & Leaf"}</div>
         <div style="font-size:12px;color:#8b7a6f">${headerData.brand.tagline || "Friendly seasonal yard cleanup"}</div>
       </div>
     `;
@@ -51,7 +51,7 @@ async function initSite() {
   if (footerData && document.querySelector("footer")) {
     const footer = document.querySelector("footer");
     footer.innerHTML = `
-      <div>${footerData.footer.left || "© Artemis Leaf & Lawn"}</div>
+      <div>${footerData.footer.left || "© Artemis Lawn & Leaf"}</div>
       <div>${footerData.footer.right || "Seasonal yard care & leaf removal"}</div>
     `;
   }
