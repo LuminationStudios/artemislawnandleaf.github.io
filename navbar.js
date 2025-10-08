@@ -1,7 +1,7 @@
 async function loadJSON(path) {
   try {
-    const res = await fetch(path);
-    if (!res.ok) throw new Error(`Failed to load ${path}`);
+    const res = await fetch(`./${path}?v=${Date.now()}`); // cache-busting
+    if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
     return await res.json();
   } catch (err) {
     console.error(`Error loading ${path}:`, err);
@@ -39,9 +39,10 @@ async function initSite() {
   // Services
   if (servicesData && document.getElementById("services-grid")) {
     const servicesGrid = document.getElementById("services-grid");
+    servicesGrid.innerHTML = "";
     servicesData.services.forEach(s => {
       const el = document.createElement("div");
-      el.className = "service";
+      el.className = "card";
       el.innerHTML = `<h3>${s.title}</h3><p>${s.desc}</p>`;
       servicesGrid.appendChild(el);
     });
