@@ -1,46 +1,60 @@
 async function loadJSON(path) {
-  const res = await fetch(path);
-  return await res.json();
+  try {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`Failed to load ${path}`);
+    return await res.json();
+  } catch (err) {
+    console.error(`Error loading ${path}:`, err);
+    return null;
+  }
 }
 
 async function initSite() {
   const [headerData, bodyData, servicesData, footerData] = await Promise.all([
-    loadJSON("data/header.json"),
-    loadJSON("data/body.json"),
-    loadJSON("data/services.json"),
-    loadJSON("data/footer.json")
+    loadJSON("./data/header.json"),
+    loadJSON("./data/body.json"),
+    loadJSON("./data/services.json"),
+    loadJSON("./data/footer.json")
   ]);
 
   // Header
-  document.getElementById("brand").innerHTML = `
-    <div class="logo">${headerData.brand.logo}</div>
-    <div>
-      <div style="font-weight:700">${headerData.brand.name}</div>
-      <div style="font-size:12px;color:#8b7a6f">${headerData.brand.tagline}</div>
-    </div>
-  `;
+  if (headerData && document.getElementById("brand")) {
+    document.getElementById("brand").innerHTML = `
+      <div class="logo">${headerData.brand.logo || "🍂"}</div>
+      <div>
+        <div style="font-weight:700">${headerData.brand.name || "Artemis Leaf & Lawn"}</div>
+        <div style="font-size:12px;color:#8b7a6f">${headerData.brand.tagline || "Friendly seasonal yard cleanup"}</div>
+      </div>
+    `;
+  }
 
   // Hero
-  document.getElementById("hero-text").innerHTML = `
-    <h1>${bodyData.hero.title}</h1>
-    <p class="lead">${bodyData.hero.subtitle}</p>
-  `;
+  if (bodyData && document.getElementById("hero-text")) {
+    document.getElementById("hero-text").innerHTML = `
+      <h1>${bodyData.hero.title}</h1>
+      <p class="lead">${bodyData.hero.subtitle}</p>
+    `;
+  }
 
   // Services
-  const servicesGrid = document.getElementById("services-grid");
-  servicesData.services.forEach(s => {
-    const el = document.createElement("div");
-    el.className = "service";
-    el.innerHTML = `<h3>${s.title}</h3><p>${s.desc}</p>`;
-    servicesGrid.appendChild(el);
-  });
+  if (servicesData && document.getElementById("services-grid")) {
+    const servicesGrid = document.getElementById("services-grid");
+    servicesData.services.forEach(s => {
+      const el = document.createElement("div");
+      el.className = "service";
+      el.innerHTML = `<h3>${s.title}</h3><p>${s.desc}</p>`;
+      servicesGrid.appendChild(el);
+    });
+  }
 
   // Footer
-  const footer = document.querySelector("footer");
-  footer.innerHTML = `
-    <div>${footerData.footer.left}</div>
-    <div>${footerData.footer.right}</div>
-  `;
+  if (footerData && document.querySelector("footer")) {
+    const footer = document.querySelector("footer");
+    footer.innerHTML = `
+      <div>${footerData.footer.left || "© Artemis Leaf & Lawn"}</div>
+      <div>${footerData.footer.right || "Seasonal yard care & leaf removal"}</div>
+    `;
+  }
 }
 
-initSite();
+document.addEventListener("DOMContentLoaded", initSite);
