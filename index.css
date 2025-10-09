@@ -16,7 +16,10 @@
 html, body {
   height: 100%;
   margin: 0;
-  background-image: var(--bg-gradient);
+  background: var(--bg-gradient);   /* ✅ use 'background' instead of background-image */
+  background-attachment: fixed;     /* ✅ keeps gradient consistent while scrolling */
+  background-repeat: no-repeat;
+  background-size: cover;
   color: var(--muted);
   font-family: inherit;
   scroll-behavior: smooth;
