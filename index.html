@@ -144,12 +144,140 @@ input, select, textarea {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+    /* 🌸 Contact Card */
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--glow);
+  padding: 2em;
+  margin-top: 2em;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.2em;
+  box-shadow: var(--glow);
+}
+
+/* 🌸 Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: var(--card);
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--glow);
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content input, 
+.modal-content textarea, 
+.modal-content select {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+}
+
+.close {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.close:hover {
+  color: #333;
+}
+
   </style>
 <body>
   <header>
     <div class="brand" id="brand"></div>
     <nav id="navbar"></nav>
   </header>
+
+  <!-- 🌸 Contact Section -->
+<section id="contact">
+  <div class="card contact-card">
+    <h2>Contact Us</h2>
+    <div class="contact-info">
+      <div class="avatar">AA</div>
+      <p><strong>Owner:</strong> Artemis Aldrich</p>
+      <p>Serving your local neighborhoods with friendly seasonal yard cleanup!</p>
+      <button class="btn cta" id="quoteBtn">Get Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- ✨ Quote Modal -->
+<div id="quoteModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Request a Quote</h2>
+    <form id="quoteForm">
+      <label>Name:</label>
+      <input type="text" name="name" required />
+
+      <label>Contact Info (Phone or Email):</label>
+      <input type="text" name="contact" required />
+
+      <label>Service:</label>
+      <select name="service" required>
+        <option value="">Select a Service</option>
+        <option>Leaf Cleanup</option>
+        <option>One-Time Cleanup</option>
+        <option>Snow Removal</option>
+      </select>
+
+      <label>Additional Details:</label>
+      <textarea name="message" rows="3"></textarea>
+
+      <button type="submit" class="btn cta">Submit Quote</button>
+    </form>
+
+    <div id="thankYou" style="display:none; text-align:center; padding:1em;">
+      <h3>✅ Thank you! We’ll be in touch soon.</h3>
+    </div>
+  </div>
+</div>
 
   <main>
     <section id="hero-text"></section>
@@ -159,6 +287,66 @@ input, select, textarea {
   </main>
 
   <footer></footer>
+  <script>
+  const modal = document.getElementById("quoteModal");
+  const btn = document.getElementById("quoteBtn");
+  const span = document.querySelector(".close");
+  const form = document.getElementById("quoteForm");
+  const thankYou = document.getElementById("thankYou");
+
+  // Open / Close
+  btn.onclick = () => modal.style.display = "flex";
+  span.onclick = () => modal.style.display = "none";
+  window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+
+  // URLs
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
+  const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9";
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      // Google Sheets
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      // Discord webhook
+      await fetch(DISCORD_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: `📬 **New Quote Request**
+**Name:** ${payload.name}
+**Contact:** ${payload.contact}
+**Service:** ${payload.service}
+**Message:** ${payload.message || "No message provided."}`
+        })
+      });
+
+      // Success animation
+      form.style.display = "none";
+      thankYou.style.display = "block";
+      setTimeout(() => {
+        modal.style.display = "none";
+        thankYou.style.display = "none";
+        form.reset();
+        form.style.display = "block";
+      }, 3000);
+
+    } catch (err) {
+      console.error(err);
+      alert("There was a problem submitting your quote. Please try again later.");
+    }
+  });
+</script>
+
 </body>
 
 </html>
