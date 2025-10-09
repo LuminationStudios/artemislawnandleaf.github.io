@@ -13,6 +13,7 @@ async function initSite() {
   const [navbarData, servicesData, footerData] = await Promise.all([
     loadJSON("navbar.json"),
     loadJSON("services.json"),
+    loadJSON("about.json"),
     loadJSON("footer.json")
   ]);
 
@@ -46,7 +47,18 @@ async function initSite() {
       </div>
     `).join("");
   }
-
+  
+  // 🌿 About
+  if (servicesData && servicesData.services && document.getElementById("services-grid")) {
+    const servicesGrid = document.getElementById("services-grid");
+    servicesGrid.innerHTML = servicesData.services.map(service => `
+      <div class="service">
+        <h3>${service.title}</h3>
+        <p>${service.desc}</p>
+      </div>
+    `).join("");
+  }
+  
   // 🌼 Footer
   if (footerData && footerData.footer && document.querySelector("footer")) {
     const footer = document.querySelector("footer");
