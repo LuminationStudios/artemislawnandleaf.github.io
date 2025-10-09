@@ -16,7 +16,7 @@
 html, body {
   height: 100%;
   margin: 0;
-  background: var(--bg-gradient);
+  background-image: var(--bg-gradient);
   color: var(--muted);
   font-family: inherit;
   scroll-behavior: smooth;
