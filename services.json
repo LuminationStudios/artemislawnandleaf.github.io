@@ -1,0 +1,16 @@
+{
+  "services": [
+    {
+      "title": "Full Lawn Leaf Removal",
+      "desc": "Raking, bagging, and hauling — complete yard cleanups."
+    },
+    {
+      "title": "One-time Cleanups",
+      "desc": "Perfect for post-storm or pre-holiday yard prep."
+    },
+    {
+      "title": "Snow Removal",
+      "desc": "Shoveling walks and salting to prevent ice."
+    }
+  ]
+}
