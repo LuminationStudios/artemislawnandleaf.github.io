@@ -1,7 +1,7 @@
 {
   "banner": {
-    "text": "🍂 Fall Cleanup Specials! Book before October 20 for 15% off!",
-    "link": "#quote",
+    "text": "🍂 Fall Cleanup! Get rid of those leaves today! Send a Quote Reqest and we will reach out.",
+    "link": "prices.html",
     "background": "linear-gradient(90deg, #FFB88C, #FFD27F)"
   }
 }
