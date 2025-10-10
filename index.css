@@ -322,40 +322,89 @@ input, select, textarea {
   font-family: inherit;
 }
 
-/* 🌟 prices */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-    }
+/* 🌿 Pricing Section */
+main {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 60px 40px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
+  text-align: center;
+}
 
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--glow);
-      padding: 24px;
-      text-align: center;
-      transition: transform 0.2s ease;
-    }
+main h1 {
+  font-size: 2rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
 
-    .card:hover {transform: translateY(-3px);}
-    .card h2 {margin: 0 0 6px;}
-    .card p {margin: 0 0 12px; color: #5b4c45;}
-    .price {font-size: 22px; font-weight: 700; color: #a1682a; margin-bottom: 14px;}
+main .lead {
+  font-size: 1.1rem;
+  color: #5b4c45;
+  margin-bottom: 36px;
+}
 
-    .tiers {display: flex; flex-direction: column; gap: 8px;}
-    .tier {
-      background: white;
-      border-radius: 10px;
-      padding: 10px;
-      box-shadow: 0 4px 10px rgba(150, 110, 80, 0.08);
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-    }
+/* 💸 Pricing Cards */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
 
-    .tier:hover {
-      box-shadow: 0 0 14px rgba(255, 190, 130, 0.6), 0 0 8px rgba(255, 190, 130, 0.3);
-      transform: translateY(-2px);
-    }
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--glow);
+  padding: 28px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter: blur(6px);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(255, 190, 140, 0.35);
+}
+
+.card h2 {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.card p {
+  margin: 0 0 12px;
+  color: #5b4c45;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #a1682a;
+  margin: 14px 0 18px;
+}
+
+/* 🌸 Tier Styling */
+.tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tier {
+  background: linear-gradient(180deg, #fffdf9, #fff7f1);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(150, 110, 80, 0.1);
+  transition: all 0.25s ease;
+}
+
+.tier:hover {
+  box-shadow: 0 0 18px rgba(255, 190, 130, 0.6);
+  transform: translateY(-2px);
+}
 
 /* 🌟 Footer */
 footer {
