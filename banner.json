@@ -1,11 +1,11 @@
 {
   "banners": [
     {
-      "text": "🍂 Fall Cleanup! Get rid of those leaves today! <button id='quoteBtn' class='btn cta'>Get a Quote</button>",
+      "text": "🍂 Fall Cleanup! Get rid of those leaves today!",
       "background": "linear-gradient(90deg, #FFB88C, #FFD27F)"
     },
     {
-      "text": "❄️ Snow Season is coming! <button id='quoteBtn' class='btn cta'>Book Early!</button>",
+      "text": "❄️ Snow Season is coming! Book early to get added to our schedule!",
       "background": "linear-gradient(90deg, #A7C7E7, #E0F7FF)"
     }
   ],
