@@ -46,9 +46,8 @@
       <div class="services" id="services-grid"></div>
     </section>
   </main>
-  <footer></footer>
 
-  <!-- ✨ Quote Modal -->
+    <!-- 💌 Quote Modal -->
   <div id="quoteModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -79,5 +78,62 @@
       </div>
     </div>
   </div>
+
+  <!-- 🌸 Footer -->
+  <footer></footer>
+
+  <!-- ✨ Quote Modal Script -->
+  <script>
+    const modal = document.getElementById("quoteModal");
+    const span = document.querySelector(".close");
+    const form = document.getElementById("quoteForm");
+    const thankYou = document.getElementById("thankYou");
+
+    span.onclick = () => modal.style.display = "none";
+    window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
+    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9";
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        await fetch(DISCORD_WEBHOOK, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content: `📬 **New Quote Request**
+**Name:** ${payload.name}
+**Contact:** ${payload.contact}
+**Service:** ${payload.service}
+**Message:** ${payload.message || "No message provided."}`
+          })
+        });
+
+        form.style.display = "none";
+        thankYou.style.display = "block";
+        setTimeout(() => {
+          modal.style.display = "none";
+          thankYou.style.display = "none";
+          form.reset();
+          form.style.display = "block";
+        }, 3000);
+
+      } catch (err) {
+        console.error(err);
+        alert("There was a problem submitting your quote. Please try again later.");
+      }
+    });
+  </script>
 </body>
 </html>
