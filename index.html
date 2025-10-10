@@ -79,6 +79,20 @@
       </div>
     </div>
   </div>
+  <script>
+    // Load navbar from JSON
+    fetch("navbar.json")
+      .then(res => res.json())
+      .then(data => {
+        const navbar = document.getElementById("navbar");
+        navbar.innerHTML = data.links.map(link => {
+          const isActive = window.location.pathname.endsWith(link.href);
+          return `<a href="${link.href}" class="btn ${isActive ? 'active' : ''}">${link.label}</a>`;
+        }).join('');
+      });
 
+    // Set footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
