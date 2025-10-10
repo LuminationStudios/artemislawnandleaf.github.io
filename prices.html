@@ -7,7 +7,6 @@
   <meta name="description" content="Artemis Lawn & Leaf — affordable seasonal yard care and cleanup options" /> 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23D97706' d='M12 2C8 6 6 9 6 12s2 6 6 8c4-2 6-6 6-8s-2-6-6-10z'/%3E%3C/svg%3E">
 
-  <!-- External Styles -->
   <link rel="stylesheet" href="index.css">
   <script src="navbar.js" defer></script>
   <script src="banner.js" defer></script>
@@ -22,69 +21,56 @@
             <path fill="#FFB88C" d="M12 2c-1 2-4 4-6 6s-3 4 0 7 6 3 10 1 2-8-4-14z"/>
           </svg>
         </div>
-        <div class="brand-text">
-          <div style="font-weight:700">Artemis Lawn & Leaf</div>
-        </div>
+        <div class="brand-text"><div style="font-weight:700">Artemis Lawn & Leaf</div></div>
       </div>
-
-      <!-- 🌸 Dynamic Navbar -->
       <button class="menu-toggle" id="menuToggle">☰</button>
       <nav id="navLinks" class="nav-links"></nav>
     </div>
   </header>
 
-    <main>
-      <h1>Pricing</h1>
-      <p class="lead">Affordable, transparent seasonal cleanup packages to fit any yard or budget.</p>
+  <main>
+    <h1>Pricing</h1>
+    <p class="lead">Affordable, transparent seasonal cleanup packages to fit any yard or budget.</p>
 
-      <div class="pricing-grid">
-        <div class="card">
-          <h2>Leaf Cleanup</h2>
-          <p>Complete yard raking, bagging, and leaf removal.</p>
-          <div class="price">Starting at $60</div>
-          <div class="tiers">
-            <div class="tier">🍂 Basic — Small yard cleanup</div>
-            <div class="tier">🍁 Plus — Medium yard, bag & haul</div>
-            <div class="tier">🌳 Premium — Full property + disposal</div>
-          </div>
+    <div class="pricing-grid">
+      <div class="card">
+        <h2>Leaf Cleanup</h2>
+        <p>Complete yard raking, bagging, and leaf removal.</p>
+        <div class="price">Starting at $60</div>
+        <div class="tiers">
+          <div class="tier">🍂 Basic — Small yard cleanup</div>
+          <div class="tier">🍁 Plus — Medium yard, bag & haul</div>
+          <div class="tier">🌳 Premium — Full property + disposal</div>
         </div>
-
-        <div class="card">
-          <h2>One-Time Cleanups</h2>
-          <p>Perfect for post-storm or seasonal refreshes.</p>
-          <div class="price">Starting at $60</div>
-          <div class="tiers">
-            <div class="tier">🍂 Basic — Quick debris pickup</div>
-            <div class="tier">🍁 Plus — Lawn & pathway cleanup</div>
-            <div class="tier">🌳 Premium — Full yard detailing</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Snow Removal</h2>
-          <p>Driveways, walkways, and entryways cleared fast.</p>
-          <div class="price">Starting at $90</div>
-          <div class="tiers">
-            <div class="tier">❄️ Basic — Walkway clearing</div>
-            <div class="tier">⛄ Plus — Walk + driveway</div>
-            <div class="tier">🌨️ Premium — Full property + salting</div>
-          </div>
-        </div>
-
-        <!-- <div class="card">
-          <h2>Junk Removal</h2>
-          <p>Haul away old yard waste, furniture, or debris.</p>
-          <div class="price">Starting at $149</div>
-          <div class="tiers">
-            <div class="tier">🪵 Basic — 1 pickup load</div>
-            <div class="tier">🚛 Plus — Medium load + cleanup</div>
-            <div class="tier">🏠 Premium — Full property removal</div>
-          </div>
-        </div> -->
       </div>
-    </main>
 
-<!-- 💌 Quote Modal -->
+      <div class="card">
+        <h2>One-Time Cleanups</h2>
+        <p>Perfect for post-storm or seasonal refreshes.</p>
+        <div class="price">Starting at $60</div>
+        <div class="tiers">
+          <div class="tier">🍂 Basic — Quick debris pickup</div>
+          <div class="tier">🍁 Plus — Lawn & pathway cleanup</div>
+          <div class="tier">🌳 Premium — Full yard detailing</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Snow Removal</h2>
+        <p>Driveways, walkways, and entryways cleared fast.</p>
+        <div class="price">Starting at $90</div>
+        <div class="tiers">
+          <div class="tier">❄️ Basic — Walkway clearing</div>
+          <div class="tier">⛄ Plus — Walk + driveway</div>
+          <div class="tier">🌨️ Premium — Full property + salting</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <!-- ✨ Quote Modal -->
   <div id="quoteModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -116,61 +102,5 @@
     </div>
   </div>
 
-  <!-- 🌸 Footer -->
-  <footer></footer>
-
-  <!-- ✨ Quote Modal Script -->
-  <script>
-    const modal = document.getElementById("quoteModal");
-    const span = document.querySelector(".close");
-    const form = document.getElementById("quoteForm");
-    const thankYou = document.getElementById("thankYou");
-
-    span.onclick = () => modal.style.display = "none";
-    window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
-
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
-    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9";
-
-    form.addEventListener("submit", async e => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
-
-      try {
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        await fetch(DISCORD_WEBHOOK, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            content: `📬 **New Quote Request**
-**Name:** ${payload.name}
-**Contact:** ${payload.contact}
-**Service:** ${payload.service}
-**Message:** ${payload.message || "No message provided."}`
-          })
-        });
-
-        form.style.display = "none";
-        thankYou.style.display = "block";
-        setTimeout(() => {
-          modal.style.display = "none";
-          thankYou.style.display = "none";
-          form.reset();
-          form.style.display = "block";
-        }, 3000);
-
-      } catch (err) {
-        console.error(err);
-        alert("There was a problem submitting your quote. Please try again later.");
-      }
-    });
-  </script>
 </body>
 </html>
