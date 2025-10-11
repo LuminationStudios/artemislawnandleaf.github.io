@@ -66,6 +66,9 @@ button { font-family: inherit; cursor: pointer; border: none; }
   justify-content: center;
   box-shadow: var(--glow);
   animation: sparkle 3s infinite ease-in-out;
+  background: none;       /* Remove background color */
+  border: none;           /* Remove any borders */
+  border-radius: 0;       /* Make sure it's not forcing a shape */
 }
 
 /* 🌸 Navbar Buttons */
