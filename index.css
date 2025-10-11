@@ -59,9 +59,8 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 
 .logo {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
