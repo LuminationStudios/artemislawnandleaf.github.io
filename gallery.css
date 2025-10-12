@@ -68,13 +68,12 @@
 }
 
 /* ❄️ Deep Blue Version for Snow Gallery */
-.view-gallery.blue {
-  background: linear-gradient(90deg, #5b8df7, #3b4cc0);
-  box-shadow: 0 0 12px rgba(91, 141, 247, 0.5);
+button.view-gallery.blue {
+  background: linear-gradient(90deg, #5b8df7, #3b4cc0) !important;
+  box-shadow: 0 0 12px rgba(91, 141, 247, 0.5) !important;
 }
 
-.view-gallery.blue:hover {
-  box-shadow: 0 0 20px rgba(91, 141, 247, 0.8);
-  transform: scale(1.05);
+button.view-gallery.blue:hover {
+  box-shadow: 0 0 20px rgba(91, 141, 247, 0.8) !important;
 }
 
