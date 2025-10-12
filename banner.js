@@ -1,37 +1,37 @@
-fetch('json/banner.json') // adjust path if needed
+fetch('json/banner.json')
   .then(res => res.json())
   .then(data => {
     const today = new Date();
     const bannerEl = document.getElementById('banner');
 
-    // Get all banners valid for today
-    const activeBanners = data.banners.filter(b => {
-      const start = new Date(b.startDate);
-      const end = new Date(b.endDate);
-      return today >= start && today <= end;
-    });
+    // Sort banners by startDate
+    const banners = data.banners.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
-    if (activeBanners.length === 0) {
-      bannerEl.style.display = 'none';
-      return;
+    let activeBanner = null;
+
+    for (let i = 0; i < banners.length; i++) {
+      const start = new Date(banners[i].startDate);
+      let end;
+
+      if (i < banners.length - 1) {
+        // End at the day before next banner starts
+        end = new Date(new Date(banners[i + 1].startDate).getTime() - 86400000);
+      } else {
+        end = new Date(banners[i].endDate);
+      }
+
+      if (today >= start && today <= end) {
+        activeBanner = banners[i];
+        break;
+      }
     }
 
-    let index = 0;
-
-    const showBanner = () => {
-      const banner = activeBanners[index];
-      bannerEl.style.opacity = 0; // fade out
-
-      setTimeout(() => {
-        bannerEl.textContent = banner.text;
-        bannerEl.style.background = banner.background;
-        bannerEl.style.opacity = 1; // fade in
-      }, 500); // match transition time
-
-      index = (index + 1) % activeBanners.length;
-    };
-
-    showBanner(); // show first banner immediately
-    setInterval(showBanner, 5000); // rotate every 5 seconds
+    if (activeBanner) {
+      bannerEl.textContent = activeBanner.text;
+      bannerEl.style.background = activeBanner.background;
+      bannerEl.style.display = "block";
+    } else {
+      bannerEl.style.display = "none";
+    }
   })
   .catch(err => console.error("Error loading banner:", err));
