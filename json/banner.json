@@ -2,7 +2,15 @@
   "banners": [
     {
       "text": "❄️ Snow Season is coming! Book early to get added to our schedule!",
-      "background": "linear-gradient(90deg, #aab5ee, #bed9fd)"
-    ]
-  }
+      "background": "linear-gradient(90deg, #aab5ee, #bed9fd)",
+      "startDate": "2025-11-01",
+      "endDate": "2026-02-28"
+    },
+    {
+      "text": "🌸 Spring Cleanup! Get your yard ready for new growth!",
+      "background": "linear-gradient(90deg, #ffd1dc, #ffe5f0)",
+      "startDate": "2026-03-01",
+      "endDate": "2026-05-31"
+    }
+  ]
 }
