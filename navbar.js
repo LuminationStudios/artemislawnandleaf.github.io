@@ -56,25 +56,27 @@ async function initSite() {
     `;
   }
 
-// 📱 Mobile menu toggle
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
+  // 📱 Mobile menu toggle
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
 
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = navLinks.classList.toggle("active");
-    menuToggle.classList.toggle("open", isOpen);
-    menuToggle.textContent = isOpen ? "✖" : "☰";
-  });
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("active");
+      menuToggle.classList.toggle("open", isOpen);
+      menuToggle.textContent = isOpen ? "✖" : "☰";
+    });
 
-  // Optional: Close menu when clicking a link
-  navLinks.addEventListener("click", e => {
-    if (e.target.tagName === "A") {
-      navLinks.classList.remove("active");
-      menuToggle.classList.remove("open");
-      menuToggle.textContent = "☰";
-    }
-  });
+    // Optional: Close menu when clicking a link
+    navLinks.addEventListener("click", e => {
+      if (e.target.tagName === "A") {
+        navLinks.classList.remove("active");
+        menuToggle.classList.remove("open");
+        menuToggle.textContent = "☰";
+      }
+    });
+  }
 }
 
+// ✅ Add this closing parenthesis + brace
 document.addEventListener("DOMContentLoaded", initSite);
