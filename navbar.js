@@ -19,11 +19,13 @@ async function initSite() {
   // 🌸 Navbar
   if (navbarData && navbarData.navbar && document.getElementById("navLinks")) {
     const nav = document.getElementById("navLinks");
-    nav.innerHTML = navbarData.navbar.links.map(link => {
-      const cls = link.class ? `class="${link.class}"` : "";
-      const id = link.id ? `id="${link.id}"` : "";
-      return `<a href="${link.href}" ${cls} ${id}>${link.text}</a>`;
-    }).join("");
+    nav.innerHTML = navbarData.navbar.links
+      .map(link => {
+        const cls = link.class ? `class="${link.class}"` : "";
+        const id = link.id ? `id="${link.id}"` : "";
+        return `<a href="${link.href}" ${cls} ${id}>${link.text}</a>`;
+      })
+      .join("");
 
     // Quote modal trigger
     const quoteBtn = document.getElementById("quoteBtn");
@@ -39,14 +41,16 @@ async function initSite() {
   // 🌿 Services
   if (servicesData && servicesData.services && document.getElementById("services-grid")) {
     const servicesGrid = document.getElementById("services-grid");
-    servicesGrid.innerHTML = servicesData.services.map(service => `
-      <div class="service">
-        <h3>${service.title}</h3>
-        <p>${service.desc}</p>
-      </div>
-    `).join("");
+    servicesGrid.innerHTML = servicesData.services
+      .map(service => `
+        <div class="service">
+          <h3>${service.title}</h3>
+          <p>${service.desc}</p>
+        </div>
+      `)
+      .join("");
   }
-  
+
   // 🌼 Footer
   if (footerData && footerData.footer && document.querySelector("footer")) {
     const footer = document.querySelector("footer");
@@ -78,5 +82,5 @@ async function initSite() {
   }
 }
 
-// ✅ Add this closing parenthesis + brace
+// ✅ Properly close the script with this line
 document.addEventListener("DOMContentLoaded", initSite);
