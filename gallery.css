@@ -1,0 +1,68 @@
+/* 🌸 Gallery Modal (Pastel Glow Aesthetic) */
+.gallery-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 245, 235, 0.75);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.gallery-content {
+  background: var(--card, #fff8f3);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.3);
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.gallery-close {
+  float: right;
+  font-size: 26px;
+  color: #7c6b63;
+  cursor: pointer;
+}
+
+.gallery-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(150, 110, 80, 0.15);
+  transition: all 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 180, 120, 0.4);
+}
+
+/* 🍬 Gallery Button */
+.view-gallery {
+  margin-top: 1em;
+  background: linear-gradient(90deg, #ffb88c, #ffd27f);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 182, 150, 0.4);
+  transition: all 0.3s ease;
+}
+
+.view-gallery:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 190, 150, 0.6);
+}
