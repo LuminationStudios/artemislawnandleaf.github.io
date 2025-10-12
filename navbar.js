@@ -11,9 +11,9 @@ async function loadJSON(path) {
 
 async function initSite() {
   const [navbarData, servicesData, footerData] = await Promise.all([
-    loadJSON("navbar.json"),
-    loadJSON("services.json"),
-    loadJSON("footer.json")
+    loadJSON("json/navbar.json"),
+    loadJSON("json/services.json"),
+    loadJSON("json/footer.json")
   ]);
 
   // 🌸 Navbar
