@@ -1,0 +1,18 @@
+{
+  "leaf": {
+    "title": "Leaf Cleanup Gallery",
+    "images": [
+      "images/leaf1.jpg",
+      "images/leaf2.jpg",
+      "images/leaf3.jpg"
+    ]
+  },
+  "snow": {
+    "title": "Snow Removal Gallery",
+    "images": [
+      "images/snow1.jpg",
+      "images/snow2.jpg",
+      "images/snow3.jpg"
+    ]
+  }
+}
