@@ -59,6 +59,7 @@ async function initSite() {
       <div>${footerData.footer.right}</div>
     `;
   }
+}
 
-// ✅ Properly close the script with this line
+// ✅ Attach after DOM is ready
 document.addEventListener("DOMContentLoaded", initSite);
