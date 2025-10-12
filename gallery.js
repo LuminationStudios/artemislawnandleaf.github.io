@@ -1,6 +1,6 @@
 async function loadGallery(type) {
   try {
-    const res = await fetch('gallery.json');
+    const res = await fetch('json/gallery.json');
     if (!res.ok) throw new Error(`Failed to load gallery.json: ${res.status}`);
     const data = await res.json();
 
