@@ -1,10 +1,6 @@
 {
   "banners": [
     {
-      "text": "🍂 Fall Cleanup! Get rid of those leaves today!",
-      "background": "linear-gradient(90deg, #FFB88C, #FFD27F)"
-    },
-    {
       "text": "❄️ Snow Season is coming! Book early to get added to our schedule!",
       "background": "linear-gradient(90deg, #aab5ee, #bed9fd)"
     }
