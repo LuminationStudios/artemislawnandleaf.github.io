@@ -1,0 +1,9 @@
+{
+  "banners": [
+    {
+      "text": "❄️ Snow Season is coming! Book early to get added to our schedule!",
+      "background": "linear-gradient(90deg, #aab5ee, #bed9fd)"
+    }
+  ],
+  "rotationInterval": 6000
+}
