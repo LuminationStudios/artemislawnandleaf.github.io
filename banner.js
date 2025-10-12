@@ -28,17 +28,17 @@
 
     for (let i = 0; i < banners.length; i++) {
       const start = banners[i].start;
-      let end;
+      const end = i < banners.length - 1
+        ? new Date(banners[i + 1].start.getTime() - 1) // until just before next banner
+        : banners[i].end || new Date("2099-12-31");    // last banner
 
-      if (i < banners.length - 1) {
-        // End at the day before next banner starts
-        end = new Date(banners[i + 1].start.getTime() - 86400000);
-      } else {
-        // Last banner uses its endDate or forever if null
-        end = banners[i].end || new Date("2099-12-31");
-      }
-
+      // Show banner if today >= start OR this is the first banner
       if (today >= start && today <= end) {
+        activeBanner = banners[i];
+        break;
+      }
+      // If no active banner yet, show the first banner as placeholder
+      if (i === 0 && today < start) {
         activeBanner = banners[i];
         break;
       }
@@ -50,18 +50,14 @@
     }
 
     // Fade-in function
-    const showBanner = banner => {
-      bannerEl.style.transition = "opacity 0.5s";
-      bannerEl.style.opacity = 0;
-      setTimeout(() => {
-        bannerEl.textContent = banner.text;
-        bannerEl.style.background = banner.background;
-        bannerEl.style.display = "block";
-        bannerEl.style.opacity = 1;
-      }, 50);
-    };
-
-    showBanner(activeBanner);
+    bannerEl.style.transition = "opacity 0.5s";
+    bannerEl.style.opacity = 0;
+    setTimeout(() => {
+      bannerEl.textContent = activeBanner.text;
+      bannerEl.style.background = activeBanner.background;
+      bannerEl.style.display = "block";
+      bannerEl.style.opacity = 1;
+    }, 50);
 
   } catch (err) {
     console.error("Error loading banner:", err);
