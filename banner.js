@@ -1,4 +1,4 @@
-fetch('banners.json')
+fetch('json/banner.json')
   .then(res => res.json())
   .then(data => {
     const today = new Date();
