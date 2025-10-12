@@ -105,23 +105,27 @@ a.cta:hover {
   transform: translateY(-2px);
 }
 
-/* 🍔 Mobile Menu Button */
+/* 🍔 Mobile Menu Button Enhancements */
 .menu-toggle {
   display: none;
   font-size: 28px;
   background: none;
   border: none;
   color: var(--muted);
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .menu-toggle.open {
-  color: var(--accent-1);
+  color: var(--accent-1); /* turns orange-pink when open */
+  transform: rotate(90deg); /* subtle spin when toggled */
 }
 
 @media (max-width: 850px) {
   .menu-toggle {
     display: block;
   }
+}
 
   .nav-links {
     position: absolute;
