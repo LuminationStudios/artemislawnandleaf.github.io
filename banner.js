@@ -1,6 +1,6 @@
 async function loadBanner() {
   try {
-    const res = await fetch("banner.json");
+    const res = await fetch("json/banner.json");
     if (!res.ok) throw new Error("Failed to load banner.json");
     const data = await res.json();
 
