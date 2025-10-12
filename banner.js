@@ -1,52 +1,22 @@
-async function loadBanner() {
-  try {
-    const res = await fetch("json/banner.json");
-    if (!res.ok) throw new Error("Failed to load banner.json");
-    const data = await res.json();
+fetch('banners.json')
+  .then(res => res.json())
+  .then(data => {
+    const today = new Date();
+    const bannerEl = document.getElementById('banner');
 
-    const banners = data.banners || [];
-    const rotationInterval = data.rotationInterval || 7000;
-
-    if (banners.length === 0) return;
-
-    const banner = document.createElement("div");
-    banner.className = "banner fade";
-    document.body.insertBefore(banner, document.querySelector("main"));
-
-    let index = 0;
-    let interval;
-
-    const updateBanner = () => {
-      const b = banners[index];
-      banner.style.background = b.background || "linear-gradient(90deg, #FFB88C, #FFD27F)";
-      banner.innerHTML = b.text;
-      banner.style.opacity = 0;
-      setTimeout(() => (banner.style.opacity = 1), 200);
-      index = (index + 1) % banners.length;
-    };
-
-    const startRotation = () => {
-      updateBanner();
-      interval = setInterval(updateBanner, rotationInterval);
-    };
-
-    const stopRotation = () => clearInterval(interval);
-
-    banner.addEventListener("mouseenter", stopRotation);
-    banner.addEventListener("mouseleave", startRotation);
-
-    startRotation();
-
-    document.addEventListener("click", e => {
-      if (e.target && e.target.id === "quoteBannerBtn") {
-        const modal = document.getElementById("quoteModal");
-        if (modal) modal.style.display = "flex";
-      }
+    // Find the first banner valid for today
+    const activeBanner = data.banners.find(b => {
+      const start = new Date(b.startDate);
+      const end = new Date(b.endDate);
+      return today >= start && today <= end;
     });
 
-  } catch (err) {
-    console.error("Banner error:", err);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", loadBanner);
+    if (activeBanner) {
+      bannerEl.textContent = activeBanner.text;
+      bannerEl.style.background = activeBanner.background;
+    } else {
+      // Optional: hide banner if none are active
+      bannerEl.style.display = 'none';
+    }
+  })
+  .catch(err => console.error("Error loading banner:", err));
