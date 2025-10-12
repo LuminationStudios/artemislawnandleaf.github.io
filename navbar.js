@@ -80,7 +80,6 @@ async function initSite() {
       }
     });
   }
-}
 
 // ✅ Properly close the script with this line
 document.addEventListener("DOMContentLoaded", initSite);
