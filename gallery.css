@@ -27,13 +27,20 @@
   font-size: 26px;
   color: #7c6b63;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
+.gallery-close:hover {
+  color: var(--accent-1, #ffb88c);
+}
+
+/* 🌈 Gallery Grid */
 .gallery-grid {
   margin-top: 16px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 16px;
+  justify-items: center;
 }
 
 .gallery-grid img {
@@ -46,6 +53,26 @@
 .gallery-grid img:hover {
   transform: scale(1.05);
   box-shadow: 0 0 18px rgba(255, 180, 120, 0.4);
+}
+
+/* ✨ Text Item Support (for galleries using text instead of images) */
+.gallery-item {
+  background: var(--card, #fffaf6);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 200, 150, 0.25);
+  color: #7a655b;
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 16px rgba(255, 180, 120, 0.4);
 }
 
 /* 🍬 Gallery Button */
@@ -76,4 +103,3 @@ button.view-gallery.blue {
 button.view-gallery.blue:hover {
   box-shadow: 0 0 20px rgba(91, 141, 247, 0.8) !important;
 }
-
