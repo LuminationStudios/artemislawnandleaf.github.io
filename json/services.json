@@ -2,7 +2,11 @@
   "services": [
     {
       "title": "Full Lawn Leaf Removal",
-      "desc": "Raking, bagging, and hauling — complete yard cleanups."
+      "desc": "Raking, bagging, and hauling."
+    },
+    {
+      "title": "Yard Cleanups",
+      "desc": "Basic weeding, debris cleanup, trash cleanup."
     },
     {
       "title": "Snow Removal",
