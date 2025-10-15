@@ -73,6 +73,7 @@
     <select id="eventType">
       <option value="Leaf Cleanup">Leaf Cleanup</option>
       <option value="Snow Removal">Snow Removal</option>
+      <option value="Closed">Closed</option>
       <option value="Other">Other</option>
     </select>
     <button class="save-btn" id="addEvent">Add Event</button>
@@ -102,7 +103,7 @@ const eventType = document.getElementById('eventType');
 const addEventBtn = document.getElementById('addEvent');
 
 let events = JSON.parse(localStorage.getItem('events')) || [];
-const typeColors = { "Leaf Cleanup":"#FF8C42", "Snow Removal":"#42A5FF", "Mowing":"#4CAF50", "Other":"#FFD27F" };
+const typeColors = { "Leaf Cleanup":"#FF8C42", "Snow Removal":"#42A5FF", "Closed":"#db5856", "Other":"#FFD27F" };
 
 let today = new Date();
 let currentMonth = today.getMonth();
