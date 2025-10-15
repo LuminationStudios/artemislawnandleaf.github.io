@@ -6,150 +6,26 @@
 <link rel="stylesheet" href="theme.css">
 <title>Admin Calendar</title>
 <style>
-  #calendar-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  #calendar-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 0;
-  }
-
-  #calendar-nav button {
-    padding: 8px 16px;
-  }
-
-  #calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    margin-bottom: 40px;
-  }
-
-  .day {
-    background-color: var(--card-bg);
-    border: 1px solid var(--secondary-color);
-    border-radius: 10px;
-    padding: 8px;
-    min-height: 80px;
-    box-shadow: var(--card-shadow);
-    position: relative;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .day:hover {
-    background-color: var(--accent-color);
-    color: #fff;
-  }
-
-  .date-number {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  .event {
-    color: #fff;
-    font-size: 12px;
-    padding: 2px 5px;
-    border-radius: 5px;
-    margin-top: 2px;
-    display: block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .today {
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 12px var(--primary-color);
-  }
-
-  .past {
-    opacity: 0.5;
-  }
-
-  .weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    margin-bottom: 5px;
-  }
-
-  .weekday {
-    text-align: center;
-    font-weight: bold;
-    color: var(--primary-color);
-    text-shadow: var(--glow);
-  }
-
-  /* Modal */
-  #eventModal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-
-  .modal-content {
-    background-color: var(--card-bg);
-    border-radius: 12px;
-    padding: 20px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: var(--card-shadow);
-  }
-
-  .modal-content h3 {
-    margin-top: 0;
-    color: var(--primary-color);
-    text-shadow: var(--glow);
-  }
-
-  .close-btn {
-    background: var(--secondary-color);
-    color: #fff;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    float: right;
-  }
-
-  input, select {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 8px;
-    border: 1px solid var(--secondary-color);
-    box-shadow: var(--card-shadow);
-  }
-
-  button.save-btn {
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-
-  button.delete-btn {
-    background-color: #ff4d4d;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-  }
+  /* Calendar & modal styles (same pastel/glow theme) */
+  #calendar-container { max-width:900px; margin:0 auto; }
+  #calendar-nav { display:flex; justify-content:space-between; align-items:center; margin:20px 0; }
+  #calendar-nav button { padding:8px 16px; }
+  #calendar { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-bottom:40px; }
+  .day { background-color:var(--card-bg); border:1px solid var(--secondary-color); border-radius:10px; padding:8px; min-height:80px; box-shadow:var(--card-shadow); cursor:pointer; transition:all 0.2s ease; }
+  .day:hover { background-color: var(--accent-color); color:#fff; }
+  .date-number { font-weight:bold; margin-bottom:5px; }
+  .event { color:#fff; font-size:12px; padding:2px 5px; border-radius:5px; margin-top:2px; display:block; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; }
+  .today { border:2px solid var(--primary-color); box-shadow:0 0 12px var(--primary-color); }
+  .past { opacity:0.5; }
+  .weekdays { display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:5px; }
+  .weekday { text-align:center; font-weight:bold; color:var(--primary-color); text-shadow:var(--glow); }
+  #eventModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); display:flex; justify-content:center; align-items:center; z-index:1000; }
+  .modal-content { background-color:var(--card-bg); border-radius:12px; padding:20px; max-width:400px; width:90%; box-shadow:var(--card-shadow); }
+  .modal-content h3 { margin-top:0; color:var(--primary-color); text-shadow:var(--glow); }
+  .close-btn { background:var(--secondary-color); color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; float:right; }
+  input, select { width:100%; padding:8px; margin:5px 0; border-radius:8px; border:1px solid var(--secondary-color); box-shadow:var(--card-shadow); }
+  button.save-btn { background-color:var(--primary-color); color:#fff; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; margin-right:5px; }
+  button.delete-btn { background-color:#ff4d4d; color:#fff; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -196,7 +72,6 @@
 </div>
 
 <script>
-// Admin Calendar JS
 const calendarDiv = document.getElementById('calendar');
 const monthYearHeader = document.getElementById('monthYear');
 const prevBtn = document.getElementById('prevMonth');
@@ -226,118 +101,78 @@ let currentYear = today.getFullYear();
 let editingIndex = null;
 let selectedDate = null;
 
-function daysInMonth(month, year) {
-  return new Date(year, month + 1, 0).getDate();
-}
+function daysInMonth(month, year) { return new Date(year, month+1,0).getDate(); }
 
 function renderCalendar(month, year) {
   calendarDiv.innerHTML = '';
-  monthYearHeader.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+  monthYearHeader.textContent = new Date(year, month).toLocaleString('default',{month:'long',year:'numeric'});
 
   const firstDay = new Date(year, month, 1).getDay();
   const totalDays = daysInMonth(month, year);
 
-  // Blank divs
-  for (let i = 0; i < firstDay; i++) {
-    calendarDiv.appendChild(document.createElement('div'));
-  }
+  for(let i=0;i<firstDay;i++) calendarDiv.appendChild(document.createElement('div'));
 
-  for (let day = 1; day <= totalDays; day++) {
-    const dayDiv = document.createElement('div');
-    dayDiv.classList.add('day');
-
-    const dateNumber = document.createElement('div');
-    dateNumber.classList.add('date-number');
-    dateNumber.textContent = day;
-    dayDiv.appendChild(dateNumber);
+  for(let day=1;day<=totalDays;day++){
+    const dayDiv = document.createElement('div'); dayDiv.classList.add('day');
+    const dateNumber = document.createElement('div'); dateNumber.classList.add('date-number'); dateNumber.textContent = day; dayDiv.appendChild(dateNumber);
 
     const currentDate = new Date(year, month, day);
     const dateStr = currentDate.toISOString().split('T')[0];
-    if (currentDate.toDateString() === new Date().toDateString()) dayDiv.classList.add('today');
-    if (currentDate < new Date().setHours(0,0,0,0)) dayDiv.classList.add('past');
+    if(currentDate.toDateString() === new Date().toDateString()) dayDiv.classList.add('today');
+    if(currentDate < new Date().setHours(0,0,0,0)) dayDiv.classList.add('past');
 
-    const dayEvents = events.filter(ev => ev.date === dateStr);
-    dayEvents.forEach(ev => {
-      const evDiv = document.createElement('span');
-      evDiv.classList.add('event');
-      evDiv.style.backgroundColor = typeColors[ev.type] || typeColors["Other"];
-      evDiv.textContent = ev.title;
-      dayDiv.appendChild(evDiv);
+    const dayEvents = events.filter(ev=>ev.date===dateStr);
+    dayEvents.forEach(ev=>{
+      const evDiv=document.createElement('span');
+      evDiv.classList.add('event'); evDiv.style.backgroundColor=typeColors[ev.type]||typeColors["Other"];
+      evDiv.textContent = ev.title; dayDiv.appendChild(evDiv);
     });
 
-    // Click to open modal
-    dayDiv.onclick = () => openModal(dateStr);
-
+    dayDiv.onclick=()=>openModal(dateStr);
     calendarDiv.appendChild(dayDiv);
   }
 }
 
-// Open modal
-function openModal(dateStr) {
-  selectedDate = dateStr;
-  editingIndex = null;
-  modal.style.display = 'flex';
-  modalDate.textContent = new Date(dateStr).toDateString();
-  eventTitle.value = '';
-  eventTime.value = '';
-  eventType.value = 'Leaf Cleanup';
+function openModal(dateStr){
+  selectedDate=dateStr; editingIndex=null;
+  modal.style.display='flex'; modalDate.textContent=new Date(dateStr).toDateString();
+  eventTitle.value=''; eventTime.value=''; eventType.value='Leaf Cleanup';
 
-  // Check if there is already an event for editing (first event of the day)
-  const dayEvents = events.filter(ev => ev.date === dateStr);
-  if(dayEvents.length > 0){
-    editingIndex = events.findIndex(ev => ev.date === dateStr && ev.title === dayEvents[0].title);
-    eventTitle.value = dayEvents[0].title;
-    eventTime.value = dayEvents[0].time;
-    eventType.value = dayEvents[0].type;
+  const dayEvents=events.filter(ev=>ev.date===dateStr);
+  if(dayEvents.length>0){ editingIndex=events.findIndex(ev=>ev.date===dateStr && ev.title===dayEvents[0].title);
+    eventTitle.value=dayEvents[0].title; eventTime.value=dayEvents[0].time; eventType.value=dayEvents[0].type;
   }
 }
 
 // Save event
-saveEvent.onclick = () => {
-  const ev = {
-    date: selectedDate,
-    title: eventTitle.value,
-    time: eventTime.value,
-    type: eventType.value
-  };
-  if(editingIndex !== null){
-    events[editingIndex] = ev;
-  } else {
-    events.push(ev);
-  }
-  localStorage.setItem('events', JSON.stringify(events));
-  modal.style.display = 'none';
-  renderCalendar(currentMonth, currentYear);
+saveEvent.onclick=()=>{
+  const ev={date:selectedDate,title:eventTitle.value,time:eventTime.value,type:eventType.value};
+  if(editingIndex!==null) events[editingIndex]=ev;
+  else events.push(ev);
+  localStorage.setItem('events',JSON.stringify(events));
+  renderCalendar(currentMonth,currentYear);
+  modal.style.display='none';
 };
 
 // Delete event
-deleteEvent.onclick = () => {
-  if(editingIndex !== null){
+deleteEvent.onclick=()=>{
+  if(editingIndex!==null){
     events.splice(editingIndex,1);
-    localStorage.setItem('events', JSON.stringify(events));
-    modal.style.display = 'none';
-    renderCalendar(currentMonth, currentYear);
+    localStorage.setItem('events',JSON.stringify(events));
+    renderCalendar(currentMonth,currentYear);
+    modal.style.display='none';
   }
 };
 
-closeModal.onclick = () => modal.style.display = 'none';
-window.onclick = e => { if(e.target == modal) modal.style.display = 'none'; };
+closeModal.onclick=()=>modal.style.display='none';
+window.onclick=e=>{if(e.target==modal) modal.style.display='none';};
 
 // Navigation
-prevBtn.onclick = () => {
-  currentMonth--;
-  if(currentMonth < 0){ currentMonth = 11; currentYear--; }
-  renderCalendar(currentMonth, currentYear);
-};
-
-nextBtn.onclick = () => {
-  currentMonth++;
-  if(currentMonth > 11){ currentMonth = 0; currentYear++; }
-  renderCalendar(currentMonth, currentYear);
-};
+prevBtn.onclick=()=>{currentMonth--; if(currentMonth<0){currentMonth=11; currentYear--;} renderCalendar(currentMonth,currentYear);}
+nextBtn.onclick=()=>{currentMonth++; if(currentMonth>11){currentMonth=0; currentYear++;} renderCalendar(currentMonth,currentYear);}
 
 // Initial render
-renderCalendar(currentMonth, currentYear);
+renderCalendar(currentMonth,currentYear);
 </script>
 </body>
 </html>
