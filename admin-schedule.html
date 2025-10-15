@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="theme.css">
+<title>Admin Calendar</title>
+</head>
+<body>
+<h1>Artemis Lawn & Leaf - Admin Calendar</h1>
+<button id="logoutBtn">Log Out</button>
+<div id="calendar"></div>
+<div id="eventModal" style="display:none;">
+  <input type="text" id="eventTitle" placeholder="Event Title">
+  <input type="time" id="eventTime">
+  <button id="saveEvent">Save</button>
+  <button id="deleteEvent">Delete</button>
+</div>
+<script>
+const PASSWORD = 'artielawn2025';
+let loggedIn = false;
+while(!loggedIn){
+  let pass = prompt('Enter admin password:');
+  if(pass === PASSWORD){ loggedIn = true; }
+  else { alert('Wrong password'); }
+}
+let events = JSON.parse(localStorage.getItem('events')) || [];
+function saveEvents(){ localStorage.setItem('events', JSON.stringify(events)); }
+</script>
+</body>
+</html>
