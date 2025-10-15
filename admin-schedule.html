@@ -6,133 +6,338 @@
 <link rel="stylesheet" href="theme.css">
 <title>Admin Calendar</title>
 <style>
-/* Basic modal styles */
-#loginModal, #eventModal { display:none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); justify-content:center; align-items:center; }
-.modal-content { background:#fff; padding:20px; border-radius:10px; }
-#calendar div:hover { background: var(--primary-color); color: #fff; }
+  #calendar-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  #calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  #calendar-nav button {
+    padding: 8px 16px;
+  }
+
+  #calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 40px;
+  }
+
+  .day {
+    background-color: var(--card-bg);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 8px;
+    min-height: 80px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .day:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+  }
+
+  .date-number {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .event {
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-top: 2px;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .today {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 12px var(--primary-color);
+  }
+
+  .past {
+    opacity: 0.5;
+  }
+
+  .weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 5px;
+  }
+
+  .weekday {
+    text-align: center;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: var(--glow);
+  }
+
+  /* Modal */
+  #eventModal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--card-shadow);
+  }
+
+  .modal-content h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    text-shadow: var(--glow);
+  }
+
+  .close-btn {
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    float: right;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: 1px solid var(--secondary-color);
+    box-shadow: var(--card-shadow);
+  }
+
+  button.save-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  button.delete-btn {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
-<h1>Artemis Lawn & Leaf - Admin Calendar</h1>
-<button id="logoutBtn" style="display:none;">Log Out</button>
-<div id="calendar"></div>
+<h1 style="text-align:center;">Artemis Lawn & Leaf - Admin Calendar</h1>
+
+<div id="calendar-container">
+  <div id="calendar-nav">
+    <button id="prevMonth">&lt; Previous</button>
+    <h2 id="monthYear"></h2>
+    <button id="nextMonth">Next &gt;</button>
+  </div>
+
+  <div class="weekdays">
+    <div class="weekday">Sun</div>
+    <div class="weekday">Mon</div>
+    <div class="weekday">Tue</div>
+    <div class="weekday">Wed</div>
+    <div class="weekday">Thu</div>
+    <div class="weekday">Fri</div>
+    <div class="weekday">Sat</div>
+  </div>
+
+  <div id="calendar"></div>
+</div>
 
 <!-- Event Modal -->
 <div id="eventModal">
   <div class="modal-content">
-    <input type="text" id="eventTitle" placeholder="Event Title"><br><br>
-    <input type="time" id="eventTime"><br><br>
-    <button id="saveEvent">Save</button>
-    <button id="deleteEvent">Delete</button>
-    <button id="closeEvent">Cancel</button>
-  </div>
-</div>
-
-<!-- Login Modal -->
-<div id="loginModal">
-  <div class="modal-content">
-    <h2>Admin Login</h2>
-    <input type="password" id="loginPassword" placeholder="Enter password"><br><br>
-    <button id="loginBtn">Login</button>
+    <button class="close-btn" id="closeModal">Close</button>
+    <h3 id="modalDate"></h3>
+    <input type="text" id="eventTitle" placeholder="Event Title">
+    <input type="time" id="eventTime">
+    <select id="eventType">
+      <option value="Leaf Cleanup">Leaf Cleanup</option>
+      <option value="Snow Removal">Snow Removal</option>
+      <option value="Mowing">Mowing</option>
+      <option value="Other">Other</option>
+    </select>
+    <div style="margin-top:10px;">
+      <button class="save-btn" id="saveEvent">Save</button>
+      <button class="delete-btn" id="deleteEvent">Delete</button>
+    </div>
   </div>
 </div>
 
 <script>
-const PASSWORD = 'artielawn2025';
-const loginModal = document.getElementById('loginModal');
-const loginBtn = document.getElementById('loginBtn');
-const loginPassword = document.getElementById('loginPassword');
-const logoutBtn = document.getElementById('logoutBtn');
-const modal = document.getElementById('eventModal');
-const titleInput = document.getElementById('eventTitle');
-const timeInput = document.getElementById('eventTime');
-const saveBtn = document.getElementById('saveEvent');
-const deleteBtn = document.getElementById('deleteEvent');
-const closeEvent = document.getElementById('closeEvent');
+// Admin Calendar JS
 const calendarDiv = document.getElementById('calendar');
+const monthYearHeader = document.getElementById('monthYear');
+const prevBtn = document.getElementById('prevMonth');
+const nextBtn = document.getElementById('nextMonth');
+
+const modal = document.getElementById('eventModal');
+const modalDate = document.getElementById('modalDate');
+const closeModal = document.getElementById('closeModal');
+const saveEvent = document.getElementById('saveEvent');
+const deleteEvent = document.getElementById('deleteEvent');
+const eventTitle = document.getElementById('eventTitle');
+const eventTime = document.getElementById('eventTime');
+const eventType = document.getElementById('eventType');
 
 let events = JSON.parse(localStorage.getItem('events')) || [];
+
+const typeColors = {
+  "Leaf Cleanup": "#FF8C42",
+  "Snow Removal": "#42A5FF",
+  "Mowing": "#4CAF50",
+  "Other": "#FFD27F"
+};
+
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
 let editingIndex = null;
+let selectedDate = null;
 
-// Show login modal initially
-loginModal.style.display = 'flex';
-logoutBtn.style.display = 'none';
+function daysInMonth(month, year) {
+  return new Date(year, month + 1, 0).getDate();
+}
 
-loginBtn.onclick = () => {
-  if(loginPassword.value === PASSWORD){
-    loginModal.style.display = 'none';
-    logoutBtn.style.display = 'inline';
-    renderCalendar();
-  } else {
-    alert('Wrong password');
-  }
-};
-
-logoutBtn.onclick = () => {
-  location.reload();
-};
-
-// Floating Add Event button
-const addBtn = document.createElement('button');
-addBtn.textContent = '+ Add Event';
-addBtn.style.position = 'fixed';
-addBtn.style.bottom = '20px';
-addBtn.style.right = '20px';
-addBtn.style.padding = '10px 20px';
-addBtn.style.backgroundColor = 'var(--primary-color)';
-addBtn.style.color = '#fff';
-addBtn.style.border = 'none';
-addBtn.style.borderRadius = '10px';
-addBtn.style.cursor = 'pointer';
-document.body.appendChild(addBtn);
-addBtn.onclick = () => openModal();
-
-// Render calendar
-function renderCalendar(){
+function renderCalendar(month, year) {
   calendarDiv.innerHTML = '';
-  events.forEach((ev, idx) => {
-    const div = document.createElement('div');
-    div.textContent = `${ev.time} - ${ev.title}`;
-    div.style.cursor = 'pointer';
-    div.style.margin = '5px 0';
-    div.style.padding = '5px';
-    div.style.border = '1px solid var(--secondary-color)';
-    div.style.borderRadius = '5px';
-    div.onclick = () => openModal(idx);
-    calendarDiv.appendChild(div);
-  });
-}
+  monthYearHeader.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
 
-function openModal(index = null){
-  editingIndex = index;
-  if(index !== null){
-    titleInput.value = events[index].title;
-    timeInput.value = events[index].time;
-    deleteBtn.style.display = 'inline';
-  } else {
-    titleInput.value = '';
-    timeInput.value = '';
-    deleteBtn.style.display = 'none';
+  const firstDay = new Date(year, month, 1).getDay();
+  const totalDays = daysInMonth(month, year);
+
+  // Blank divs
+  for (let i = 0; i < firstDay; i++) {
+    calendarDiv.appendChild(document.createElement('div'));
   }
-  modal.style.display = 'flex';
+
+  for (let day = 1; day <= totalDays; day++) {
+    const dayDiv = document.createElement('div');
+    dayDiv.classList.add('day');
+
+    const dateNumber = document.createElement('div');
+    dateNumber.classList.add('date-number');
+    dateNumber.textContent = day;
+    dayDiv.appendChild(dateNumber);
+
+    const currentDate = new Date(year, month, day);
+    const dateStr = currentDate.toISOString().split('T')[0];
+    if (currentDate.toDateString() === new Date().toDateString()) dayDiv.classList.add('today');
+    if (currentDate < new Date().setHours(0,0,0,0)) dayDiv.classList.add('past');
+
+    const dayEvents = events.filter(ev => ev.date === dateStr);
+    dayEvents.forEach(ev => {
+      const evDiv = document.createElement('span');
+      evDiv.classList.add('event');
+      evDiv.style.backgroundColor = typeColors[ev.type] || typeColors["Other"];
+      evDiv.textContent = ev.title;
+      dayDiv.appendChild(evDiv);
+    });
+
+    // Click to open modal
+    dayDiv.onclick = () => openModal(dateStr);
+
+    calendarDiv.appendChild(dayDiv);
+  }
 }
 
-saveBtn.onclick = () => {
-  const ev = { title: titleInput.value, time: timeInput.value };
-  if(editingIndex !== null){ events[editingIndex] = ev; }
-  else { events.push(ev); }
+// Open modal
+function openModal(dateStr) {
+  selectedDate = dateStr;
+  editingIndex = null;
+  modal.style.display = 'flex';
+  modalDate.textContent = new Date(dateStr).toDateString();
+  eventTitle.value = '';
+  eventTime.value = '';
+  eventType.value = 'Leaf Cleanup';
+
+  // Check if there is already an event for editing (first event of the day)
+  const dayEvents = events.filter(ev => ev.date === dateStr);
+  if(dayEvents.length > 0){
+    editingIndex = events.findIndex(ev => ev.date === dateStr && ev.title === dayEvents[0].title);
+    eventTitle.value = dayEvents[0].title;
+    eventTime.value = dayEvents[0].time;
+    eventType.value = dayEvents[0].type;
+  }
+}
+
+// Save event
+saveEvent.onclick = () => {
+  const ev = {
+    date: selectedDate,
+    title: eventTitle.value,
+    time: eventTime.value,
+    type: eventType.value
+  };
+  if(editingIndex !== null){
+    events[editingIndex] = ev;
+  } else {
+    events.push(ev);
+  }
   localStorage.setItem('events', JSON.stringify(events));
   modal.style.display = 'none';
-  renderCalendar();
+  renderCalendar(currentMonth, currentYear);
 };
 
-deleteBtn.onclick = () => {
-  if(editingIndex !== null){ events.splice(editingIndex,1); localStorage.setItem('events', JSON.stringify(events)); modal.style.display = 'none'; renderCalendar(); }
+// Delete event
+deleteEvent.onclick = () => {
+  if(editingIndex !== null){
+    events.splice(editingIndex,1);
+    localStorage.setItem('events', JSON.stringify(events));
+    modal.style.display = 'none';
+    renderCalendar(currentMonth, currentYear);
+  }
 };
 
-closeEvent.onclick = () => { modal.style.display = 'none'; };
+closeModal.onclick = () => modal.style.display = 'none';
+window.onclick = e => { if(e.target == modal) modal.style.display = 'none'; };
 
-window.onclick = (e) => { if(e.target==modal) modal.style.display='none'; if(e.target==loginModal) loginModal.style.display='flex'; };
+// Navigation
+prevBtn.onclick = () => {
+  currentMonth--;
+  if(currentMonth < 0){ currentMonth = 11; currentYear--; }
+  renderCalendar(currentMonth, currentYear);
+};
+
+nextBtn.onclick = () => {
+  currentMonth++;
+  if(currentMonth > 11){ currentMonth = 0; currentYear++; }
+  renderCalendar(currentMonth, currentYear);
+};
+
+// Initial render
+renderCalendar(currentMonth, currentYear);
 </script>
 </body>
 </html>
