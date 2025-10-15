@@ -5,27 +5,134 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="theme.css">
 <title>Admin Calendar</title>
+<style>
+/* Basic modal styles */
+#loginModal, #eventModal { display:none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); justify-content:center; align-items:center; }
+.modal-content { background:#fff; padding:20px; border-radius:10px; }
+#calendar div:hover { background: var(--primary-color); color: #fff; }
+</style>
 </head>
 <body>
 <h1>Artemis Lawn & Leaf - Admin Calendar</h1>
-<button id="logoutBtn">Log Out</button>
+<button id="logoutBtn" style="display:none;">Log Out</button>
 <div id="calendar"></div>
-<div id="eventModal" style="display:none;">
-  <input type="text" id="eventTitle" placeholder="Event Title">
-  <input type="time" id="eventTime">
-  <button id="saveEvent">Save</button>
-  <button id="deleteEvent">Delete</button>
+
+<!-- Event Modal -->
+<div id="eventModal">
+  <div class="modal-content">
+    <input type="text" id="eventTitle" placeholder="Event Title"><br><br>
+    <input type="time" id="eventTime"><br><br>
+    <button id="saveEvent">Save</button>
+    <button id="deleteEvent">Delete</button>
+    <button id="closeEvent">Cancel</button>
+  </div>
 </div>
+
+<!-- Login Modal -->
+<div id="loginModal">
+  <div class="modal-content">
+    <h2>Admin Login</h2>
+    <input type="password" id="loginPassword" placeholder="Enter password"><br><br>
+    <button id="loginBtn">Login</button>
+  </div>
+</div>
+
 <script>
 const PASSWORD = 'artielawn2025';
-let loggedIn = false;
-while(!loggedIn){
-  let pass = prompt('Enter admin password:');
-  if(pass === PASSWORD){ loggedIn = true; }
-  else { alert('Wrong password'); }
-}
+const loginModal = document.getElementById('loginModal');
+const loginBtn = document.getElementById('loginBtn');
+const loginPassword = document.getElementById('loginPassword');
+const logoutBtn = document.getElementById('logoutBtn');
+const modal = document.getElementById('eventModal');
+const titleInput = document.getElementById('eventTitle');
+const timeInput = document.getElementById('eventTime');
+const saveBtn = document.getElementById('saveEvent');
+const deleteBtn = document.getElementById('deleteEvent');
+const closeEvent = document.getElementById('closeEvent');
+const calendarDiv = document.getElementById('calendar');
+
 let events = JSON.parse(localStorage.getItem('events')) || [];
-function saveEvents(){ localStorage.setItem('events', JSON.stringify(events)); }
+let editingIndex = null;
+
+// Show login modal initially
+loginModal.style.display = 'flex';
+logoutBtn.style.display = 'none';
+
+loginBtn.onclick = () => {
+  if(loginPassword.value === PASSWORD){
+    loginModal.style.display = 'none';
+    logoutBtn.style.display = 'inline';
+    renderCalendar();
+  } else {
+    alert('Wrong password');
+  }
+};
+
+logoutBtn.onclick = () => {
+  location.reload();
+};
+
+// Floating Add Event button
+const addBtn = document.createElement('button');
+addBtn.textContent = '+ Add Event';
+addBtn.style.position = 'fixed';
+addBtn.style.bottom = '20px';
+addBtn.style.right = '20px';
+addBtn.style.padding = '10px 20px';
+addBtn.style.backgroundColor = 'var(--primary-color)';
+addBtn.style.color = '#fff';
+addBtn.style.border = 'none';
+addBtn.style.borderRadius = '10px';
+addBtn.style.cursor = 'pointer';
+document.body.appendChild(addBtn);
+addBtn.onclick = () => openModal();
+
+// Render calendar
+function renderCalendar(){
+  calendarDiv.innerHTML = '';
+  events.forEach((ev, idx) => {
+    const div = document.createElement('div');
+    div.textContent = `${ev.time} - ${ev.title}`;
+    div.style.cursor = 'pointer';
+    div.style.margin = '5px 0';
+    div.style.padding = '5px';
+    div.style.border = '1px solid var(--secondary-color)';
+    div.style.borderRadius = '5px';
+    div.onclick = () => openModal(idx);
+    calendarDiv.appendChild(div);
+  });
+}
+
+function openModal(index = null){
+  editingIndex = index;
+  if(index !== null){
+    titleInput.value = events[index].title;
+    timeInput.value = events[index].time;
+    deleteBtn.style.display = 'inline';
+  } else {
+    titleInput.value = '';
+    timeInput.value = '';
+    deleteBtn.style.display = 'none';
+  }
+  modal.style.display = 'flex';
+}
+
+saveBtn.onclick = () => {
+  const ev = { title: titleInput.value, time: timeInput.value };
+  if(editingIndex !== null){ events[editingIndex] = ev; }
+  else { events.push(ev); }
+  localStorage.setItem('events', JSON.stringify(events));
+  modal.style.display = 'none';
+  renderCalendar();
+};
+
+deleteBtn.onclick = () => {
+  if(editingIndex !== null){ events.splice(editingIndex,1); localStorage.setItem('events', JSON.stringify(events)); modal.style.display = 'none'; renderCalendar(); }
+};
+
+closeEvent.onclick = () => { modal.style.display = 'none'; };
+
+window.onclick = (e) => { if(e.target==modal) modal.style.display='none'; if(e.target==loginModal) loginModal.style.display='flex'; };
 </script>
 </body>
 </html>
