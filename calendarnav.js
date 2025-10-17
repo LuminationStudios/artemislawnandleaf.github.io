@@ -16,6 +16,7 @@ async function initSite() {
   // Load all JSON concurrently
   const [navbarData, servicesData, footerData] = await Promise.all([
     loadJSON("json/calendarnav.json"),
+    loadJSON("json/services.json"),
     loadJSON("json/footer.json")
   ]);
 
@@ -30,6 +31,34 @@ async function initSite() {
       })
       .join("");
 
+    // Optional quote button
+    const quoteBtn = document.getElementById("quoteBtn");
+    const modal = document.getElementById("quoteModal");
+    if (quoteBtn && modal) {
+      quoteBtn.addEventListener("click", e => {
+        e.preventDefault();
+        modal.style.display = "flex";
+      });
+    }
+  } else {
+    console.warn("Navbar JSON missing or nav element not found.");
+  }
+
+  // 🌿 Services
+  const servicesGrid = document.getElementById("services-grid");
+  if (Array.isArray(servicesData?.services) && servicesGrid) {
+    servicesGrid.innerHTML = servicesData.services
+      .map(service => `
+        <div class="service">
+          <h3>${service.title}</h3>
+          <p>${service.desc}</p>
+        </div>
+      `)
+      .join("");
+  } else {
+    console.warn("Services JSON missing or services-grid element not found.");
+  }
+
   // 🌼 Footer
   const footerEl = document.querySelector("footer");
   if (footerData?.footer && footerEl) {
@@ -43,3 +72,6 @@ async function initSite() {
 
   console.log("Site initialization complete.");
 }
+
+// ✅ Attach after DOM is ready
+document.addEventListener("DOMContentLoaded", initSite);
