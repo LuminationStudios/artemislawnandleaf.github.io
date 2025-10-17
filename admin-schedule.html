@@ -5,46 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="theme.css">
 <title>Admin Calendar</title>
-<meta name="description" content="Artemis Lawn & Leaf — affordable seasonal yard care and cleanup options" />
-<link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
 <style>
-  body { font-family: sans-serif; background-color: #f0f4f8; color:#333; }
-  #calendar-container { max-width:900px; margin:0 auto; display:none; }
-  #calendar-nav { display:flex; justify-content:space-between; align-items:center; margin:20px 0; }
-  #calendar-nav button { padding:8px 16px; cursor:pointer; border:none; border-radius:8px; background:#42a5f5; color:#fff; transition:all 0.2s; }
+  body { font-family:sans-serif; background:#f5f5f5; margin:0; padding:0; }
+  #calendar-container { max-width:900px; margin:20px auto; }
+  #calendar-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  #calendar-nav button { padding:8px 16px; border:none; border-radius:8px; background:#42a5f5; color:#fff; cursor:pointer; }
   #calendar-nav button:hover { background:#1e88e5; }
-  #calendar { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-bottom:40px; }
-  .day { background-color:var(--card-bg); border:1px solid var(--secondary-color); border-radius:10px; padding:8px; min-height:80px; box-shadow:var(--card-shadow); cursor:pointer; transition:all 0.2s ease; }
-  .day:hover { background-color: var(--accent-color); color:#fff; }
-  .date-number { font-weight:bold; margin-bottom:5px; }
-  .event { color:#fff; font-size:12px; padding:2px 5px; border-radius:5px; margin-top:2px; display:block; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; }
-  .today { border:2px solid var(--primary-color); box-shadow:0 0 12px var(--primary-color); }
+  #calendar { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; }
+  .day { background:#fff; border:1px solid #ccc; border-radius:10px; padding:8px; min-height:80px; cursor:pointer; }
+  .today { border:2px solid #42a5f5; box-shadow:0 0 8px #42a5f5; }
   .past { opacity:0.5; }
-  .weekdays { display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:5px; }
-  .weekday { text-align:center; font-weight:bold; color:var(--primary-color); text-shadow:var(--glow); }
-  #loginModal, #eventModal { display:flex; position:fixed; top:0; left:0; width:100%; height:100%; justify-content:center; align-items:center; z-index:1000; background:rgba(0,0,0,0.5); }
-  #eventModal { display:none; }
-  .modal-content { background-color:var(--card-bg); border-radius:12px; padding:20px; max-width:400px; width:90%; box-shadow:var(--card-shadow); }
-  .close-btn { background:var(--secondary-color); color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; float:right; }
-  input, select, textarea { width:100%; padding:8px; margin:5px 0; border-radius:8px; border:1px solid var(--secondary-color); box-shadow:var(--card-shadow); }
-  textarea { resize:vertical; }
-  button.save-btn { background-color:var(--primary-color); color:#fff; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; margin-top:5px; }
-  button.delete-btn { background-color:#ff4d4d; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; margin-left:5px; }
-  .event-item { display:flex; justify-content:space-between; align-items:center; margin:5px 0; padding:5px; border-radius:6px; color:#fff; font-weight:bold; }
+  .date-number { font-weight:bold; margin-bottom:5px; }
+  .event { background:#42a5f5; color:#fff; padding:2px 4px; margin-top:2px; border-radius:5px; display:block; font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  #eventModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000; }
+  .modal-content { background:#fff; padding:20px; border-radius:12px; max-width:400px; width:90%; position:relative; }
+  .close-btn { position:absolute; top:10px; right:10px; background:#db5856; color:#fff; border:none; border-radius:6px; padding:5px 10px; cursor:pointer; }
+  input, select { width:100%; margin:5px 0; padding:8px; border-radius:6px; border:1px solid #ccc; }
+  button.save-btn, button.export-btn { padding:8px 16px; border:none; border-radius:6px; cursor:pointer; margin-top:5px; color:#fff; }
+  button.save-btn { background:#42a5f5; }
+  button.export-btn { background:#1e88e5; }
+  .event-item { display:flex; justify-content:space-between; align-items:center; padding:5px; border-radius:6px; margin:5px 0; background:#42a5f5; color:#fff; font-weight:bold; }
+  .delete-btn { background:#db5856; color:#fff; border:none; border-radius:6px; padding:2px 6px; cursor:pointer; }
 </style>
 </head>
 <body>
 
-<h1 style="text-align:center;">Artemis Lawn & Leaf - Admin Calendar</h1>
-
-<!-- Login Modal -->
-<div id="loginModal">
-  <div class="modal-content">
-    <h2>Admin Login</h2>
-    <input type="password" id="loginPassword" placeholder="Enter password"><br><br>
-    <button id="loginBtn" class="save-btn">Login</button>
-  </div>
-</div>
+<h1 style="text-align:center;">Admin Calendar</h1>
 
 <div id="calendar-container">
   <div id="calendar-nav">
@@ -52,6 +38,7 @@
     <h2 id="monthYear"></h2>
     <button id="nextMonth">Next &gt;</button>
   </div>
+
   <div class="weekdays">
     <div class="weekday">Sun</div>
     <div class="weekday">Mon</div>
@@ -61,20 +48,22 @@
     <div class="weekday">Fri</div>
     <div class="weekday">Sat</div>
   </div>
+
   <div id="calendar"></div>
 
-  <!-- Export Button -->
-  <button id="exportICS" class="save-btn">Save .ICS File</button>
+  <button class="export-btn" id="exportICS">Export .ICS</button>
+  <button class="export-btn" id="saveJSON" style="background:#43a047;">Save to Server</button>
 </div>
 
 <!-- Event Modal -->
 <div id="eventModal">
   <div class="modal-content">
-    <button class="close-btn" id="closeModal">Close</button>
+    <button class="close-btn" id="closeModal">X</button>
     <h3 id="modalDate"></h3>
     <div id="modalEvents"></div>
     <hr>
     <input type="text" id="eventTitle" placeholder="Event Title">
+    <input type="date" id="eventDate">
     <input type="time" id="eventTime">
     <select id="eventType">
       <option value="Leaf Cleanup">Leaf Cleanup</option>
@@ -82,18 +71,18 @@
       <option value="Closed">Closed</option>
       <option value="Other">Other</option>
     </select>
-    <input type="text" id="eventLocation" placeholder="Location (optional)">
-    <textarea id="eventDescription" placeholder="Description (optional)" rows="3"></textarea>
     <button class="save-btn" id="addEvent">Add Event</button>
   </div>
 </div>
 
 <script>
-const PASSWORD = 'artielawn2025';
-const loginModal = document.getElementById('loginModal');
-const loginBtn = document.getElementById('loginBtn');
-const loginPassword = document.getElementById('loginPassword');
-const calendarContainer = document.getElementById('calendar-container');
+let events = JSON.parse(localStorage.getItem('events')) || [];
+const typeColors = { "Leaf Cleanup": "#FF8C42", "Snow Removal": "#42A5FF", "Closed": "#db5856", "Other": "#FFD27F" };
+
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+let selectedDate = null;
 
 const calendarDiv = document.getElementById('calendar');
 const monthYearHeader = document.getElementById('monthYear');
@@ -104,177 +93,139 @@ const modal = document.getElementById('eventModal');
 const modalDate = document.getElementById('modalDate');
 const modalEvents = document.getElementById('modalEvents');
 const closeModal = document.getElementById('closeModal');
+
 const eventTitle = document.getElementById('eventTitle');
+const eventDate = document.getElementById('eventDate');
 const eventTime = document.getElementById('eventTime');
 const eventType = document.getElementById('eventType');
-const eventLocation = document.getElementById('eventLocation');
-const eventDescription = document.getElementById('eventDescription');
 const addEventBtn = document.getElementById('addEvent');
-const exportICS = document.getElementById('exportICS');
+const exportICSBtn = document.getElementById('exportICS');
+const saveJSONBtn = document.getElementById('saveJSON');
 
-let events = JSON.parse(localStorage.getItem('events')) || [];
-const typeColors = { "Leaf Cleanup":"#FF8C42", "Snow Removal":"#42A5FF", "Closed":"#db5856", "Other":"#FFD27F" };
+function daysInMonth(month, year){ return new Date(year, month+1,0).getDate(); }
 
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
-let selectedDate = null;
+function renderCalendar(month,year){
+  calendarDiv.innerHTML='';
+  monthYearHeader.textContent = new Date(year, month).toLocaleString('default',{ month:'long', year:'numeric' });
 
-// Login
-loginBtn.onclick = () => {
-  if (loginPassword.value === PASSWORD) {
-    loginModal.style.display = 'none';
-    calendarContainer.style.display = 'block';
-    renderCalendar(currentMonth, currentYear);
-  } else {
-    alert('Incorrect password');
-  }
-};
+  const firstDay = new Date(year,month,1).getDay();
+  const totalDays = daysInMonth(month,year);
 
-function daysInMonth(month, year) { return new Date(year, month + 1, 0).getDate(); }
+  for(let i=0;i<firstDay;i++) calendarDiv.appendChild(document.createElement('div'));
 
-function renderCalendar(month, year) {
-  calendarDiv.innerHTML = '';
-  monthYearHeader.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const totalDays = daysInMonth(month, year);
-  const todayStr = new Date().toISOString().split('T')[0];
-
-  for (let i = 0; i < firstDay; i++) calendarDiv.appendChild(document.createElement('div'));
-
-  for (let day = 1; day <= totalDays; day++) {
-    const dateObj = new Date(year, month, day);
-    const dateStr = dateObj.toISOString().split('T')[0];
-
-    const dayDiv = document.createElement('div');
+  for(let day=1;day<=totalDays;day++){
+    const dayDiv=document.createElement('div');
     dayDiv.classList.add('day');
 
-    const dateNumber = document.createElement('div');
+    const dateNumber=document.createElement('div');
     dateNumber.classList.add('date-number');
-    dateNumber.textContent = day;
+    dateNumber.textContent=day;
     dayDiv.appendChild(dateNumber);
 
-    if (dateStr === todayStr) dayDiv.classList.add('today');
-    else if (dateObj < new Date(new Date().setHours(0,0,0,0))) dayDiv.classList.add('past');
+    const currentDate=new Date(year,month,day);
+    const dateStr=currentDate.toISOString().split('T')[0];
 
-    const dayEvents = events.filter(ev => ev.date === dateStr);
-    dayEvents.forEach(ev => {
-      const evDiv = document.createElement('span');
+    if(currentDate.toDateString()===today.toDateString()) dayDiv.classList.add('today');
+    if(currentDate<new Date(today.getFullYear(),today.getMonth(),today.getDate())) dayDiv.classList.add('past');
+
+    const dayEvents = events.filter(ev=>ev.date===dateStr);
+    dayEvents.forEach(ev=>{
+      const evDiv=document.createElement('span');
       evDiv.classList.add('event');
-      evDiv.style.backgroundColor = typeColors[ev.type] || typeColors["Other"];
-      evDiv.textContent = ev.title;
+      evDiv.style.backgroundColor=typeColors[ev.type]||typeColors["Other"];
+      evDiv.textContent=ev.title;
       dayDiv.appendChild(evDiv);
     });
 
-    dayDiv.onclick = () => openModal(dateStr);
+    dayDiv.onclick=()=>openModal(dateStr);
     calendarDiv.appendChild(dayDiv);
   }
 }
 
-function openModal(dateStr) {
-  selectedDate = dateStr;
-  modal.style.display = 'flex';
-  modalDate.textContent = new Date(dateStr).toDateString();
-  eventTitle.value = '';
-  eventTime.value = '';
-  eventType.value = 'Leaf Cleanup';
-  eventLocation.value = '';
-  eventDescription.value = '';
+// Modal functions
+function openModal(dateStr){
+  selectedDate=dateStr;
+  modal.style.display='flex';
+  modalDate.textContent=new Date(dateStr).toDateString();
+  eventDate.value=dateStr;
+  eventTitle.value='';
+  eventTime.value='';
+  eventType.value='Leaf Cleanup';
   renderModalEvents();
 }
 
-function renderModalEvents() {
-  modalEvents.innerHTML = '';
-  const dayEvents = events.filter(ev => ev.date === selectedDate);
-  if (dayEvents.length === 0) { modalEvents.textContent = 'No events yet'; return; }
-
-  dayEvents.forEach(ev => {
-    const evDiv = document.createElement('div');
+function renderModalEvents(){
+  modalEvents.innerHTML='';
+  const dayEvents = events.filter(ev=>ev.date===selectedDate);
+  dayEvents.forEach(ev=>{
+    const evDiv=document.createElement('div');
     evDiv.classList.add('event-item');
-    evDiv.style.backgroundColor = typeColors[ev.type] || typeColors["Other"];
-    evDiv.innerHTML = `${ev.time || 'All Day'} - ${ev.title} <button class="delete-btn">Delete</button>`;
-    evDiv.querySelector('button').onclick = () => {
-      events.splice(events.indexOf(ev), 1);
-      localStorage.setItem('events', JSON.stringify(events));
-      renderCalendar(currentMonth, currentYear);
+    evDiv.style.backgroundColor=typeColors[ev.type]||typeColors["Other"];
+    evDiv.innerHTML=`${ev.time||'All Day'} - ${ev.title} <button class="delete-btn">Delete</button>`;
+    evDiv.querySelector('button').onclick=()=>{
+      events.splice(events.indexOf(ev),1);
+      localStorage.setItem('events',JSON.stringify(events));
+      renderCalendar(currentMonth,currentYear);
       renderModalEvents();
     };
     modalEvents.appendChild(evDiv);
   });
 }
 
-addEventBtn.onclick = () => {
-  if (eventTitle.value.trim() === '') return alert('Enter a title');
-  const newEv = {
-    date: selectedDate,
-    title: eventTitle.value,
-    time: eventTime.value,
-    type: eventType.value,
-    location: eventLocation.value,
-    description: eventDescription.value
-  };
+addEventBtn.onclick=()=>{
+  if(!eventTitle.value.trim()) return alert('Enter a title');
+  const newEv={ title:eventTitle.value, date:eventDate.value, time:eventTime.value, type:eventType.value };
   events.push(newEv);
-  localStorage.setItem('events', JSON.stringify(events));
-  renderCalendar(currentMonth, currentYear);
+  localStorage.setItem('events',JSON.stringify(events));
+  renderCalendar(currentMonth,currentYear);
   renderModalEvents();
-  eventTitle.value = '';
-  eventTime.value = '';
-  eventType.value = 'Leaf Cleanup';
-  eventLocation.value = '';
-  eventDescription.value = '';
 };
 
-closeModal.onclick = () => (modal.style.display = 'none');
-window.onclick = e => { if (e.target == modal) modal.style.display = 'none'; };
+// Navigation
+prevBtn.onclick=()=>{ currentMonth--; if(currentMonth<0){currentMonth=11;currentYear--;} renderCalendar(currentMonth,currentYear);}
+nextBtn.onclick=()=>{ currentMonth++; if(currentMonth>11){currentMonth=0;currentYear++;} renderCalendar(currentMonth,currentYear);}
 
-prevBtn.onclick = () => { currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(currentMonth, currentYear); };
-nextBtn.onclick = () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(currentMonth, currentYear); };
+closeModal.onclick=()=> modal.style.display='none';
+window.onclick=e=>{ if(e.target==modal) modal.style.display='none'; }
 
-// ICS Export Functions
-function generateUID() { return 'uid-' + Math.random().toString(36).substr(2,9) + '@artielawn.com'; }
-function formatDateTime(dateStr, timeStr) { const [y,m,d]=dateStr.split('-'); return !timeStr ? `${y}${m}${d}` : `${y}${m}${d}T${timeStr.replace(':','')}00`; }
-function calculateEndTime(timeStr) { if(!timeStr) return null; let [h,m]=timeStr.split(':').map(Number); m+=60; if(m>=60){h+=Math.floor(m/60); m%=60;} if(h>23) h=23; return String(h).padStart(2,'0')+String(m).padStart(2,'0')+'00'; }
-
-function generateICS(events) {
-  let ics = `BEGIN:VCALENDAR
-VERSION:2.0
-CALSCALE:GREGORIAN
-PRODID:-//Artemis Lawn & Leaf Calendar//EN
-`;
+// Export ICS
+function generateICS(events){
+  let ics=`BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Artemis Lawn & Leaf//EN\n`;
   events.forEach(ev=>{
-    const uid = generateUID();
-    const dtstamp = new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
-    const dtstart = formatDateTime(ev.date, ev.time);
-    let dtend;
-    if(ev.time) dtend = formatDateTime(ev.date, calculateEndTime(ev.time));
-    else { const nextDay=new Date(ev.date); nextDay.setDate(nextDay.getDate()+1); dtend=nextDay.toISOString().split('T')[0].replace(/-/g,''); }
-
-    ics += `BEGIN:VEVENT
-UID:${uid}
-DTSTAMP:${dtstamp}
-SUMMARY:${ev.title}
-DTSTART:${dtstart}
-DTEND:${dtend}
-CATEGORIES:${ev.type}
-${ev.description ? 'DESCRIPTION:'+ev.description+'\n' : ''}
-${ev.location ? 'LOCATION:'+ev.location+'\n' : ''}
-END:VEVENT
-`;
+    const date=ev.date.replace(/-/g,'');
+    const time=ev.time?ev.time.replace(':','')+'00':'000000';
+    const endTime=ev.time?String(Number(ev.time.replace(':',''))+100).padStart(6,'0'):'010000';
+    ics+=`BEGIN:VEVENT\nSUMMARY:${ev.title}\nDTSTART:${date}T${time}\nDTEND:${date}T${endTime}\nCATEGORIES:${ev.type}\nEND:VEVENT\n`;
   });
-  ics += `END:VCALENDAR`;
+  ics+='END:VCALENDAR';
   return ics;
 }
 
-exportICS.onclick = () => {
-  const icsData = generateICS(events);
-  const blob = new Blob([icsData], { type: 'text/calendar' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'events.ics';
+exportICSBtn.onclick=()=>{
+  const blob=new Blob([generateICS(events)],{type:'text/calendar'});
+  const link=document.createElement('a');
+  link.href=URL.createObjectURL(blob);
+  link.download='events.ics';
   link.click();
-  alert('✅ Calendar exported successfully!');
+  alert('✅ ICS exported!');
 };
+
+// Save to server
+saveJSONBtn.onclick=async()=>{
+  try{
+    const res=await fetch('save-json.php',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(events)
+    });
+    const txt=await res.text();
+    alert(txt);
+  }catch(err){console.error(err); alert('Error saving JSON');}
+};
+
+// Initial render
+renderCalendar(currentMonth,currentYear);
 </script>
+
 </body>
 </html>
