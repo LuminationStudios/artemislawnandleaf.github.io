@@ -1,6 +1,7 @@
 /*Hewwo*/
 :root {
-  --bg: #fff7f0; /* light cream background */
+  --bg: #ffffff; /* light cream background */
+  --bg-gradient: linear-gradient(180deg, #3d2513 0%, #8b6c5c 100%);
   --primary-color: #FF8C42; /* orange */
   --secondary-color: #A0522D; /* brown */
   --accent-color: #FFD27F; /* light orange accent */
@@ -11,7 +12,9 @@
 }
 
 body {
-  background-color: var(--bg);
+  background: var(--bg-gradient);   /* ✅ use 'background' instead of background-image */
+  background-attachment: fixed;     /* ✅ keeps gradient consistent while scrolling */
+  background-repeat: no-repeat;
   font-family: 'Arial', sans-serif;
   color: var(--text-color);
   margin: 0;
