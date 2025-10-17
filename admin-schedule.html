@@ -110,19 +110,7 @@ let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 let selectedDate = null;
 
-// Hide calendar until login
-calendarContainer.style.display = 'none';
 
-// Login functionality
-loginBtn.onclick = () => {
-    if(loginPassword.value === PASSWORD){
-        loginModal.style.display = 'none';
-        calendarContainer.style.display = 'block';
-        renderCalendar(currentMonth, currentYear);
-    } else {
-        alert('Incorrect password');
-    }
-};
 
 // Calendar helpers
 function daysInMonth(month, year){ return new Date(year, month+1,0).getDate(); }
