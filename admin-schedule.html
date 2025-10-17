@@ -18,8 +18,6 @@
   .past { opacity:0.5; }
   .weekdays { display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:5px; }
   .weekday { text-align:center; font-weight:bold; color:var(--primary-color); text-shadow:var(--glow); }
-  
-  /* Modals */
   #loginModal, #eventModal { display:flex; position:fixed; top:0; left:0; width:100%; height:100%; justify-content:center; align-items:center; z-index:1000; background:rgba(0,0,0,0.5); }
   #eventModal { display:none; }
   .modal-content { background-color:var(--card-bg); border-radius:12px; padding:20px; max-width:400px; width:90%; box-shadow:var(--card-shadow); }
@@ -59,6 +57,9 @@
     <div class="weekday">Sat</div>
   </div>
   <div id="calendar"></div>
+
+  <!-- Export Button -->
+  <button id="exportICS" class="save-btn">Save .ICS File</button>
 </div>
 
 <!-- Event Modal -->
@@ -101,6 +102,7 @@ const eventTitle = document.getElementById('eventTitle');
 const eventTime = document.getElementById('eventTime');
 const eventType = document.getElementById('eventType');
 const addEventBtn = document.getElementById('addEvent');
+const exportICS = document.getElementById('exportICS');
 
 let events = JSON.parse(localStorage.getItem('events')) || [];
 const typeColors = { "Leaf Cleanup":"#FF8C42", "Snow Removal":"#42A5FF", "Closed":"#db5856", "Other":"#FFD27F" };
@@ -165,7 +167,7 @@ function renderModalEvents(){
   const dayEvents=events.filter(ev=>ev.date===selectedDate);
   if(dayEvents.length===0){ modalEvents.textContent='No events yet'; return; }
 
-  dayEvents.forEach((ev,index)=>{
+  dayEvents.forEach(ev=>{
     const evDiv=document.createElement('div'); evDiv.classList.add('event-item');
     evDiv.style.backgroundColor=typeColors[ev.type]||typeColors["Other"];
     evDiv.innerHTML=`${ev.time} - ${ev.title} <button class="delete-btn">Delete</button>`;
@@ -194,6 +196,27 @@ window.onclick=e=>{if(e.target==modal) modal.style.display='none';}
 
 prevBtn.onclick=()=>{currentMonth--; if(currentMonth<0){currentMonth=11; currentYear--;} renderCalendar(currentMonth,currentYear);}
 nextBtn.onclick=()=>{currentMonth++; if(currentMonth>11){currentMonth=0; currentYear++;} renderCalendar(currentMonth,currentYear);}
+
+// Generate and export .ICS
+function generateICS(events) {
+  let ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Artemis Lawn & Leaf//EN\n`;
+  events.forEach(ev => {
+    const date = ev.date.replace(/-/g, '');
+    const time = ev.time ? ev.time.replace(':', '') + '00' : '000000';
+    ics += `BEGIN:VEVENT\nSUMMARY:${ev.title}\nDTSTART:${date}T${time}\nDTEND:${date}T${time}\nCATEGORIES:${ev.type}\nEND:VEVENT\n`;
+  });
+  ics += `END:VCALENDAR`;
+  return ics;
+}
+
+exportICS.onclick = () => {
+  const icsData = generateICS(events);
+  const blob = new Blob([icsData], {type: 'text/calendar'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'events.ics';
+  link.click();
+};
 </script>
 </body>
 </html>
