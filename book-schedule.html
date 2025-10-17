@@ -103,7 +103,7 @@ function renderCalendar(month, year) {
 
   for(let i=0;i<firstDay;i++) calendarDiv.appendChild(document.createElement('div'));
 
-  for(let day=1;day<=totalDays;day++) {
+  for(let day=1; day<=totalDays; day++) {
     const dayDiv = document.createElement('div');
     dayDiv.classList.add('day');
 
@@ -115,8 +115,10 @@ function renderCalendar(month, year) {
     const currentDate = new Date(year, month, day);
     const dateStr = currentDate.toISOString().split('T')[0];
 
-    if(currentDate.toDateString() === todayDate.toDateString()) dayDiv.classList.add('today');
-    if(currentDate < new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate())) dayDiv.classList.add('past');
+    // Highlight only today
+    if(currentDate.toDateString() === todayDate.toDateString()) {
+      dayDiv.classList.add('today');
+    }
 
     const dayEvents = events.filter(ev => ev.date === dateStr);
     dayEvents.forEach(ev => {
@@ -132,7 +134,7 @@ function renderCalendar(month, year) {
     calendarDiv.appendChild(dayDiv);
   }
 }
-
+  
 function openModal(dateStr, dayEvents) {
   modal.style.display='flex';
   modalDate.textContent = new Date(dateStr).toDateString();
