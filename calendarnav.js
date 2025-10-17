@@ -43,6 +43,3 @@ async function initSite() {
 
   console.log("Site initialization complete.");
 }
-
-// ✅ Attach after DOM is ready
-document.addEventListener("DOMContentLoaded", initSite);
