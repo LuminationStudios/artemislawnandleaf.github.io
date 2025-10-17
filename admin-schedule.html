@@ -5,10 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="theme.css">
 <title>Admin Calendar</title>
+<meta name="description" content="Artemis Lawn & Leaf — affordable seasonal yard care and cleanup options" />
+<link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
 <style>
+  body { font-family: sans-serif; background-color: #f0f4f8; color:#333; }
   #calendar-container { max-width:900px; margin:0 auto; display:none; }
   #calendar-nav { display:flex; justify-content:space-between; align-items:center; margin:20px 0; }
-  #calendar-nav button { padding:8px 16px; }
+  #calendar-nav button { padding:8px 16px; cursor:pointer; border:none; border-radius:8px; background:#42a5f5; color:#fff; transition:all 0.2s; }
+  #calendar-nav button:hover { background:#1e88e5; }
   #calendar { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-bottom:40px; }
   .day { background-color:var(--card-bg); border:1px solid var(--secondary-color); border-radius:10px; padding:8px; min-height:80px; box-shadow:var(--card-shadow); cursor:pointer; transition:all 0.2s ease; }
   .day:hover { background-color: var(--accent-color); color:#fff; }
@@ -22,7 +26,8 @@
   #eventModal { display:none; }
   .modal-content { background-color:var(--card-bg); border-radius:12px; padding:20px; max-width:400px; width:90%; box-shadow:var(--card-shadow); }
   .close-btn { background:var(--secondary-color); color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; float:right; }
-  input, select { width:100%; padding:8px; margin:5px 0; border-radius:8px; border:1px solid var(--secondary-color); box-shadow:var(--card-shadow); }
+  input, select, textarea { width:100%; padding:8px; margin:5px 0; border-radius:8px; border:1px solid var(--secondary-color); box-shadow:var(--card-shadow); }
+  textarea { resize:vertical; }
   button.save-btn { background-color:var(--primary-color); color:#fff; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; margin-top:5px; }
   button.delete-btn { background-color:#ff4d4d; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; margin-left:5px; }
   .event-item { display:flex; justify-content:space-between; align-items:center; margin:5px 0; padding:5px; border-radius:6px; color:#fff; font-weight:bold; }
@@ -77,13 +82,14 @@
       <option value="Closed">Closed</option>
       <option value="Other">Other</option>
     </select>
+    <input type="text" id="eventLocation" placeholder="Location (optional)">
+    <textarea id="eventDescription" placeholder="Description (optional)" rows="3"></textarea>
     <button class="save-btn" id="addEvent">Add Event</button>
   </div>
 </div>
 
 <script>
 const PASSWORD = 'artielawn2025';
-
 const loginModal = document.getElementById('loginModal');
 const loginBtn = document.getElementById('loginBtn');
 const loginPassword = document.getElementById('loginPassword');
@@ -101,6 +107,8 @@ const closeModal = document.getElementById('closeModal');
 const eventTitle = document.getElementById('eventTitle');
 const eventTime = document.getElementById('eventTime');
 const eventType = document.getElementById('eventType');
+const eventLocation = document.getElementById('eventLocation');
+const eventDescription = document.getElementById('eventDescription');
 const addEventBtn = document.getElementById('addEvent');
 const exportICS = document.getElementById('exportICS');
 
@@ -133,9 +141,7 @@ function renderCalendar(month, year) {
   const totalDays = daysInMonth(month, year);
   const todayStr = new Date().toISOString().split('T')[0];
 
-  for (let i = 0; i < firstDay; i++) {
-    calendarDiv.appendChild(document.createElement('div'));
-  }
+  for (let i = 0; i < firstDay; i++) calendarDiv.appendChild(document.createElement('div'));
 
   for (let day = 1; day <= totalDays; day++) {
     const dateObj = new Date(year, month, day);
@@ -149,11 +155,8 @@ function renderCalendar(month, year) {
     dateNumber.textContent = day;
     dayDiv.appendChild(dateNumber);
 
-    if (dateStr === todayStr) {
-      dayDiv.classList.add('today');
-    } else if (dateObj < new Date(new Date().setHours(0,0,0,0))) {
-      dayDiv.classList.add('past');
-    }
+    if (dateStr === todayStr) dayDiv.classList.add('today');
+    else if (dateObj < new Date(new Date().setHours(0,0,0,0))) dayDiv.classList.add('past');
 
     const dayEvents = events.filter(ev => ev.date === dateStr);
     dayEvents.forEach(ev => {
@@ -176,16 +179,15 @@ function openModal(dateStr) {
   eventTitle.value = '';
   eventTime.value = '';
   eventType.value = 'Leaf Cleanup';
+  eventLocation.value = '';
+  eventDescription.value = '';
   renderModalEvents();
 }
 
 function renderModalEvents() {
   modalEvents.innerHTML = '';
   const dayEvents = events.filter(ev => ev.date === selectedDate);
-  if (dayEvents.length === 0) {
-    modalEvents.textContent = 'No events yet';
-    return;
-  }
+  if (dayEvents.length === 0) { modalEvents.textContent = 'No events yet'; return; }
 
   dayEvents.forEach(ev => {
     const evDiv = document.createElement('div');
@@ -204,7 +206,14 @@ function renderModalEvents() {
 
 addEventBtn.onclick = () => {
   if (eventTitle.value.trim() === '') return alert('Enter a title');
-  const newEv = { date: selectedDate, title: eventTitle.value, time: eventTime.value, type: eventType.value };
+  const newEv = {
+    date: selectedDate,
+    title: eventTitle.value,
+    time: eventTime.value,
+    type: eventType.value,
+    location: eventLocation.value,
+    description: eventDescription.value
+  };
   events.push(newEv);
   localStorage.setItem('events', JSON.stringify(events));
   renderCalendar(currentMonth, currentYear);
@@ -212,6 +221,8 @@ addEventBtn.onclick = () => {
   eventTitle.value = '';
   eventTime.value = '';
   eventType.value = 'Leaf Cleanup';
+  eventLocation.value = '';
+  eventDescription.value = '';
 };
 
 closeModal.onclick = () => (modal.style.display = 'none');
@@ -220,13 +231,36 @@ window.onclick = e => { if (e.target == modal) modal.style.display = 'none'; };
 prevBtn.onclick = () => { currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(currentMonth, currentYear); };
 nextBtn.onclick = () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(currentMonth, currentYear); };
 
+// ICS Export Functions
+function generateUID() { return 'uid-' + Math.random().toString(36).substr(2,9) + '@artielawn.com'; }
+function formatDateTime(dateStr, timeStr) { const [y,m,d]=dateStr.split('-'); return !timeStr ? `${y}${m}${d}` : `${y}${m}${d}T${timeStr.replace(':','')}00`; }
+function calculateEndTime(timeStr) { if(!timeStr) return null; let [h,m]=timeStr.split(':').map(Number); m+=60; if(m>=60){h+=Math.floor(m/60); m%=60;} if(h>23) h=23; return String(h).padStart(2,'0')+String(m).padStart(2,'0')+'00'; }
+
 function generateICS(events) {
-  let ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Artemis Lawn & Leaf//EN\n`;
-  events.forEach(ev => {
-    const date = ev.date.replace(/-/g, '');
-    const time = ev.time ? ev.time.replace(':', '') + '00' : '000000';
-    const endTime = ev.time ? String(Number(ev.time.replace(':', '')) + 100).padStart(6, '0') : '010000';
-    ics += `BEGIN:VEVENT\nSUMMARY:${ev.title}\nDTSTART:${date}T${time}\nDTEND:${date}T${endTime}\nCATEGORIES:${ev.type}\nEND:VEVENT\n`;
+  let ics = `BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+PRODID:-//Artemis Lawn & Leaf Calendar//EN
+`;
+  events.forEach(ev=>{
+    const uid = generateUID();
+    const dtstamp = new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+    const dtstart = formatDateTime(ev.date, ev.time);
+    let dtend;
+    if(ev.time) dtend = formatDateTime(ev.date, calculateEndTime(ev.time));
+    else { const nextDay=new Date(ev.date); nextDay.setDate(nextDay.getDate()+1); dtend=nextDay.toISOString().split('T')[0].replace(/-/g,''); }
+
+    ics += `BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:${dtstamp}
+SUMMARY:${ev.title}
+DTSTART:${dtstart}
+DTEND:${dtend}
+CATEGORIES:${ev.type}
+${ev.description ? 'DESCRIPTION:'+ev.description+'\n' : ''}
+${ev.location ? 'LOCATION:'+ev.location+'\n' : ''}
+END:VEVENT
+`;
   });
   ics += `END:VCALENDAR`;
   return ics;
