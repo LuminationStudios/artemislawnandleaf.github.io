@@ -112,7 +112,7 @@ let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 let selectedDate = null;
 
-// Login functionality
+// Login
 loginBtn.onclick = () => {
   if (loginPassword.value === PASSWORD) {
     loginModal.style.display = 'none';
@@ -131,19 +131,19 @@ function renderCalendar(month, year) {
 
   const firstDay = new Date(year, month, 1).getDay();
   const totalDays = daysInMonth(month, year);
-  const todayDate = new Date();
-  const todayStr = todayDate.toISOString().split('T')[0];
+  const todayStr = new Date().toISOString().split('T')[0];
 
   for (let i = 0; i < firstDay; i++) {
     calendarDiv.appendChild(document.createElement('div'));
   }
 
   for (let day = 1; day <= totalDays; day++) {
+    const dateObj = new Date(year, month, day);
+    const dateStr = dateObj.toISOString().split('T')[0];
+
     const dayDiv = document.createElement('div');
     dayDiv.classList.add('day');
 
-    const dateObj = new Date(year, month, day);
-    const dateStr = dateObj.toISOString().split('T')[0];
     const dateNumber = document.createElement('div');
     dateNumber.classList.add('date-number');
     dateNumber.textContent = day;
@@ -151,7 +151,7 @@ function renderCalendar(month, year) {
 
     if (dateStr === todayStr) {
       dayDiv.classList.add('today');
-    } else if (dateObj < new Date(todayDate.setHours(0, 0, 0, 0))) {
+    } else if (dateObj < new Date(new Date().setHours(0,0,0,0))) {
       dayDiv.classList.add('past');
     }
 
@@ -164,7 +164,6 @@ function renderCalendar(month, year) {
       dayDiv.appendChild(evDiv);
     });
 
-    // Open modal only when user clicks a day
     dayDiv.onclick = () => openModal(dateStr);
     calendarDiv.appendChild(dayDiv);
   }
@@ -221,7 +220,6 @@ window.onclick = e => { if (e.target == modal) modal.style.display = 'none'; };
 prevBtn.onclick = () => { currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(currentMonth, currentYear); };
 nextBtn.onclick = () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(currentMonth, currentYear); };
 
-// Generate and export .ICS
 function generateICS(events) {
   let ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Artemis Lawn & Leaf//EN\n`;
   events.forEach(ev => {
