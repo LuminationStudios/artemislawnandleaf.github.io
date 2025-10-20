@@ -1,14 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const PASSWORD = 'artielawn2025';
 
-  // -------------------------
   // Elements
-  // -------------------------
   const pwOverlay = document.getElementById('pwOverlay');
   const unlockBtn = document.getElementById('unlockBtn');
   const adminPasswordInput = document.getElementById('adminPassword');
   const calendarContainer = document.getElementById('calendar-container');
-
   const calendarDiv = document.getElementById('calendar');
   const monthYearHeader = document.getElementById('monthYear');
   const prevBtn = document.getElementById('prevMonth');
@@ -41,9 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentYear = today.getFullYear();
   let selectedDate = null;
 
-  // -------------------------
-  // PASSWORD MODAL
-  // -------------------------
+  // PASSWORD
   unlockBtn.onclick = () => {
     if(adminPasswordInput.value === PASSWORD){
       pwOverlay.style.display = 'none';
@@ -57,9 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   adminPasswordInput.addEventListener('keypress', e => { if(e.key==='Enter') unlockBtn.click(); });
 
-  // -------------------------
-  // CALENDAR FUNCTIONS
-  // -------------------------
+  // CALENDAR
   function daysInMonth(m,y){ return new Date(y,m+1,0).getDate(); }
 
   function renderCalendar(month, year){
@@ -94,9 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // -------------------------
   // EVENT MODAL
-  // -------------------------
   function openModal(dateStr){
     selectedDate=dateStr;
     modal.style.display='flex';
@@ -142,9 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
   closeModal.onclick=()=>modal.style.display='none';
   window.onclick=e=>{ if(e.target===modal) modal.style.display='none'; };
 
-  // -------------------------
-  // EXPORT FUNCTIONS
-  // -------------------------
+  // EXPORT ICS
   function generateICS(events){
     let ics=`BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Artemis Lawn & Leaf//EN\n`;
     events.forEach(ev=>{
@@ -168,29 +157,27 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('✅ ICS exported!');
   };
 
-  // -------------------------
-  // SAVE TO GITHUB ACTIONS
-  // -------------------------
-  saveJSONBtn.onclick = async () => {
-    if (!events.length) return alert("No events to save!");
+  // SAVE TO GITHUB
+  saveJSONBtn.onclick=async()=>{
+    if(!events.length) return alert("No events to save!");
 
     try {
-      const response = await fetch("/update-events", { // This calls your Node.js server
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/update-events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ events })
       });
 
-      if (response.ok) {
-        alert("💾 Events pushed to GitHub! Actions running.");
+      const data = await response.json();
+
+      if(data.success){
+        alert('💾 Events pushed to GitHub! Actions triggered.');
       } else {
-        const text = await response.text();
-        alert("❌ Failed to push: " + text);
+        alert('❌ Failed: ' + data.message);
       }
-    } catch (e) {
+    } catch(e){
       console.error(e);
-      alert("❌ Network error.");
+      alert('❌ Network error.');
     }
   };
-
 });
