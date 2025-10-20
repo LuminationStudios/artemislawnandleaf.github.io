@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     // 2️⃣ Update events.json
     const updateRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-      method: 'PUT',
+      method: 'REST',
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
       body: JSON.stringify({
         message: 'Update events.json from admin',
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
     // 3️⃣ Trigger workflow dispatch
     const dispatchRes = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`, {
-      method: 'POST',
+      method: 'REST',
       headers: {
         'Authorization': `token ${GITHUB_TOKEN}`,
         'Accept': 'application/vnd.github+json'
