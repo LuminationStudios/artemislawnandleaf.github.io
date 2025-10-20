@@ -148,13 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ics+='END:VCALENDAR'; return ics;
   }
 
-  exportICSBtn.onclick=()=>{
-    const blob=new Blob([generateICS(events)],{type:'text/calendar'});
-    const link=document.createElement('a'); link.href=URL.createObjectURL(blob);
-    link.download='events.ics'; link.click(); URL.revokeObjectURL(link.href);
-    alert('✅ ICS exported!');
-  };
-
   // -------------------------
   // SAVE TO SERVER (GitHub Action)
   saveJSONBtn.onclick=async()=>{
