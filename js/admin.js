@@ -1,33 +1,32 @@
 const PASSWORD = 'artielawn2025'; // Admin password
 
-// On page load, ask for password
-window.addEventListener('load', () => {
-  const input = prompt('Enter Admin Password:');
-  if (input !== PASSWORD) {
-    alert('Access Denied');
-    document.body.innerHTML = '<h2 style="text-align:center;color:red;">⛔ Access Denied</h2>';
-    throw new Error('Unauthorized');
-  }
-});
-
 // Elements
+const pwOverlay = document.getElementById('pwOverlay');
+const unlockBtn = document.getElementById('unlockBtn');
+const adminPasswordInput = document.getElementById('adminPassword');
+
 const calendarDiv = document.getElementById('calendar');
+const calendarContainer = document.getElementById('calendar-container');
 const monthYearHeader = document.getElementById('monthYear');
 const prevBtn = document.getElementById('prevMonth');
 const nextBtn = document.getElementById('nextMonth');
+
 const modal = document.getElementById('eventModal');
 const modalDate = document.getElementById('modalDate');
 const modalEvents = document.getElementById('modalEvents');
 const closeModal = document.getElementById('closeModal');
+
 const eventTitle = document.getElementById('eventTitle');
 const eventDate = document.getElementById('eventDate');
 const eventTime = document.getElementById('eventTime');
 const eventType = document.getElementById('eventType');
 const addEventBtn = document.getElementById('addEvent');
+
 const exportICSBtn = document.getElementById('exportICS');
 const saveJSONBtn = document.getElementById('saveJSON');
 
 let events = JSON.parse(localStorage.getItem('events')) || [];
+
 const typeColors = {
   "Leaf Cleanup": "#FF8C42",
   "Snow Removal": "#42A5FF",
@@ -40,6 +39,28 @@ let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 let selectedDate = null;
 
+// -------------------------
+// PASSWORD MODAL HANDLING
+// -------------------------
+unlockBtn.onclick = () => {
+  if (adminPasswordInput.value === PASSWORD) {
+    pwOverlay.style.display = 'none';
+    calendarContainer.classList.remove('hidden');
+    renderCalendar(currentMonth, currentYear);
+  } else {
+    alert('❌ Wrong password');
+    adminPasswordInput.value = '';
+    adminPasswordInput.focus();
+  }
+};
+
+adminPasswordInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') unlockBtn.click();
+});
+
+// -------------------------
+// CALENDAR FUNCTIONS
+// -------------------------
 function daysInMonth(month, year) {
   return new Date(year, month + 1, 0).getDate();
 }
@@ -57,6 +78,7 @@ function renderCalendar(month, year) {
   for (let day = 1; day <= totalDays; day++) {
     const dayDiv = document.createElement('div');
     dayDiv.classList.add('day');
+
     const dateNumber = document.createElement('div');
     dateNumber.classList.add('date-number');
     dateNumber.textContent = day;
@@ -83,6 +105,9 @@ function renderCalendar(month, year) {
   }
 }
 
+// -------------------------
+// EVENT MODAL FUNCTIONS
+// -------------------------
 function openModal(dateStr) {
   selectedDate = dateStr;
   modal.style.display = 'flex';
@@ -146,9 +171,12 @@ nextBtn.onclick = () => {
 
 closeModal.onclick = () => (modal.style.display = 'none');
 window.onclick = e => {
-  if (e.target == modal) modal.style.display = 'none';
+  if (e.target === modal) modal.style.display = 'none';
 };
 
+// -------------------------
+// EXPORT FUNCTIONS
+// -------------------------
 function generateICS(events) {
   let ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Artemis Lawn & Leaf//EN\n`;
   events.forEach(ev => {
@@ -180,7 +208,7 @@ exportICSBtn.onclick = () => {
   alert('✅ ICS exported!');
 };
 
-saveJSONBtn.onclick = async () => {
+saveJSONBtn.onclick = () => {
   const blob = new Blob([JSON.stringify(events, null, 2)], { type: 'application/json' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
@@ -189,5 +217,3 @@ saveJSONBtn.onclick = async () => {
   URL.revokeObjectURL(link.href);
   alert('💾 JSON downloaded! Upload to GitHub manually to sync.');
 };
-
-renderCalendar(currentMonth, currentYear);
