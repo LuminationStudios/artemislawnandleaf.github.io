@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const REPO = 'LuminationStudios/artielawnandleaf.github.io';
   const PATH = 'events.json';
   const BRANCH = 'main';
-  const WORKFLOW_FILE = 'deploy.yml'; // replace with your workflow filename
+  const WORKFLOW_FILE = '.github/workflows/update-ics.yml'; // replace with your workflow filename
 
   try {
     // 1️⃣ Get SHA of existing file
