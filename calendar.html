@@ -3,12 +3,25 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Public Calendar - Artemis Lawn & Leaf</title>
+  <title>Artemis Lawn & Leaf</title>
   <link rel="stylesheet" href="css/theme.css"/>
+  <script src="calendarnav.js" defer></script>
 </head>
 <body>
+<!-- 🌿 Header -->
+  <header class="sticky-header">
+    <div class="header-inner container">
+      <div class="brand">
+        <div class="logo">
+          <img src="logo/leaficon.svg" alt="Logo" width="36" height="36">
+        </div>
+        <strong>Artemis Lawn & Leaf</strong>
+      </div>
+      <nav class="nav-links" id="navLinks"></nav>
+    </div>
+  </header>
+  
   <h1 style="text-align:center;">Our Events</h1>
-
   <div id="calendar-container">
     <div id="calendar-nav">
       <button id="prevMonth">&lt; Previous</button>
