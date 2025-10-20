@@ -5,8 +5,8 @@ export default async function handler(req, res) {
 
   const { events } = req.body;
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-  const REPO = 'LuminationStudios/artielawnandleaf.github.io';
-  const PATH = 'events.json';
+  const REPO = 'LuminationStudios/artemislawnandleaf.github.io';
+  const PATH = 'data/events.json';
   const BRANCH = 'main';
   const WORKFLOW_FILE = '.github/workflows/update-ics.yml'; // replace with your workflow filename
 
