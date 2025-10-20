@@ -5,7 +5,7 @@ export default async function handler(req, res){
 
   const { events } = req.body;
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-  const REPO = 'USERNAME/REPO'; // replace
+  const REPO = 'LuminationStudios/artielawnandleaf.github.io'; // replace
   const PATH = 'events.json';
   const BRANCH = 'main';
 
