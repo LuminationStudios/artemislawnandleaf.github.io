@@ -51,13 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
       adminPasswordInput.focus();
     }
   };
-  adminPasswordInput.addEventListener('keypress', e => { if (e.key === 'Enter') unlockBtn.click(); });
+  adminPasswordInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') unlockBtn.click();
+  });
 
   // Calendar Render
   function daysInMonth(m, y) { return new Date(y, m + 1, 0).getDate(); }
+
   function renderCalendar(month, year) {
     calendarDiv.innerHTML = '';
-    monthYearHeader.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+    monthYearHeader.textContent = new Date(year, month)
+      .toLocaleString('default', { month: 'long', year: 'numeric' });
     const firstDay = new Date(year, month, 1).getDay();
     const totalDays = daysInMonth(month, year);
 
@@ -66,13 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const dayDiv = document.createElement('div');
       dayDiv.classList.add('day');
       const dn = document.createElement('div');
-      dn.classList.add('date-number'); dn.textContent = d;
+      dn.classList.add('date-number');
+      dn.textContent = d;
       dayDiv.appendChild(dn);
 
       const dateObj = new Date(year, month, d);
       const dateStr = dateObj.toISOString().split('T')[0];
       if (dateObj.toDateString() === today.toDateString()) dayDiv.classList.add('today');
-      if (dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate())) dayDiv.classList.add('past');
+      if (dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate()))
+        dayDiv.classList.add('past');
 
       const dayEvents = events.filter(ev => ev.date === dateStr);
       dayEvents.forEach(ev => {
@@ -94,7 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.style.display = 'flex';
     modalDate.textContent = new Date(dateStr).toDateString();
     eventDate.value = dateStr;
-    eventTitle.value = ''; eventTime.value = ''; eventType.value = 'Leaf Cleanup';
+    eventTitle.value = '';
+    eventTime.value = '';
+    eventType.value = 'Leaf Cleanup';
     renderModalEvents();
   }
 
@@ -117,38 +125,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addEventBtn.onclick = () => {
     if (!eventTitle.value.trim()) return alert('Enter a title');
-    events.push({ title: eventTitle.value, date: eventDate.value, time: eventTime.value, type: eventType.value });
+    events.push({
+      title: eventTitle.value,
+      date: eventDate.value,
+      time: eventTime.value,
+      type: eventType.value
+    });
     localStorage.setItem('events', JSON.stringify(events));
     renderCalendar(currentMonth, currentYear);
     renderModalEvents();
   };
 
-  prevBtn.onclick = () => { currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(currentMonth, currentYear); };
-  nextBtn.onclick = () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(currentMonth, currentYear); };
+  prevBtn.onclick = () => {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar(currentMonth, currentYear);
+  };
+  nextBtn.onclick = () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar(currentMonth, currentYear);
+  };
   closeModal.onclick = () => modal.style.display = 'none';
   window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
 
-// Save events by triggering a GitHub Action workflow (secure)
-saveJSONBtn.onclick = async () => {
-  if (!events.length) return alert("No events to save!");
+  // Save events by triggering a GitHub Action workflow (secure)
+  saveJSONBtn.onclick = async () => {
+    if (!events.length) return alert("No events to save!");
+    try {
+      const res = await fetch("https://api.github.com/repos/LuminationStudios/artemislawnandleaf/dispatches", {
+        method: "POST",
+        headers: {
+          "Accept": "application/vnd.github+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          event_type: "update-events",
+          client_payload: { events: JSON.stringify(events, null, 2) }
+        }),
+      });
 
-  try {
-    const res = await fetch("https://api.github.com/repos/LuminationStudios/artemislawnandleaf/dispatches", {
-      method: "POST",
-      headers: {
-        "Accept": "application/vnd.github+json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        event_type: "update-events",
-        client_payload: { events: JSON.stringify(events, null, 2) }
-      }),
-    });
-
-    if (res.ok) alert("✅ Calendar update triggered! GitHub will sync soon.");
-    else alert("❌ Failed to trigger update: " + (await res.text()));
-  } catch (err) {
-    console.error(err);
-    alert("❌ Network error: " + err.message);
-  }
-};
+      if (res.ok) alert("✅ Calendar update triggered! GitHub will sync soon.");
+      else alert("❌ Failed to trigger update: " + (await res.text()));
+    } catch (err) {
+      console.error(err);
+      alert("❌ Network error: " + err.message);
+    }
+  };
+}); // 👈 this closing line was missing
