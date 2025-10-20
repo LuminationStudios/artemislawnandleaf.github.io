@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     // 2️⃣ Update events.json
     const updateRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-      method: 'REST',
+      method: 'PUT',
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
       body: JSON.stringify({
         message: 'Update events.json from admin',
