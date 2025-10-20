@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const PASSWORD = 'artielawn2025';
-
-  // Elements
   const pwOverlay = document.getElementById('pwOverlay');
   const unlockBtn = document.getElementById('unlockBtn');
   const adminPasswordInput = document.getElementById('adminPassword');
   const calendarContainer = document.getElementById('calendar-container');
+
   const calendarDiv = document.getElementById('calendar');
   const monthYearHeader = document.getElementById('monthYear');
   const prevBtn = document.getElementById('prevMonth');
@@ -38,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentYear = today.getFullYear();
   let selectedDate = null;
 
-  // PASSWORD
+  // -------------------------
+  // PASSWORD MODAL
   unlockBtn.onclick = () => {
     if(adminPasswordInput.value === PASSWORD){
       pwOverlay.style.display = 'none';
@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   adminPasswordInput.addEventListener('keypress', e => { if(e.key==='Enter') unlockBtn.click(); });
 
-  // CALENDAR
+  // -------------------------
+  // CALENDAR FUNCTIONS
   function daysInMonth(m,y){ return new Date(y,m+1,0).getDate(); }
 
   function renderCalendar(month, year){
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     monthYearHeader.textContent=new Date(year,month).toLocaleString('default',{month:'long',year:'numeric'});
     const firstDay=new Date(year,month,1).getDay();
     const totalDays=daysInMonth(month,year);
+
     for(let i=0;i<firstDay;i++) calendarDiv.appendChild(document.createElement('div'));
     for(let d=1;d<=totalDays;d++){
       const dayDiv=document.createElement('div');
@@ -87,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // -------------------------
   // EVENT MODAL
   function openModal(dateStr){
     selectedDate=dateStr;
@@ -122,18 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
     renderModalEvents();
   };
 
-  prevBtn.onclick=()=>{
-    currentMonth--; if(currentMonth<0){ currentMonth=11; currentYear--; }
-    renderCalendar(currentMonth,currentYear);
-  };
-  nextBtn.onclick=()=>{
-    currentMonth++; if(currentMonth>11){ currentMonth=0; currentYear++; }
-    renderCalendar(currentMonth,currentYear);
-  };
+  prevBtn.onclick=()=>{ currentMonth--; if(currentMonth<0){ currentMonth=11; currentYear--; } renderCalendar(currentMonth,currentYear); };
+  nextBtn.onclick=()=>{ currentMonth++; if(currentMonth>11){ currentMonth=0; currentYear++; } renderCalendar(currentMonth,currentYear); };
   closeModal.onclick=()=>modal.style.display='none';
   window.onclick=e=>{ if(e.target===modal) modal.style.display='none'; };
 
-  // EXPORT ICS
+  // -------------------------
+  // EXPORT FUNCTIONS
   function generateICS(events){
     let ics=`BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Artemis Lawn & Leaf//EN\n`;
     events.forEach(ev=>{
@@ -157,27 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('✅ ICS exported!');
   };
 
-  // SAVE TO GITHUB
+  // -------------------------
+  // SAVE TO SERVER (GitHub Action)
   saveJSONBtn.onclick=async()=>{
     if(!events.length) return alert("No events to save!");
-
     try {
-      const response = await fetch('/api/update-events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ events })
+      const response = await fetch('/update-events', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({events})
       });
-
-      const data = await response.json();
-
-      if(data.success){
-        alert('💾 Events pushed to GitHub! Actions triggered.');
-      } else {
-        alert('❌ Failed: ' + data.message);
-      }
-    } catch(e){
-      console.error(e);
-      alert('❌ Network error.');
-    }
+      if(response.ok){ alert('💾 Events pushed to GitHub!'); }
+      else { const text = await response.text(); alert('❌ Failed: '+text); }
+    } catch(e){ console.error(e); alert('❌ Network error.'); }
   };
 });
