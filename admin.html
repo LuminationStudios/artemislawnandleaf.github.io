@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="theme.css">
-<title>Admin Calendar</title>
-<style>
-  body { font-family:sans-serif; background:#f5f5f5; margin:0; padding:0; }
-  #calendar-container { max-width:900px; margin:20px auto; }
-  #calendar-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-  #calendar-nav button { padding:8px 16px; border:none; border-radius:8px; background:#42a5f5; color:#fff; cursor:pointer; }
-  #calendar-nav button:hover { background:#1e88e5; }
-  #calendar { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; }
-  .day { background:#fff; border:1px solid #ccc; border-radius:10px; padding:8px; min-height:80px; cursor:pointer; }
-  .today { border:2px solid #42a5f5; box-shadow:0 0 8px #42a5f5; }
-  .past { opacity:0.5; }
-  .date-number { font-weight:bold; margin-bottom:5px; }
-  .event { background:#42a5f5; color:#fff; padding:2px 4px; margin-top:2px; border-radius:5px; display:block; font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  #eventModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000; }
-  .modal-content { background:#fff; padding:20px; border-radius:12px; max-width:400px; width:90%; position:relative; }
-  .close-btn { position:absolute; top:10px; right:10px; background:#db5856; color:#fff; border:none; border-radius:6px; padding:5px 10px; cursor:pointer; }
-  input, select { width:100%; margin:5px 0; padding:8px; border-radius:6px; border:1px solid #ccc; }
-  button.save-btn, button.export-btn { padding:8px 16px; border:none; border-radius:6px; cursor:pointer; margin-top:5px; color:#fff; }
-  button.save-btn { background:#42a5f5; }
-  button.export-btn { background:#1e88e5; }
-  .event-item { display:flex; justify-content:space-between; align-items:center; padding:5px; border-radius:6px; margin:5px 0; background:#42a5f5; color:#fff; font-weight:bold; }
-  .delete-btn { background:#db5856; color:#fff; border:none; border-radius:6px; padding:2px 6px; cursor:pointer; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Artemis Lawn & Leaf</title>
+  <meta name="description" content="Artemis Lawn & Leaf — affordable seasonal yard care and cleanup options" /> 
+  <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="calendarnav.js" defer></script>
 </head>
 <body>
+  <!-- 🌿 Header -->
+  <header class="sticky-header">
+    <div class="header-inner container">
+      <div class="brand">
+        <div class="logo">
+          <img src="logo/leaficon.svg" alt="Logo" width="36" height="36">
+        </div>
+        <strong>Artemis Lawn & Leaf</strong>
+      </div>
+      <nav class="nav-links" id="navLinks"></nav>
+    </div>
+  </header>
 
 <h1 style="text-align:center;">Admin Calendar</h1>
-
 <div id="calendar-container">
   <div id="calendar-nav">
     <button id="prevMonth">&lt; Previous</button>
@@ -74,6 +68,9 @@
     <button class="save-btn" id="addEvent">Add Event</button>
   </div>
 </div>
+
+  <!-- 🌼 Footer -->
+  <footer></footer>
 
 <script>
 const PASSWORD = 'artielawn2025'; // Admin password
