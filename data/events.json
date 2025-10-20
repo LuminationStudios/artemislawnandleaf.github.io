@@ -1,14 +1,26 @@
 [
   {
-    "title": "Sample Leaf Cleanup",
-    "date": "2025-11-01",
-    "time": "09:00",
-    "type": "Leaf Cleanup"
+    "date": "2025-12-24",
+    "title": "Holiday",
+    "time": "00:00",
+    "type": "Closed"
   },
   {
-    "title": "Office Closed",
-    "date": "2025-12-25",
-    "time": "",
+    "date": "2025-12-23",
+    "title": "Holiday",
+    "time": "00:00",
+    "type": "Closed"
+  },
+  {
+    "date": "2025-10-31",
+    "title": "Holiday",
+    "time": "00:00",
+    "type": "Closed"
+  },
+  {
+    "date": "2025-11-27",
+    "title": "Holiday",
+    "time": "00:00",
     "type": "Closed"
   }
 ]
