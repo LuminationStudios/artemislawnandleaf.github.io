@@ -15,7 +15,7 @@ async function initSite() {
 
   // Load all JSON concurrently
   const [navbarData, servicesData, footerData] = await Promise.all([
-    loadJSON("json/navbar.json"),
+    loadJSON("json/calendarnav.json"),
     loadJSON("json/services.json"),
     loadJSON("json/footer.json")
   ]);
