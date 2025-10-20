@@ -1,17 +1,14 @@
-console.log('pwOverlay:', pwOverlay);
-console.log('unlockBtn:', unlockBtn);
-console.log('adminPasswordInput:', adminPasswordInput);
-console.log('calendarContainer:', calendarContainer);
-
 const PASSWORD = 'artielawn2025'; // Admin password
 
-// Elements
+// -------------------------
+// ELEMENTS
+// -------------------------
 const pwOverlay = document.getElementById('pwOverlay');
 const unlockBtn = document.getElementById('unlockBtn');
 const adminPasswordInput = document.getElementById('adminPassword');
+const calendarContainer = document.getElementById('calendar-container');
 
 const calendarDiv = document.getElementById('calendar');
-const calendarContainer = document.getElementById('calendar-container');
 const monthYearHeader = document.getElementById('monthYear');
 const prevBtn = document.getElementById('prevMonth');
 const nextBtn = document.getElementById('nextMonth');
@@ -30,8 +27,10 @@ const addEventBtn = document.getElementById('addEvent');
 const exportICSBtn = document.getElementById('exportICS');
 const saveJSONBtn = document.getElementById('saveJSON');
 
+// -------------------------
+// DATA
+// -------------------------
 let events = JSON.parse(localStorage.getItem('events')) || [];
-
 const typeColors = {
   "Leaf Cleanup": "#FF8C42",
   "Snow Removal": "#42A5FF",
