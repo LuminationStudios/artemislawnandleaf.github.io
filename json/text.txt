@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Artemis Lawn & Leaf</title>
+  <meta name="description" content="Artemis Lawn & Leaf — affordable seasonal yard care and cleanup options" /> 
+  <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
 
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="calendarnav.js" defer></script>
+</head>
+<body>
+  <!-- 🌿 Header -->
+  <header class="sticky-header">
+    <div class="header-inner container">
+      <div class="brand">
+        <div class="logo">
+          <img src="logo/leaficon.svg" alt="Logo" width="36" height="36">
+        </div>
+        <strong>Artemis Lawn & Leaf</strong>
+      </div>
+      <nav class="nav-links" id="navLinks"></nav>
+    </div>
+  </header>
