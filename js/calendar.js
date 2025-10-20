@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModal = document.querySelector('#eventModal .close-btn');
 
   const typeColors = {
-    "Leaf Cleanup": "#FF8C42",
-    "Snow Removal": "#42A5FF",
-    "Closed": "#db5856",
-    "Other": "#FFD27F",
-    "Quote": "#FFD27F",
-    "Cleanup": "#FFD27F"
+    "Leaf Cleanup": "#ffc78f", //Orange
+    "Snow Removal": "#c1ebff", //Blue
+    "Closed": "#f6b2b2", //Red
+    "Other": "#faffa8", //Yellow
+    "Quote": "#d9c4ec", //Purple
+    "Cleanup": "#cbffbb" //Green
   };
 
   let events = [];
