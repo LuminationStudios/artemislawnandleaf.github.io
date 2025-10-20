@@ -78,7 +78,7 @@ input::placeholder {
 }
 
 /* ------------------------------ */
-/* Calendar */
+/* Calendar Container */
 #calendar-container {
   max-width: 900px;
   margin: 0 auto;
@@ -167,7 +167,7 @@ input::placeholder {
 }
 
 /* ------------------------------ */
-/* Event Modal */
+/* Event Modal (Admin & Public) */
 #eventModal {
   display: none;
   position: fixed;
@@ -214,7 +214,7 @@ input::placeholder {
 }
 
 /* ------------------------------ */
-/* Password Overlay */
+/* Password Overlay (Admin) */
 .password-overlay {
   position: fixed;
   inset: 0;
@@ -246,7 +246,7 @@ input::placeholder {
 }
 
 /* ------------------------------ */
-/* Export Buttons */
+/* Export & Admin Buttons */
 .calendar-buttons {
   margin-top: 15px;
   display: flex;
@@ -283,6 +283,7 @@ footer {
     padding: 10px;
     font-size: 16px;
   }
+
   .calendar-buttons {
     flex-direction: column;
   }
