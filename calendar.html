@@ -23,6 +23,7 @@
   </header>
   
   <h1 style="text-align:center;">Our Events</h1>
+  
   <div id="calendar-container">
     <div id="calendar-nav">
       <button id="prevMonth">&lt; Previous</button>
@@ -42,8 +43,19 @@
 
     <div id="calendar"></div>
   </div>
+
+  <!-- Public Event Modal (hidden initially) -->
+  <div id="eventModal" style="display:none;">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">X</button>
+      <h3 id="modalDate"></h3>
+      <div id="modalEvents"></div>
+    </div>
+  </div>
+
 <footer></footer>
-  <!-- ✅ External JS file -->
-  <script src="js/calendar.js" defer></script>
+
+<!-- ✅ External JS file -->
+<script src="js/calendar.js" defer></script>
 </body>
 </html>
