@@ -15,7 +15,8 @@ async function initSite() {
 
   // Load all JSON concurrently
   const [navbarData, servicesData, footerData] = await Promise.all([
-    loadJSON("json/calendarnav.json"),
+    loadJSON("json/navbar.json"),
+    loadJSON("json/services.json"),
     loadJSON("json/footer.json")
   ]);
 
@@ -41,6 +42,21 @@ async function initSite() {
     }
   } else {
     console.warn("Navbar JSON missing or nav element not found.");
+  }
+
+  // 🌿 Services
+  const servicesGrid = document.getElementById("services-grid");
+  if (Array.isArray(servicesData?.services) && servicesGrid) {
+    servicesGrid.innerHTML = servicesData.services
+      .map(service => `
+        <div class="service">
+          <h3>${service.title}</h3>
+          <p>${service.desc}</p>
+        </div>
+      `)
+      .join("");
+  } else {
+    console.warn("Services JSON missing or services-grid element not found.");
   }
 
   // 🌼 Footer
