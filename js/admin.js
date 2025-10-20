@@ -128,27 +128,27 @@ document.addEventListener('DOMContentLoaded', () => {
   closeModal.onclick = () => modal.style.display = 'none';
   window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
 
-  // Save to GitHub via repository_dispatch
-  saveJSONBtn.onclick = async () => {
-    if (!events.length) return alert("No events to save!");
-    try {
-      const res = await fetch(`https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/dispatches`, {
-        method: "POST",
-        headers: {
-          "Accept": "application/vnd.github+json",
-          "Authorization": "token YOUR_GITHUB_ACCESS_KEY",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          event_type: "update-events",
-          client_payload: { events: JSON.stringify(events, null, 2) }
-        })
-      });
-      if (res.ok) alert('💾 Events pushed to GitHub!');
-      else alert('❌ GitHub update failed: ' + (await res.text()));
-    } catch (err) {
-      console.error(err);
-      alert('❌ Network error: ' + err.message);
-    }
-  };
-});
+// Save events by triggering a GitHub Action workflow (secure)
+saveJSONBtn.onclick = async () => {
+  if (!events.length) return alert("No events to save!");
+
+  try {
+    const res = await fetch("https://api.github.com/repos/LuminationStudios/artemislawnandleaf/dispatches", {
+      method: "POST",
+      headers: {
+        "Accept": "application/vnd.github+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        event_type: "update-events",
+        client_payload: { events: JSON.stringify(events, null, 2) }
+      }),
+    });
+
+    if (res.ok) alert("✅ Calendar update triggered! GitHub will sync soon.");
+    else alert("❌ Failed to trigger update: " + (await res.text()));
+  } catch (err) {
+    console.error(err);
+    alert("❌ Network error: " + err.message);
+  }
+};
