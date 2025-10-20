@@ -172,4 +172,4 @@ document.addEventListener('DOMContentLoaded', () => {
       alert("❌ Network error: " + err.message);
     }
   };
-}); // 👈 this closing line was missing
+});
