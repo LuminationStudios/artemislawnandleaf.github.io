@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Admin Calendar - Artemis Lawn & Leaf</title>
-<link rel="stylesheet" href="css/theme.css">
-<link rel="stylesheet" href="css/index.css">
-<script src="js/admin.js" defer></script>
-<script src="js/calendarnav.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Calendar - Artemis Lawn & Leaf</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="js/calendarnav.js" defer></script>
+  <script src="js/admin.js" defer></script>
 </head>
 <body>
+
 <!-- Header -->
 <header class="sticky-header">
   <div class="header-inner container">
@@ -22,27 +23,29 @@
     <nav class="nav-links" id="navLinks"></nav>
   </div>
 </header>
-  
-  <!-- PASSWORD MODAL -->
+
+<!-- PASSWORD MODAL -->
 <div class="password-overlay" id="pwOverlay">
   <div class="password-box">
     <h2>Admin Login</h2>
     <input id="adminPassword" type="password" placeholder="Enter password" />
-    <div style="margin-top:12px;">
-      <button id="unlockBtn">Unlock</button>
-    </div>
+    <button id="unlockBtn">Unlock</button>
     <div class="note">Enter the admin password to manage the calendar.</div>
   </div>
 </div>
 
-<h1 style="text-align:center;">Admin Calendar</h1>
+<!-- Calendar Header -->
+<h1 class="calendar-title">Admin Calendar</h1>
 <div id="calendar-container" class="hidden">
+
+  <!-- Month Navigation -->
   <div id="calendar-nav">
     <button id="prevMonth">&lt; Previous</button>
     <h2 id="monthYear"></h2>
     <button id="nextMonth">Next &gt;</button>
   </div>
 
+  <!-- Weekday Labels -->
   <div class="weekdays">
     <div class="weekday">Sun</div>
     <div class="weekday">Mon</div>
@@ -53,10 +56,14 @@
     <div class="weekday">Sat</div>
   </div>
 
+  <!-- Calendar Grid -->
   <div id="calendar"></div>
 
-  <button class="export-btn" id="exportICS">Download .ICS</button>
-  <button class="export-btn" id="saveJSON">Save to GitHub</button>
+  <!-- Export Buttons -->
+  <div class="calendar-buttons">
+    <button class="export-btn" id="exportICS">Download .ICS</button>
+    <button class="export-btn" id="saveJSON">Save to GitHub</button>
+  </div>
 </div>
 
 <!-- Event Modal -->
@@ -80,5 +87,6 @@
 </div>
 
 <footer></footer>
+
 </body>
 </html>
