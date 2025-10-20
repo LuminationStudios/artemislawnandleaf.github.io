@@ -1,0 +1,42 @@
+name: Generate events.ics (private artifact)
+
+on:
+  push:
+    paths:
+      - 'data/events.json'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate ICS
+        run: |
+          node -e "
+          const fs = require('fs');
+          const events = JSON.parse(fs.readFileSync('data/events.json','utf8')||'[]');
+          let ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Artemis Lawn & Leaf//EN\n';
+          for (const ev of events) {
+            const date = ev.date.replace(/-/g,'');
+            let startTime='000000', endTime='010000';
+            if (ev.time) {
+              const [h,m] = ev.time.split(':');
+              startTime = `${h.padStart(2,'0')}${m.padStart(2,'0')}00`;
+              const d = new Date(`${ev.date}T${ev.time}`);
+              d.setHours(d.getHours()+1);
+              endTime = `${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}00`;
+            }
+            ics += `BEGIN:VEVENT\nSUMMARY:${ev.title}\nDTSTART:${date}T${startTime}\nDTEND:${date}T${endTime}\nCATEGORIES:${ev.type}\nEND:VEVENT\n`;
+          }
+          ics += 'END:VCALENDAR\n';
+          fs.writeFileSync('data/events.ics', ics);
+          "
+
+      - name: Upload ICS as artifact (private)
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-ics
+          path: data/events.ics
