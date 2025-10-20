@@ -3,20 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Artemis Lawn & Leaf</title>
-<link rel="stylesheet" href="css/theme.css" />
-<link rel="stylesheet" href="css/index.css">
+<title>Admin Calendar - Artemis Lawn & Leaf</title>
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="js/admin.js" defer></script>
 <script src="js/calendarnav.js" defer></script>
-<style>
-/* small overrides for admin modal */
-.password-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:2000; }
-.password-box { background:var(--card-bg); padding:24px; border-radius:12px; box-shadow:var(--card-shadow); width:320px; text-align:center; }
-.password-box h2 { margin-top:0; color:var(--primary-color); }
-.hidden { display:none; }
-.note { font-size:13px; color:var(--secondary-color); margin-top:8px; }
-</style>
 </head>
 <body>
+
+<!-- PASSWORD MODAL -->
 <div class="password-overlay" id="pwOverlay">
   <div class="password-box">
     <h2>Admin Login</h2>
@@ -28,18 +23,18 @@
   </div>
 </div>
 
-  <!-- 🌿 Header -->
-  <header class="sticky-header">
-    <div class="header-inner container">
-      <div class="brand">
-        <div class="logo">
-          <img src="logo/leaficon.svg" alt="Logo" width="36" height="36">
-        </div>
-        <strong>Artemis Lawn & Leaf</strong>
+<!-- Header -->
+<header class="sticky-header">
+  <div class="header-inner container">
+    <div class="brand">
+      <div class="logo">
+        <img src="logo/leaficon.svg" alt="Logo" width="36" height="36">
       </div>
-      <nav class="nav-links" id="navLinks"></nav>
+      <strong>Artemis Lawn & Leaf</strong>
     </div>
-  </header>
+    <nav class="nav-links" id="navLinks"></nav>
+  </div>
+</header>
 
 <h1 style="text-align:center;">Admin Calendar</h1>
 <div id="calendar-container" class="hidden">
@@ -62,7 +57,7 @@
   <div id="calendar"></div>
 
   <button class="export-btn" id="exportICS">Download .ICS</button>
-  <button class="export-btn" id="saveJSON" style="background:#43a047;">Save to GitHub</button>
+  <button class="export-btn" id="saveJSON">Save to GitHub</button>
 </div>
 
 <!-- Event Modal -->
@@ -84,7 +79,7 @@
     <button class="save-btn" id="addEvent">Add Event</button>
   </div>
 </div>
+
 <footer></footer>
-<script src="js/admin.js" defer></script>
 </body>
 </html>
