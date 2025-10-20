@@ -22,5 +22,17 @@
     "title": "Holiday",
     "time": "00:00",
     "type": "Closed"
-  }
+  },
+  {
+    "date": "2025-10-22",
+    "title": "Quote",
+    "time": "10:00",
+    "type": "Other"
+  },
+  {
+    "date": "2025-10-21",
+    "title": "Cleanup",
+    "time": "02:00",
+    "type": "Other"
+  },
 ]
