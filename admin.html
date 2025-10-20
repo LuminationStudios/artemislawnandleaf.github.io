@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Admin Calendar - Artemis Lawn & Leaf</title>
+<title>Artemis Lawn & Leaf</title>
 <link rel="stylesheet" href="css/theme.css" />
+<script src="calendarnav.js" defer></script>
 <style>
 /* small overrides for admin modal */
 .password-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:2000; }
@@ -25,6 +26,19 @@
     <div class="note">Enter the admin password to manage the calendar.</div>
   </div>
 </div>
+
+  <!-- 🌿 Header -->
+  <header class="sticky-header">
+    <div class="header-inner container">
+      <div class="brand">
+        <div class="logo">
+          <img src="logo/leaficon.svg" alt="Logo" width="36" height="36">
+        </div>
+        <strong>Artemis Lawn & Leaf</strong>
+      </div>
+      <nav class="nav-links" id="navLinks"></nav>
+    </div>
+  </header>
 
 <h1 style="text-align:center;">Admin Calendar</h1>
 <div id="calendar-container" class="hidden">
