@@ -1,3 +1,8 @@
+console.log('pwOverlay:', pwOverlay);
+console.log('unlockBtn:', unlockBtn);
+console.log('adminPasswordInput:', adminPasswordInput);
+console.log('calendarContainer:', calendarContainer);
+
 const PASSWORD = 'artielawn2025'; // Admin password
 
 // Elements
