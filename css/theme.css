@@ -79,7 +79,10 @@ input::placeholder {
 
 /* ------------------------------ */
 /* Calendar */
-#calendar-container { max-width: 900px; margin: 0 auto; }
+#calendar-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
 #calendar-nav {
   display: flex;
@@ -90,18 +93,20 @@ input::placeholder {
 
 #calendar-nav button {
   padding: 8px 16px;
-  cursor: pointer;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
   background: #42a5f5;
   color: #fff;
 }
 
-#calendar-nav button:hover { background: #1e88e5; }
+#calendar-nav button:hover {
+  background: #1e88e5;
+}
 
 #calendar {
   display: grid;
-  grid-template-columns: repeat(7,1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 5px;
   margin-bottom: 40px;
 }
@@ -117,9 +122,15 @@ input::placeholder {
   transition: all 0.2s ease;
 }
 
-.day:hover { background-color: var(--accent-color); color: #fff; }
+.day:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
 
-.date-number { font-weight: bold; margin-bottom: 5px; }
+.date-number {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
 .event {
   color: #fff;
@@ -133,12 +144,18 @@ input::placeholder {
   white-space: nowrap;
 }
 
-.today { border: 2px solid var(--primary-color); box-shadow: 0 0 12px var(--primary-color); }
-.past { opacity: 0.5; }
+.today {
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 12px var(--primary-color);
+}
+
+.past {
+  opacity: 0.5;
+}
 
 .weekdays {
   display: grid;
-  grid-template-columns: repeat(7,1fr);
+  grid-template-columns: repeat(7, 1fr);
   margin-bottom: 5px;
 }
 
@@ -150,7 +167,7 @@ input::placeholder {
 }
 
 /* ------------------------------ */
-/* Modal */
+/* Event Modal */
 #eventModal {
   display: none;
   position: fixed;
@@ -217,8 +234,29 @@ input::placeholder {
   text-align: center;
 }
 
-.password-box h2 { margin-top: 0; color: var(--primary-color); }
-.note { font-size: 13px; color: var(--secondary-color); margin-top: 8px; }
+.password-box h2 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.note {
+  font-size: 13px;
+  color: var(--secondary-color);
+  margin-top: 8px;
+}
+
+/* ------------------------------ */
+/* Export Buttons */
+.calendar-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.export-btn {
+  flex: 1 1 45%;
+}
 
 /* ------------------------------ */
 /* Footer */
@@ -244,5 +282,8 @@ footer {
     width: 95%;
     padding: 10px;
     font-size: 16px;
+  }
+  .calendar-buttons {
+    flex-direction: column;
   }
 }
