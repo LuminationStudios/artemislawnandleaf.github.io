@@ -25,14 +25,14 @@
   },
   {
     "date": "2025-10-22",
-    "title": "Quote",
+    "title": "Cleanup",
     "time": "10:00",
-    "type": "Other"
+    "type": "Quote"
   },
   {
     "date": "2025-10-21",
-    "title": "Cleanup",
+    "title": "Snow Removal",
     "time": "02:00",
-    "type": "Other"
+    "type": "Quote"
   }
 ]
