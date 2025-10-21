@@ -9,8 +9,6 @@
   margin: 40px auto;
   max-width: 1100px;
   border-radius: 32px;
-
-  /* ✨ Soft Background Gradient for Section */
   background: linear-gradient(
     180deg,
     rgba(255, 245, 235, 0.9) 0%,
@@ -20,7 +18,6 @@
   backdrop-filter: blur(10px);
 }
 
-/* 🌿 Hero Card Glass Style */
 .hero-card {
   background: linear-gradient(
     180deg,
@@ -109,20 +106,54 @@
 }
 
 /* ===========================
-   💸 Pricing Section
+   💸 Pricing Section (Updated)
 =========================== */
+#pricing {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 240, 220, 0.7)
+  );
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 50px 30px;
+  margin: 40px auto;
+  max-width: 1100px;
+  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
+  text-align: center;
+}
+
+#pricing h1 {
+  display: inline-block;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0.45)
+  );
+  padding: 14px 40px;
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
+  font-size: 1.9rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+#pricing .lead {
+  color: #5b4c45;
+  margin-bottom: 32px;
+}
+
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
-  margin-top: 36px;
 }
 
 .card {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.4)
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.6)
   );
   border-radius: 24px;
   padding: 28px;
