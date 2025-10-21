@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalEvents = document.getElementById('modalEvents');
   const closeModal = document.querySelector('#eventModal .close-btn');
 
-  // --- Event Color Key ---
   const typeColors = {
     "Leaf Cleanup": "#ffc78f",
     "Snow Removal": "#c1ebff",
@@ -26,13 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadEvents() {
     try {
-      const res = await fetch("https://raw.githubusercontent.com/LuminationStudios/artemislawnandleaf/main/data/events.json", { cache: "no-store" });
+      const res = await fetch("data/events.json", { cache: "no-store" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       events = await res.json();
       renderCalendar(currentMonth, currentYear);
     } catch (err) {
       console.error("Failed to load events.json:", err);
-      calendarDiv.innerHTML = '<p class="error">Could not load calendar events. Please check your GitHub Pages sync.</p>';
+      calendarDiv.innerHTML = '<p class="error">Could not load calendar events.</p>';
     }
   }
 
@@ -103,14 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
 
   prevBtn.addEventListener('click', () => {
-    currentMonth--;
-    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    currentMonth--; if(currentMonth<0){currentMonth=11;currentYear--;}
     renderCalendar(currentMonth, currentYear);
   });
-
   nextBtn.addEventListener('click', () => {
-    currentMonth++;
-    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    currentMonth++; if(currentMonth>11){currentMonth=0;currentYear++;}
     renderCalendar(currentMonth, currentYear);
   });
 
