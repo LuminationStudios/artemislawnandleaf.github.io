@@ -35,7 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
       pwOverlay.style.display='none';
       calendarContainer.classList.remove('hidden');
       renderCalendar(currentMonth, currentYear);
-    } else { alert('❌ Wrong password'); adminPasswordInput.value=''; adminPasswordInput.focus(); }
+    } else {
+      alert('❌ Wrong password'); 
+      adminPasswordInput.value=''; 
+      adminPasswordInput.focus();
+    }
   };
   adminPasswordInput.addEventListener('keypress', e => { if(e.key==='Enter') unlockBtn.click(); });
 
@@ -94,10 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
   saveJSONBtn.onclick = async ()=>{
     if(!events.length) return alert("No events to save!");
     try{
-      const resp=await fetch('https://your-vercel-project.vercel.app/api/dispatch',{
+      const resp = await fetch('/api/dispatch', {
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({events})
+        body: JSON.stringify({events})
       });
       if(!resp.ok){ const text=await resp.text(); throw new Error(text||`Proxy error ${resp.status}`);}
       alert('✅ Update triggered — check Actions tab for the run.');
