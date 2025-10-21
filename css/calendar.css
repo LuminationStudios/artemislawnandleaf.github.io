@@ -1,8 +1,13 @@
+/* =========================== */
+/* Calendar Base Styles */
+/* =========================== */
+
 /* ------------------------------ */
-/* Calendar Grid */
+/* Calendar Container */
 #calendar-container {
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 16px;
 }
 
 /* ------------------------------ */
@@ -66,7 +71,7 @@
 }
 
 /* ------------------------------ */
-/* Calendar Layout */
+/* Calendar Grid */
 #calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -142,7 +147,6 @@
   z-index: 1000;
 }
 
-/* ✨ Improved Modal Styling ✨ */
 .modal-content {
   background: linear-gradient(180deg, #fff9ff, #f5f8ff);
   border-radius: 16px;
@@ -252,4 +256,101 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* =========================== */
+/* Mobile Responsive Styles */
+/* =========================== */
+
+/* Small tablets and large phones */
+@media (max-width: 768px) {
+  #calendar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .weekdays {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  #calendar-nav h2 {
+    font-size: 1.5rem;
+  }
+
+  #calendar-nav h3 {
+    font-size: 1rem;
+  }
+
+  #calendar-nav {
+    gap: 12px;
+  }
+
+  .day {
+    min-height: 60px;
+    padding: 6px;
+  }
+
+  .event {
+    font-size: 11px;
+  }
+
+  .modal-content {
+    max-width: 360px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  #calendar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+
+  .weekdays {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  #calendar-nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #calendar-nav .prev-btn,
+  #calendar-nav .next-btn {
+    position: static;
+  }
+
+  #calendar-nav h2 {
+    font-size: 1.3rem;
+  }
+
+  #calendar-nav h3 {
+    font-size: 0.95rem;
+  }
+
+  .day {
+    min-height: 50px;
+    padding: 4px;
+  }
+
+  .event {
+    font-size: 10px;
+    white-space: normal;
+  }
+
+  .modal-content {
+    width: 95%;
+    max-width: 300px;
+    padding: 16px;
+  }
+
+  .event-item {
+    padding: 8px 10px;
+  }
+
+  .close-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
 }
