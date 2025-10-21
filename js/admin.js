@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!events.length) return alert("No events to save!");
     try{
       const resp=await fetch('/api/dispatch',{
-        method:'POST',
+        method:'PUT',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({events})
       });
