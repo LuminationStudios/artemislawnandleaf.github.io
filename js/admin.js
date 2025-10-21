@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   saveJSONBtn.onclick = async () => {
   if (!events.length) return alert("No events to save!");
 
-  const GITHUB_TOKEN = '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'; // repo + workflow only
+  const GITHUB_TOKEN = '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'; // repo + workflow only
   const REPO = 'LuminationStudios/artemislawnandleaf';
   const BRANCH = 'main'; // branch you want to commit to
   const FILE_PATH = 'events.json'; // file in repo
