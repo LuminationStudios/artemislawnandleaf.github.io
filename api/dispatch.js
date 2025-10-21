@@ -7,7 +7,7 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: `Method ${req.method} Not Allowed — POST required` });
   }
 
-  // Parse JSON body safely
+  // Safely parse JSON body
   let body;
   try {
     body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
