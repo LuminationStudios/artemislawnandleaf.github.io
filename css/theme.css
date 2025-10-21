@@ -189,12 +189,33 @@ p, .lead {
    🌼 Footer
 =========================== */
 footer {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(8px);
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255, 200, 150, 0.3);
+  color: #5b4c45;
+  font-size: 0.95rem;
+  box-shadow: 0 -6px 18px rgba(255, 180, 120, 0.25);
+}
+
+footer div:first-child {
+  font-weight: 700;
   color: var(--muted);
-  box-shadow: 0 -4px 16px rgba(255, 180, 120, 0.15);
+}
+
+footer div:last-child {
+  text-align: right;
+  color: #8b7c6f;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
 }
