@@ -29,10 +29,7 @@ img { max-width: 100%; border-radius: var(--radius); }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; }
 
-/* 🌿 Containers */
-.container { max-width: 1100px; margin: 0 auto; padding: 28px; }
-
-/* 🩵 Sticky Header - Slimmer */
+/* 🩵 Sticky Header */
 .sticky-header {
   position: sticky;
   top: 0;
@@ -41,8 +38,8 @@ button { font-family: inherit; cursor: pointer; border: none; }
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(255, 190, 130, 0.15);
   z-index: 999;
-  padding: 8px 0; /* slimmer vertical padding */
-  margin-bottom: 30px; /* reduced spacing */
+  padding: 8px 0;
+  margin-bottom: 30px;
 }
 
 .header-inner {
@@ -51,7 +48,6 @@ button { font-family: inherit; cursor: pointer; border: none; }
   justify-content: space-between;
 }
 
-/* 🌼 Branding */
 .brand {
   display: flex;
   gap: 12px;
@@ -59,7 +55,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 
 .logo {
-  width: 50px;  /* smaller logo */
+  width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
@@ -69,18 +65,18 @@ button { font-family: inherit; cursor: pointer; border: none; }
   border-radius: 0;
 }
 
-/* 🌸 Navbar Buttons - Slimmer */
+/* 🌸 Navbar Buttons */
 .nav-links {
   display: flex;
-  gap: 10px;  /* tighter spacing */
+  gap: 10px;
   align-items: center;
   transition: all 0.3s ease;
 }
 
 a.btn {
-  padding: 6px 10px;  /* slimmer buttons */
+  padding: 6px 10px;
   border-radius: 8px;
-  font-size: 0.95rem; /* smaller text */
+  font-size: 0.95rem;
   text-decoration: none;
   background: transparent;
   color: var(--muted);
@@ -106,265 +102,6 @@ a.cta:hover {
   transform: translateY(-2px);
 }
 
-/* 🌤 Seasonal Banner */
-.banner {
-  text-align: center;
-  padding: 24px;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-  color: white;
-  border-radius: var(--radius);
-  margin: 40px auto;
-  max-width: 1100px;
-  box-shadow: var(--glow);
-  font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: 0.3px;
-}
-
-/* 🌿 Hero Section */
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 28px;
-  padding: 50px 30px; /* adjusted for slimmer navbar */
-  margin: 0 auto;
-  max-width: 1100px;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
-  border-radius: 24px;
-  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
-}
-
-.hero-card {
-  background: linear-gradient(180deg, var(--card), var(--glass));
-  border-radius: var(--radius);
-  padding: 28px;
-  box-shadow: var(--glow);
-  backdrop-filter: blur(6px);
-}
-
-h1 { font-size: 36px; margin: 0 0 8px; }
-p.lead { margin: 0 0 18px; color: #5b4c45; }
-h2, h3 { color: var(--muted); }
-
-/* 💌 Contact Card */
-.contact {
-  border-radius: 12px;
-  padding: 24px;
-  background: linear-gradient(180deg, #fffdf9, #fff7f1);
-  box-shadow: 0 10px 30px rgba(200, 120, 60, 0.12);
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  margin-top: 28px;
-}
-
-.contact .avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  font-size: 1.2em;
-  box-shadow: var(--glow);
-}
-
-.contact .info {
-  line-height: 1.5;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.contact .btn.cta {
-  align-self: center;
-  margin-top: 10px;
-  padding: 10px 16px;
-}
-
-/* 🌸 Services Section */
-#services {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
-  border-radius: 24px;
-  padding: 50px 30px; /* adjusted for slimmer navbar */
-  margin: 40px auto;
-  max-width: 1100px;
-  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
-}
-
-#services h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  color: var(--muted);
-  margin-bottom: 1.5rem;
-}
-
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 28px;
-}
-
-.service {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--glow);
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.service:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(255, 190, 140, 0.35);
-}
-
-.service h3 {
-  margin: 0 0 8px;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.service p {
-  margin: 0;
-  color: #5b4c45;
-  line-height: 1.5;
-  font-size: 0.95rem;
-}
-
-/* 💬 Modal */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 245, 235, 0.75);
-  backdrop-filter: blur(6px);
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-content {
-  background: var(--card);
-  padding: 24px;
-  border-radius: var(--radius);
-  box-shadow: var(--glow);
-  width: 90%;
-  max-width: 420px;
-  animation: fadeIn 0.3s ease;
-}
-
-.close {
-  float: right;
-  font-size: 22px;
-  cursor: pointer;
-  color: var(--muted);
-}
-
-.close:hover { color: #333; }
-
-input, select, textarea {
-  width: 100%;
-  padding: 0.6em;
-  margin: 0.4em 0 1em 0;
-  border-radius: var(--radius);
-  border: 1px solid #e4c7a3;
-  background: #fffdfb;
-  color: var(--muted);
-  font-size: 1em;
-  font-family: inherit;
-}
-
-/* 🌿 Pricing Section */
-main {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 50px 30px; /* adjusted for slimmer navbar */
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
-  border-radius: 24px;
-  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
-  text-align: center;
-}
-
-main h1 {
-  font-size: 2rem;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
-main .lead {
-  font-size: 1.1rem;
-  color: #5b4c45;
-  margin-bottom: 36px;
-}
-
-/* 💸 Pricing Cards */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
-}
-
-.card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--glow);
-  padding: 28px;
-  text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  backdrop-filter: blur(6px);
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(255, 190, 140, 0.35);
-}
-
-.card h2 {
-  margin: 0 0 6px;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.card p {
-  margin: 0 0 12px;
-  color: #5b4c45;
-}
-
-.price {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #a1682a;
-  margin: 14px 0 18px;
-}
-
-/* 🌸 Tier Styling */
-.tiers {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.tier {
-  background: linear-gradient(180deg, #fffdf9, #fff7f1);
-  border-radius: 10px;
-  padding: 12px;
-  box-shadow: 0 4px 12px rgba(150, 110, 80, 0.1);
-  transition: all 0.25s ease;
-}
-
-.tier:hover {
-  box-shadow: 0 0 18px rgba(255, 190, 130, 0.6);
-  transform: translateY(-2px);
-}
-
 /* 🌟 Footer */
 footer {
   margin-top: 36px;
@@ -383,51 +120,7 @@ footer {
   to {opacity: 1; transform: translateY(0);}
 }
 
-@keyframes sparkle {
-  0% { box-shadow: 0 0 8px rgba(255,200,150,0.3); }
-  50% { box-shadow: 0 0 24px rgba(255,180,130,0.5); }
-  100% { box-shadow: 0 0 8px rgba(255,200,150,0.3); }
-}
-
 /* 📱 Responsive */
-
-/* Small desktop / tablet */
 @media (max-width: 880px) {
-  .hero { grid-template-columns: 1fr; padding: 40px 25px; }
   footer { flex-direction: column; text-align: center; gap: 8px; }
-}
-
-/* Tablet */
-@media (max-width: 768px) {
-  .hero { padding: 35px 20px; }
-  .hero h1 { font-size: 28px; }
-  .hero p.lead { font-size: 1rem; }
-
-  #services { padding: 35px 20px; }
-  .service { padding: 18px; }
-
-  main { padding: 35px 20px; }
-  .card h2 { font-size: 1.2rem; }
-  .card p { font-size: 0.85rem; }
-  .price { font-size: 1.2rem; }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .hero { padding: 25px 15px; }
-  .hero h1 { font-size: 22px; }
-  .hero p.lead { font-size: 0.9rem; }
-
-  #services { padding: 25px 15px; }
-  .service { padding: 14px; font-size: 0.85rem; }
-
-  main { padding: 25px 15px; }
-  .card h2 { font-size: 1rem; }
-  .card p { font-size: 0.8rem; }
-  .price { font-size: 1rem; }
-
-  footer { font-size: 0.8em; padding: 12px; }
-  a.btn, a.cta { padding: 5px 8px; font-size: 0.9rem; }
-  .nav-links { gap: 8px; }
-  .sticky-header { padding: 6px 0; }
 }
