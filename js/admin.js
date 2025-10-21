@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const PASSWORD = "artielawn2025";
-  const GIST_ID = "a5807276447d041a9d6793be134e391c"; // Your public Gist ID
+  const GIST_ID = "a5807276447d041a9d6793be134e391c"; // 👈 replace with your gist id
   const GIST_FILENAME = "events.json";
 
+  // DOM Elements
   const pwOverlay = document.getElementById("pwOverlay");
   const unlockBtn = document.getElementById("unlockBtn");
   const calendarContainer = document.getElementById("calendar-container");
@@ -12,15 +13,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const monthYearHeader = document.getElementById("monthYear");
   const prevBtn = document.getElementById("prevMonth");
   const nextBtn = document.getElementById("nextMonth");
-
   const modal = document.getElementById("eventModal");
   const modalDate = document.getElementById("modalDate");
   const modalEvents = document.getElementById("modalEvents");
   const closeModal = document.getElementById("closeModal");
-  const addEventBtn = document.getElementById("addEvent");
   const eventTitleInput = document.getElementById("eventTitle");
   const eventTimeInput = document.getElementById("eventTime");
   const eventTypeSelect = document.getElementById("eventType");
+  const addEventBtn = document.getElementById("addEvent");
+  const saveJSONBtn = document.getElementById("saveJSON");
 
   const typeColors = {
     "Leaf Cleanup": "#ffc78f",
@@ -37,27 +38,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   let currentYear = today.getFullYear();
   let selectedDate = null;
 
-  // Load events from Gist (read-only)
+  // 🟢 Load events from Gist
   async function loadEventsFromGist() {
     try {
       const res = await fetch(`https://api.github.com/gists/${GIST_ID}`);
-      if (!res.ok) throw new Error("Failed to load events");
+      if (!res.ok) throw new Error("Failed to load events from Gist");
       const data = await res.json();
       events = JSON.parse(data.files[GIST_FILENAME].content || "[]");
-
-      // Merge with localStorage events (if any)
-      const storedEvents = JSON.parse(localStorage.getItem("events") || "[]");
-      events = [...events, ...storedEvents];
-
+      console.log("Loaded events:", events);
     } catch (err) {
-      console.error("Failed to load events:", err);
-      events = JSON.parse(localStorage.getItem("events") || "[]");
+      console.error(err);
+      events = [];
     }
   }
 
   await loadEventsFromGist();
 
-  // Unlock admin panel
+  // 🧩 Unlock admin panel
   unlockBtn.onclick = () => {
     if (adminPasswordInput.value === PASSWORD) {
       pwOverlay.style.display = "none";
@@ -69,9 +66,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       adminPasswordInput.focus();
     }
   };
-  adminPasswordInput.addEventListener("keypress", e => { if (e.key === "Enter") unlockBtn.click(); });
+  adminPasswordInput.addEventListener("keypress", e => {
+    if (e.key === "Enter") unlockBtn.click();
+  });
 
-  function daysInMonth(m, y) { return new Date(y, m + 1, 0).getDate(); }
+  // 🗓 Calendar helpers
+  function daysInMonth(m, y) {
+    return new Date(y, m + 1, 0).getDate();
+  }
 
   function renderCalendar(month, year) {
     calendarDiv.innerHTML = "";
@@ -80,17 +82,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const firstDay = new Date(year, month, 1).getDay();
     const totalDays = daysInMonth(month, year);
 
-    // blank boxes for days before the 1st
-    for (let i = 0; i < firstDay; i++) {
-      const emptyDiv = document.createElement("div");
-      emptyDiv.classList.add("empty-day");
-      calendarDiv.appendChild(emptyDiv);
-    }
+    for (let i = 0; i < firstDay; i++) calendarDiv.appendChild(document.createElement("div"));
 
     for (let d = 1; d <= totalDays; d++) {
       const dayDiv = document.createElement("div");
       dayDiv.classList.add("day");
-
       const dn = document.createElement("div");
       dn.classList.add("date-number");
       dn.textContent = d;
@@ -99,11 +95,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       const dateObj = new Date(year, month, d);
       const dateStr = dateObj.toISOString().split("T")[0];
 
-      // style for today & past
       if (dateObj.toDateString() === today.toDateString()) dayDiv.classList.add("today");
       if (dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate())) dayDiv.classList.add("past");
 
-      // show events
       const dayEvents = events.filter(ev => ev.date === dateStr);
       dayEvents.forEach(ev => {
         const evDiv = document.createElement("span");
@@ -122,50 +116,90 @@ document.addEventListener("DOMContentLoaded", async () => {
     selectedDate = dateStr;
     modal.style.display = "flex";
     modalDate.textContent = new Date(dateStr).toDateString();
-    modalEvents.innerHTML = "";
 
-    const dayEvents = events.filter(ev => ev.date === dateStr);
+    renderModalEvents();
+  }
+
+  function renderModalEvents() {
+    modalEvents.innerHTML = "";
+    let dayEvents = events.filter(ev => ev.date === selectedDate);
+    // sort by time (earliest to latest)
+    dayEvents.sort((a, b) => (a.time || "00:00").localeCompare(b.time || "00:00"));
+
     if (!dayEvents.length) {
       modalEvents.innerHTML = "<p>No events for this day.</p>";
       return;
     }
 
-    dayEvents.forEach(ev => {
+    dayEvents.forEach((ev, idx) => {
       const div = document.createElement("div");
       div.classList.add("event-item");
       div.style.backgroundColor = typeColors[ev.type] || typeColors.Other;
-      div.innerHTML = `<strong>${ev.time || "All Day"}</strong> - ${ev.title}<br><small>Type: ${ev.type}</small>`;
+      div.innerHTML = `<strong>${ev.time || "All Day"}</strong> - ${ev.title} <br>Type: ${ev.type} <button class="delete-btn" data-idx="${idx}">Delete</button>`;
       modalEvents.appendChild(div);
+    });
+
+    // Add delete listeners
+    modalEvents.querySelectorAll(".delete-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const idx = parseInt(btn.dataset.idx);
+        const globalIdx = events.findIndex(e => e === events.filter(ev => ev.date === selectedDate)[idx]);
+        if (globalIdx > -1) {
+          events.splice(globalIdx, 1);
+          renderCalendar(currentMonth, currentYear);
+          renderModalEvents();
+        }
+      });
     });
   }
 
+  // Modal close
   closeModal.addEventListener("click", () => modal.style.display = "none");
   window.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
 
+  // Calendar navigation
   prevBtn.addEventListener("click", () => { currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(currentMonth, currentYear); });
   nextBtn.addEventListener("click", () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(currentMonth, currentYear); });
 
-  // Add new event from modal
-  addEventBtn.onclick = () => {
+  // Add event
+  addEventBtn.addEventListener("click", () => {
     const title = eventTitleInput.value.trim();
+    if (!title) return alert("Enter an event title!");
     const time = eventTimeInput.value;
     const type = eventTypeSelect.value;
 
-    if (!title) return alert("Enter an event title!");
-
-    const newEvent = { date: selectedDate, title, time, type };
-    events.push(newEvent);
-
-    // Save to localStorage
-    localStorage.setItem("events", JSON.stringify(events));
-
-    // Update modal and calendar immediately
-    openModal(selectedDate);
+    events.push({ date: selectedDate, title, time, type });
     renderCalendar(currentMonth, currentYear);
+    renderModalEvents();
 
-    // Clear inputs
+    // clear inputs
     eventTitleInput.value = "";
     eventTimeInput.value = "";
-  };
+  });
 
+  // Save to Gist
+  async function saveToGist() {
+    try {
+      const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          files: {
+            [GIST_FILENAME]: { content: JSON.stringify(events, null, 2) }
+          }
+        })
+      });
+
+      if (!res.ok) throw new Error(`GitHub API error ${res.status}`);
+      console.log("Events saved to Gist!");
+    } catch (err) {
+      console.error("❌ Save failed:", err);
+      alert("❌ Save failed: " + err.message);
+    }
+  }
+
+  saveJSONBtn.addEventListener("click", async () => {
+    await saveToGist();
+    alert("✅ Events saved to Gist!");
+  });
 });
