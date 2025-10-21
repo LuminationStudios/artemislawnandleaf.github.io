@@ -8,8 +8,8 @@
   <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
   
   <!-- CSS -->
-  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/main.css">
 
   <!-- JS -->
   <script src="js/navbar.js" defer></script>
@@ -19,7 +19,7 @@
 <body>
 
   <!-- 🌿 Header -->
-  <header class="sticky-header">
+  <header class="header">
     <div class="header-inner container">
       <div class="brand">
         <div class="logo">
@@ -121,10 +121,8 @@
       const payload = Object.fromEntries(formData.entries());
 
       try {
-        // Submit to Google Script
         fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
 
-        // Submit to Discord
         await fetch(DISCORD_WEBHOOK, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -137,7 +135,6 @@
           })
         });
 
-        // Show thank you message
         form.style.display = "none";
         thankYou.style.display = "block";
 
