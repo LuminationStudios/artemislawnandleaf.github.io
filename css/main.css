@@ -1,4 +1,4 @@
-/* ========================================================= */
+/* ------------------------------ */
 /* 🌿 Hero Section */
 .hero {
   display: grid;
@@ -21,21 +21,6 @@
   backdrop-filter: blur(6px);
 }
 
-.hero-card h1 {
-  font-size: 36px;
-  margin: 0 0 8px;
-}
-
-.hero-card p.lead {
-  margin: 0 0 18px;
-  color: #5b4c45;
-}
-
-h2, h3 {
-  color: var(--muted);
-}
-
-/* ========================================================= */
 /* 💌 Contact Card */
 .contact {
   border-radius: 12px;
@@ -63,20 +48,13 @@ h2, h3 {
 }
 
 .contact .info {
+  line-height: 1.5;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  line-height: 1.5;
 }
 
-.contact .btn.cta {
-  align-self: center;
-  margin-top: 10px;
-  padding: 10px 16px;
-}
-
-/* ========================================================= */
 /* 🌸 Services Section */
 #services {
   background: rgba(255, 255, 255, 0.6);
@@ -86,13 +64,6 @@ h2, h3 {
   margin: 40px auto;
   max-width: 1100px;
   box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
-}
-
-#services h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  color: var(--muted);
-  margin-bottom: 1.5rem;
 }
 
 .services {
@@ -105,8 +76,8 @@ h2, h3 {
   background: var(--card);
   border-radius: var(--radius);
   padding: 24px;
-  text-align: center;
   box-shadow: var(--glow);
+  text-align: center;
   transition: all 0.3s ease;
 }
 
@@ -115,20 +86,6 @@ h2, h3 {
   box-shadow: 0 14px 36px rgba(255, 190, 140, 0.35);
 }
 
-.service h3 {
-  margin: 0 0 8px;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.service p {
-  margin: 0;
-  color: #5b4c45;
-  line-height: 1.5;
-  font-size: 0.95rem;
-}
-
-/* ========================================================= */
 /* 🌿 Pricing Section */
 main {
   max-width: 1100px;
@@ -141,19 +98,6 @@ main {
   text-align: center;
 }
 
-main h1 {
-  font-size: 2rem;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
-main .lead {
-  font-size: 1.1rem;
-  color: #5b4c45;
-  margin-bottom: 36px;
-}
-
-/* 💸 Pricing Cards */
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -163,9 +107,9 @@ main .lead {
 .card {
   background: var(--card);
   border-radius: var(--radius);
+  box-shadow: var(--glow);
   padding: 28px;
   text-align: center;
-  box-shadow: var(--glow);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   backdrop-filter: blur(6px);
 }
@@ -175,20 +119,35 @@ main .lead {
   box-shadow: 0 14px 36px rgba(255, 190, 140, 0.35);
 }
 
-.card h2 {
-  margin: 0 0 6px;
-  color: var(--muted);
-  font-weight: 700;
+.card h2 { margin: 0 0 6px; color: var(--muted); font-weight: 700; }
+.card p { margin: 0 0 12px; color: #5b4c45; }
+.price { font-size: 1.4rem; font-weight: 700; color: #a1682a; margin: 14px 0 18px; }
+
+/* Tier Styling */
+.tiers { display: flex; flex-direction: column; gap: 10px; }
+.tier {
+  background: linear-gradient(180deg, #fffdf9, #fff7f1);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(150, 110, 80, 0.1);
+  transition: all 0.25s ease;
+}
+.tier:hover {
+  box-shadow: 0 0 18px rgba(255, 190, 130, 0.6);
+  transform: translateY(-2px);
 }
 
-.card p {
-  margin: 0 0 12px;
-  color: #5b4c45;
+/* 📱 Responsive for Hero/Services/Pricing */
+@media (max-width: 880px) {
+  .hero { grid-template-columns: 1fr; padding: 50px 30px; }
 }
-
-.price {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #a1682a;
-  margin: 14px 0 18px;
+@media (max-width: 768px) {
+  .hero { padding: 40px 20px; }
+  .service { padding: 18px; }
+  main { padding: 40px 20px; }
+}
+@media (max-width: 480px) {
+  .hero { padding: 30px 15px; }
+  .service { padding: 14px; font-size: 0.85rem; }
+  main { padding: 30px 15px; }
 }
