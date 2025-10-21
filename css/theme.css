@@ -16,7 +16,7 @@ html, body {
   padding: 0;
   font-family: "Poppins", "Segoe UI", sans-serif;
   color: #4b3b2f;
-  background: linear-gradient(180deg, #fa3825 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #4b3b2f 0%, #9e6f4c 100%);
   background-attachment: fixed;
   min-height: 100vh;
 }
