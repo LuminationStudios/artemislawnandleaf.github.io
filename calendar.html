@@ -2,15 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Artemis Lawn & Leaf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Artemis Lawn & Leaf — Calendar</title>
   <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/index.css">
+
+  <!-- 🌿 Theme & Page CSS -->
+  <link rel="stylesheet" href="css/theme.css">   <!-- Global theme: fonts, nav, footer, buttons, modals -->
+  <link rel="stylesheet" href="css/main.css">    <!-- Main pages: hero, services, pricing, banner -->
+  <link rel="stylesheet" href="css/calendar.css"> <!-- Calendar & admin extras -->
+
+  <!-- 🗓 JS -->
   <script src="js/calendarnav.js" defer></script>
 </head>
+
 <body>
-<!-- 🌿 Header -->
+  <!-- 🌿 Header -->
   <header class="sticky-header">
     <div class="header-inner container">
       <div class="brand">
@@ -22,10 +28,12 @@
       <nav class="nav-links" id="navLinks"></nav>
     </div>
   </header>
-  
-  <h1 style="text-align:center;">Calendar</h1>
-  
-  <div id="calendar-container">
+
+  <!-- 🗓 Calendar Title -->
+  <h1 class="container" style="text-align:center;">Calendar</h1>
+
+  <!-- 🌿 Calendar Container -->
+  <div id="calendar-container" class="container">
     <div id="calendar-nav">
       <button id="prevMonth">&lt; Previous</button>
       <h2 id="monthYear"></h2>
@@ -45,8 +53,8 @@
     <div id="calendar"></div>
   </div>
 
-  <!-- Public Event Modal (hidden initially) -->
-  <div id="eventModal" style="display:none;">
+  <!-- 💌 Public Event Modal -->
+  <div id="eventModal" class="modal" style="display:none;">
     <div class="modal-content">
       <button class="close-btn" id="closeModal">X</button>
       <h3 id="modalDate"></h3>
@@ -54,10 +62,10 @@
     </div>
   </div>
 
-<!-- 🌼 Footer -->
+  <!-- 🌼 Footer -->
   <footer></footer>
 
-<!-- ✅ External JS file -->
-<script src="js/calendar.js" defer></script>
+  <!-- ✅ Calendar JS -->
+  <script src="js/calendar.js" defer></script>
 </body>
 </html>
