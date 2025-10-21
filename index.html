@@ -28,6 +28,7 @@
         <strong>Artemis Lawn & Leaf</strong>
       </div>
       <nav class="nav-links" id="navLinks"></nav>
+      <div class="hamburger" id="hamburger">&#9776;</div>
     </div>
   </header>
 
@@ -101,6 +102,7 @@
 
   <!-- ✨ Quote Modal Script -->
   <script>
+    // Modal logic
     const modal = document.getElementById("quoteModal");
     const closeBtn = document.querySelector(".close");
     const form = document.getElementById("quoteForm");
@@ -146,6 +148,13 @@
         console.error(err);
         alert("There was a problem submitting your quote. Please try again later.");
       }
+    });
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
     });
   </script>
 
