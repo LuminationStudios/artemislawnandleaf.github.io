@@ -54,17 +54,44 @@ header {
   height: 36px;
 }
 
+/* ===========================
+   ✨ Nav Links
+=========================== */
 .nav-links a {
   margin-left: 24px;
+  padding: 10px 20px;
+  border-radius: 12px;
   text-decoration: none;
   color: var(--muted);
   font-weight: 500;
-  transition: color 0.3s;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
+/* 🌈 Gradient + glow on hover */
 .nav-links a:hover {
-  color: #a1682a;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #5a3c2a;
+  box-shadow: 0 0 10px rgba(255, 184, 140, 0.6);
+  transform: translateY(-1px);
 }
+
+/* 💫 Always-on gradient for Quote button */
+.nav-links a.quote,
+.nav-links a#quoteBtn {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #5a3c2a;
+  box-shadow: 0 0 10px rgba(255, 184, 140, 0.6);
+  font-weight: 600;
+}
+
+/* 🔆 Extra hover pop for Quote button */
+.nav-links a.quote:hover,
+.nav-links a#quoteBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 184, 140, 0.8);
+}
+
 
 /* ===========================
    ❄️ Banner
