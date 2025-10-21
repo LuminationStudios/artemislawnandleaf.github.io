@@ -10,10 +10,47 @@ async function loadJSON(path) {
   }
 }
 
-async function initSite() {
-  console.log("Initializing site...");
+// ✅ Mobile Menu Toggle
+function setupMobileMenu() {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
 
-  // Load all JSON concurrently
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => navLinks.classList.toggle("active"));
+
+    navLinks.addEventListener("click", e => {
+      if (e.target.tagName === "A") navLinks.classList.remove("active");
+    });
+  }
+}
+
+// ✅ Quote Modal
+function setupQuoteModal() {
+  const quoteBtn = document.getElementById("quoteBtn");
+  const modal = document.getElementById("quoteModal");
+  const closeBtn = modal?.querySelector(".close");
+
+  if (quoteBtn && modal) {
+    quoteBtn.addEventListener("click", e => {
+      e.preventDefault();
+      modal.style.display = "flex";
+    });
+  }
+
+  if (closeBtn && modal) closeBtn.addEventListener("click", () => modal.style.display = "none");
+
+  window.addEventListener("click", e => {
+    if (modal && e.target === modal) modal.style.display = "none";
+  });
+}
+
+// ✅ Initialize Site
+async function initSite() {
+  console.log("Initializing calendar site...");
+  setupMobileMenu();
+  setupQuoteModal();
+
+  // Load JSON concurrently
   const [navbarData, footerData] = await Promise.all([
     loadJSON("json/calendarnav.json"),
     loadJSON("json/footer.json")
@@ -29,32 +66,15 @@ async function initSite() {
         return `<a href="${link.href}" ${cls} ${id}>${link.text}</a>`;
       })
       .join("");
-
-    // Optional quote button
-    const quoteBtn = document.getElementById("quoteBtn");
-    const modal = document.getElementById("quoteModal");
-    if (quoteBtn && modal) {
-      quoteBtn.addEventListener("click", e => {
-        e.preventDefault();
-        modal.style.display = "flex";
-      });
-    }
-  } else {
-    console.warn("Navbar JSON missing or nav element not found.");
-  }
+  } else console.warn("Navbar JSON missing or nav element not found.");
 
   // 🌼 Footer
   const footerEl = document.querySelector("footer");
   if (footerData?.footer && footerEl) {
-    footerEl.innerHTML = `
-      <div>${footerData.footer.left || ""}</div>
-      <div>${footerData.footer.right || ""}</div>
-    `;
-  } else {
-    console.warn("Footer JSON missing or footer element not found.");
-  }
+    footerEl.innerHTML = `<div>${footerData.footer.left || ""}</div><div>${footerData.footer.right || ""}</div>`;
+  } else console.warn("Footer JSON missing or footer element not found.");
 
-  console.log("Site initialization complete.");
+  console.log("Calendar site initialization complete.");
 }
 
 // ✅ Attach after DOM is ready
