@@ -98,47 +98,40 @@ document.addEventListener('DOMContentLoaded', () => {
   saveJSONBtn.onclick = async () => {
   if (!events.length) return alert("No events to save!");
 
-  const GITHUB_TOKEN = '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'; // repo + workflow only
-  const REPO = 'LuminationStudios/artemislawnandleaf';
-  const BRANCH = 'main'; // branch you want to commit to
-  const FILE_PATH = 'events.json'; // file in repo
+  const GIST_ID = "a5807276447d041a9d6793be134e391c"; // replace with your gist id
+  const GIST_FILENAME = "events.json";
 
   try {
-    // 1️⃣ Get current file SHA (required for updating existing file)
-    let sha = null;
-    const getResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`, {
-      headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
-    });
-    if (getResp.ok) {
-      const data = await getResp.json();
-      sha = data.sha;
-    }
+    const response = await fetch(`https://api.github.com/gists/${GIST_ID}`);
+    if (!response.ok) throw new Error("Failed to fetch gist");
 
-    // 2️⃣ Commit the file
-    const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
-      method: 'PUT',
+    const gist = await response.json();
+    const files = gist.files || {};
+
+    const updatedContent = JSON.stringify(events, null, 2);
+
+    // 🟢 Update gist using PATCH
+    const patchResponse = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+      method: "PATCH",
       headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
+        "Authorization": `token ${GITHUB_TOKEN}` // optional: only if private gist
       },
       body: JSON.stringify({
-        message: `Update events ${new Date().toISOString()}`,
-        content: btoa(JSON.stringify(events, null, 2)), // Base64 encode
-        branch: BRANCH,
-        sha: sha || undefined
+        files: {
+          [GIST_FILENAME]: {
+            content: updatedContent
+          }
+        }
       })
     });
 
-    if (!commitResp.ok) {
-      const text = await commitResp.text();
-      throw new Error(text || `Error ${commitResp.status}`);
-    }
+    if (!patchResponse.ok) throw new Error(`Failed to update gist (${patchResponse.status})`);
 
-    alert('✅ Events saved and workflow will trigger automatically!');
+    alert("✅ Events saved to Gist!");
   } catch (err) {
     console.error(err);
-    alert('❌ Failed to save events: ' + err.message);
+    alert("❌ Failed to save events: " + err.message);
   }
 };
-
 });
