@@ -5,18 +5,28 @@
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 28px;
-  padding: 60px 30px;
+  padding: 50px 30px;
   margin: 40px auto;
   max-width: 1100px;
-  background: transparent; /* ✅ allows gradient to show */
+  border-radius: 32px;
+
+  /* ✨ Soft Background Gradient for Section */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 245, 235, 0.9) 0%,
+    rgba(250, 225, 190, 0.8) 100%
+  );
+  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
+  backdrop-filter: blur(10px);
 }
 
+/* 🌿 Hero Card Glass Style */
 .hero-card {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.55),
-    rgba(255, 255, 255, 0.25)
-  ); /* ✅ less opaque for gradient visibility */
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0.45)
+  );
   border-radius: 24px;
   padding: 28px;
   box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
@@ -44,7 +54,11 @@
    🌿 Services Section
 =========================== */
 #services {
-  background: rgba(255, 255, 255, 0.45); /* ✅ lower opacity */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 240, 220, 0.7)
+  );
   backdrop-filter: blur(8px);
   border-radius: 24px;
   padding: 50px 30px;
@@ -66,11 +80,16 @@
 }
 
 .service {
-  background: rgba(255, 255, 255, 0.55); /* ✅ softened transparency */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.4)
+  );
   border-radius: 24px;
   padding: 24px;
   box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
   transition: transform 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(6px);
 }
 
 .service:hover {
@@ -100,7 +119,11 @@
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.55); /* ✅ slightly more transparent */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.4)
+  );
   border-radius: 24px;
   padding: 28px;
   box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
