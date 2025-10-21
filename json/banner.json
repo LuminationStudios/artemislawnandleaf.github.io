@@ -3,13 +3,13 @@
     {
       "text": "❄️ Snow Season is coming! Book your snow removal early!",
       "background": "linear-gradient(90deg, #aab5ee, #bed9fd)",
-      "startDate": "2025-11-01",
-      "endDate": "2025-10-20"
+      "startDate": "2025-10-01",
+      "endDate": "2026-02-28"
     },
     {
       "text": "🌸 Spring Cleanup! Let us handle the spring cleaning.",
       "background": "linear-gradient(90deg, #ffd1dc, #ffe5f0)",
-      "startDate": "2025-10-21",
+      "startDate": "2026-03-01",
       "endDate": "2026-05-31"
     }
   ]
