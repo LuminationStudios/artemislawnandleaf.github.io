@@ -207,3 +207,102 @@
 #services p {
   margin: 8px 0;
 }
+
+
+/* ===========================
+   🌸 Hero Section – Mobile
+=========================== */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 40px 20px;
+    gap: 20px;
+  }
+
+  .hero-card h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-card p.lead {
+    font-size: 1rem;
+  }
+
+  .hero-card h3 {
+    font-size: 1rem;
+  }
+}
+
+/* ===========================
+   🌿 Services Section – Mobile
+=========================== */
+@media (max-width: 768px) {
+  #services {
+    padding: 40px 20px;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .service h3 {
+    font-size: 1rem;
+  }
+
+  .service p {
+    font-size: 0.9rem;
+  }
+}
+
+/* ===========================
+   💸 Pricing Section – Mobile
+=========================== */
+@media (max-width: 768px) {
+  #pricing {
+    padding: 40px 20px;
+  }
+
+  #pricing h1 {
+    font-size: 1.6rem;
+    padding: 12px 28px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+  }
+
+  .card p, .tier {
+    font-size: 0.9rem;
+  }
+
+  .price {
+    font-size: 1.2rem;
+  }
+}
+
+/* ===========================
+   🕒 Footer & Contact – Mobile
+=========================== */
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .contact {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact .avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 1em;
+  }
+}
