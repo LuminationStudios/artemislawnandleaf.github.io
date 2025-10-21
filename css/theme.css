@@ -46,8 +46,9 @@ button {
   background-color: var(--primary-color);
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
+  border-radius: 8px; /* slimmer radius */
+  padding: 6px 12px;   /* slimmer padding */
+  font-size: 0.95rem;  /* smaller text */
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: var(--card-shadow);
@@ -55,7 +56,7 @@ button {
 
 button:hover {
   background-color: var(--accent-color);
-  box-shadow: 0 0 12px var(--primary-color);
+  box-shadow: 0 0 8px var(--primary-color); /* lighter hover glow */
 }
 
 /* ------------------------------ */
@@ -92,7 +93,7 @@ input::placeholder {
 }
 
 #calendar-nav button {
-  padding: 8px 16px;
+  padding: 6px 12px; /* slimmer */
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -114,7 +115,7 @@ input::placeholder {
 .day {
   background-color: var(--card-bg);
   border: 1px solid var(--secondary-color);
-  border-radius: 10px;
+  border-radius: 8px; /* slightly slimmer */
   padding: 8px;
   min-height: 80px;
   box-shadow: var(--card-shadow);
