@@ -1,26 +1,17 @@
 name: Update Events
+
 on:
-  repository_dispatch:
-    types: [update-events]
+  push:
+    paths:
+      - events.json   # triggers only when events.json changes
 
 jobs:
-  update:
+  process-events:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Update events.json
+      - uses: actions/checkout@v3
+      - name: Read events
         run: |
-          mkdir -p data
-          echo "${{ github.event.client_payload.events }}" > data/events.json
-
-      - name: Commit and Push changes
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add data/events.json
-          git commit -m "Update events.json via dispatch" || echo "No changes to commit"
-          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }} HEAD:main
+          echo "Events JSON:"
+          cat events.json
+      # Add your processing steps here
