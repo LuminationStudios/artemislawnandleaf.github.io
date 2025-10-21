@@ -95,37 +95,50 @@ document.addEventListener('DOMContentLoaded', () => {
   prevBtn.addEventListener('click',()=>{currentMonth--; if(currentMonth<0){currentMonth=11; currentYear--;} renderCalendar(currentMonth,currentYear);});
   nextBtn.addEventListener('click',()=>{currentMonth++; if(currentMonth>11){currentMonth=0; currentYear++;} renderCalendar(currentMonth,currentYear);});
 
-saveJSONBtn.onclick = async () => {
+  saveJSONBtn.onclick = async () => {
   if (!events.length) return alert("No events to save!");
 
-  // Your limited-scope GitHub token
-  const GITHUB_TOKEN = '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';
+  const GITHUB_TOKEN = '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'; // repo + workflow only
   const REPO = 'LuminationStudios/artemislawnandleaf';
-  const url = `https://api.github.com/repos/${REPO}/dispatches`;
+  const BRANCH = 'main'; // branch you want to commit to
+  const FILE_PATH = 'events.json'; // file in repo
 
   try {
-    const response = await fetch(url, {
-      method: 'POST',
+    // 1️⃣ Get current file SHA (required for updating existing file)
+    let sha = null;
+    const getResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`, {
+      headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+    });
+    if (getResp.ok) {
+      const data = await getResp.json();
+      sha = data.sha;
+    }
+
+    // 2️⃣ Commit the file
+    const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+      method: 'PUT',
       headers: {
-        'Accept': 'application/vnd.github+json',
         'Authorization': `token ${GITHUB_TOKEN}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        event_type: 'update-events',       // Name of the workflow trigger
-        client_payload: { events: events } // Send your events array
+        message: `Update events ${new Date().toISOString()}`,
+        content: btoa(JSON.stringify(events, null, 2)), // Base64 encode
+        branch: BRANCH,
+        sha: sha || undefined
       })
     });
 
-    if (!response.ok) {
-      const text = await response.text();
-      throw new Error(text || `Error ${response.status}`);
+    if (!commitResp.ok) {
+      const text = await commitResp.text();
+      throw new Error(text || `Error ${commitResp.status}`);
     }
 
-    alert('✅ GitHub Action triggered successfully!');
+    alert('✅ Events saved and workflow will trigger automatically!');
   } catch (err) {
     console.error(err);
-    alert('❌ Failed to trigger update: ' + err.message);
+    alert('❌ Failed to save events: ' + err.message);
   }
 };
+
 });
