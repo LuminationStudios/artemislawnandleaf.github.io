@@ -32,7 +32,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 /* 🌿 Containers */
 .container { max-width: 1100px; margin: 0 auto; padding: 28px; }
 
-/* 🩵 Sticky Header */
+/* 🩵 Sticky Header - Slimmer */
 .sticky-header {
   position: sticky;
   top: 0;
@@ -41,8 +41,8 @@ button { font-family: inherit; cursor: pointer; border: none; }
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(255, 190, 130, 0.15);
   z-index: 999;
-  padding: 12px 0;
-  margin-bottom: 40px;
+  padding: 8px 0; /* slimmer vertical padding */
+  margin-bottom: 30px; /* reduced spacing */
 }
 
 .header-inner {
@@ -59,8 +59,8 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
+  width: 50px;  /* smaller logo */
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,17 +69,18 @@ button { font-family: inherit; cursor: pointer; border: none; }
   border-radius: 0;
 }
 
-/* 🌸 Navbar Buttons */
+/* 🌸 Navbar Buttons - Slimmer */
 .nav-links {
   display: flex;
-  gap: 14px;
+  gap: 10px;  /* tighter spacing */
   align-items: center;
   transition: all 0.3s ease;
 }
 
 a.btn {
-  padding: 8px 14px;
-  border-radius: 10px;
+  padding: 6px 10px;  /* slimmer buttons */
+  border-radius: 8px;
+  font-size: 0.95rem; /* smaller text */
   text-decoration: none;
   background: transparent;
   color: var(--muted);
@@ -125,7 +126,7 @@ a.cta:hover {
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 28px;
-  padding: 60px 40px;
+  padding: 50px 30px; /* adjusted for slimmer navbar */
   margin: 0 auto;
   max-width: 1100px;
   background: rgba(255, 255, 255, 0.6);
@@ -191,7 +192,7 @@ h2, h3 { color: var(--muted); }
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 24px;
-  padding: 60px 40px;
+  padding: 50px 30px; /* adjusted for slimmer navbar */
   margin: 40px auto;
   max-width: 1100px;
   box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
@@ -284,7 +285,7 @@ input, select, textarea {
 main {
   max-width: 1100px;
   margin: 40px auto;
-  padding: 60px 40px;
+  padding: 50px 30px; /* adjusted for slimmer navbar */
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 24px;
@@ -392,20 +393,20 @@ footer {
 
 /* Small desktop / tablet */
 @media (max-width: 880px) {
-  .hero { grid-template-columns: 1fr; padding: 50px 30px; }
+  .hero { grid-template-columns: 1fr; padding: 40px 25px; }
   footer { flex-direction: column; text-align: center; gap: 8px; }
 }
 
 /* Tablet */
 @media (max-width: 768px) {
-  .hero { padding: 40px 20px; }
+  .hero { padding: 35px 20px; }
   .hero h1 { font-size: 28px; }
   .hero p.lead { font-size: 1rem; }
-  
-  #services { padding: 40px 20px; }
+
+  #services { padding: 35px 20px; }
   .service { padding: 18px; }
 
-  main { padding: 40px 20px; }
+  main { padding: 35px 20px; }
   .card h2 { font-size: 1.2rem; }
   .card p { font-size: 0.85rem; }
   .price { font-size: 1.2rem; }
@@ -413,17 +414,20 @@ footer {
 
 /* Mobile */
 @media (max-width: 480px) {
-  .hero { padding: 30px 15px; }
+  .hero { padding: 25px 15px; }
   .hero h1 { font-size: 22px; }
   .hero p.lead { font-size: 0.9rem; }
 
-  #services { padding: 30px 15px; }
+  #services { padding: 25px 15px; }
   .service { padding: 14px; font-size: 0.85rem; }
 
-  main { padding: 30px 15px; }
+  main { padding: 25px 15px; }
   .card h2 { font-size: 1rem; }
   .card p { font-size: 0.8rem; }
   .price { font-size: 1rem; }
 
   footer { font-size: 0.8em; padding: 12px; }
+  a.btn, a.cta { padding: 5px 8px; font-size: 0.9rem; }
+  .nav-links { gap: 8px; }
+  .sticky-header { padding: 6px 0; }
 }
