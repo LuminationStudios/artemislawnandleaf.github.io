@@ -1,18 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Artemis Lawn & Leaf</title>
   <meta name="description" content="Artemis Lawn & Leaf — affordable seasonal yard care and cleanup options" /> 
   <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
-
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/layout-extras.css">
+
+  <!-- JS -->
   <script src="js/navbar.js" defer></script>
   <script src="js/banner.js" defer></script>
 </head>
 
 <body>
+
   <!-- 🌿 Header -->
   <header class="sticky-header">
     <div class="header-inner container">
@@ -31,11 +36,12 @@
 
   <!-- 🌸 Main Content -->
   <main>
+
+    <!-- Hero Section -->
     <section id="home" class="hero container">
       <div class="hero-card">
-        <h1>Fast & friendly Seasonal Lawncare</h1>
+        <h1>Fast & Friendly Seasonal Lawncare</h1>
         <p class="lead">Fall’s Mess, Your Stress—We’ll Take Care of Both!</p>
-        <p class="lead"></p>
       </div>
       <aside class="hero-card">
         <h3>Contact</h3>
@@ -50,15 +56,16 @@
       </aside>
     </section>
 
-    <!-- 🌿 Services -->
+    <!-- Services Section -->
     <section id="services" class="container">
       <h2>Services</h2>
       <div class="services" id="services-grid"></div>
-      <div class="services" id="services-grid"></div>
+
       <h2>Hours</h2>
       <p>Open Monday - Friday 8:00am - 8:00pm</p>
-      <p>We will be closed on Halloween, Thanksgiving, and Christmas Eve/Day.</p>
+      <p>Closed on Halloween, Thanksgiving, and Christmas Eve/Day.</p>
     </section>
+
   </main>
 
   <!-- 💌 Quote Modal -->
@@ -67,21 +74,21 @@
       <span class="close">&times;</span>
       <h2>Request a Quote</h2>
       <form id="quoteForm">
-        <label>Name:</label>
-        <input type="text" name="name" required>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
 
-        <label>Contact Info (Phone or Email):</label>
-        <input type="text" name="contact" required>
+        <label for="contact">Contact Info (Phone or Email):</label>
+        <input type="text" name="contact" id="contact" required>
 
-        <label>Service:</label>
-        <select name="service" required>
+        <label for="service">Service:</label>
+        <select name="service" id="service" required>
           <option value="">Select a Service</option>
           <option>Leaf Cleanup</option>
           <option>Snow Removal</option>
         </select>
 
-        <label>Additional Details:</label>
-        <textarea name="message" rows="3"></textarea>
+        <label for="message">Additional Details:</label>
+        <textarea name="message" id="message" rows="3"></textarea>
 
         <button type="submit" class="btn cta">Submit Quote</button>
       </form>
@@ -98,11 +105,11 @@
   <!-- ✨ Quote Modal Script -->
   <script>
     const modal = document.getElementById("quoteModal");
-    const span = document.querySelector(".close");
+    const closeBtn = document.querySelector(".close");
     const form = document.getElementById("quoteForm");
     const thankYou = document.getElementById("thankYou");
 
-    span.onclick = () => modal.style.display = "none";
+    closeBtn.onclick = () => modal.style.display = "none";
     window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
 
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
@@ -114,13 +121,10 @@
       const payload = Object.fromEntries(formData.entries());
 
       try {
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
+        // Submit to Google Script
+        fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
 
+        // Submit to Discord
         await fetch(DISCORD_WEBHOOK, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -133,8 +137,10 @@
           })
         });
 
+        // Show thank you message
         form.style.display = "none";
         thankYou.style.display = "block";
+
         setTimeout(() => {
           modal.style.display = "none";
           thankYou.style.display = "none";
@@ -148,5 +154,6 @@
       }
     });
   </script>
+
 </body>
 </html>
