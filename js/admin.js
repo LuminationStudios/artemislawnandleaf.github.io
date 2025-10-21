@@ -96,15 +96,36 @@ document.addEventListener('DOMContentLoaded', () => {
   nextBtn.addEventListener('click',()=>{currentMonth++; if(currentMonth>11){currentMonth=0; currentYear++;} renderCalendar(currentMonth,currentYear);});
 
 saveJSONBtn.onclick = async () => {
-  if(!events.length) return alert("No events to save!");
+  if (!events.length) return alert("No events to save!");
+
+  // Your limited-scope GitHub token
+  const GITHUB_TOKEN = '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';
+  const REPO = 'LuminationStudios/artemislawnandleaf';
+  const url = `https://api.github.com/repos/${REPO}/dispatches`;
+
   try {
-    const resp = await fetch('/api/dispatch', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({events})
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/vnd.github+json',
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        event_type: 'update-events',       // Name of the workflow trigger
+        client_payload: { events: events } // Send your events array
+      })
     });
-    if(!resp.ok){ const text = await resp.text(); throw new Error(text||`Proxy error ${resp.status}`);}
-    alert('✅ Update triggered — check GitHub Actions for the run.');
-  } catch(err) { console.error(err); alert('❌ Failed to trigger update: '+err.message); }
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(text || `Error ${response.status}`);
+    }
+
+    alert('✅ GitHub Action triggered successfully!');
+  } catch (err) {
+    console.error(err);
+    alert('❌ Failed to trigger update: ' + err.message);
+  }
 };
 });
