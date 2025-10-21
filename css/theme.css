@@ -1,23 +1,26 @@
 /* ===========================
-   🎨 Theme: Background & Fonts
+   🌸 Background & Base Theme
 =========================== */
 :root {
   --accent-1: #ffb88c;
   --accent-2: #ffd27f;
-  --card: rgba(255, 255, 255, 0.7);
-  --glass: rgba(255, 255, 255, 0.4);
+  --card: rgba(255, 255, 255, 0.8);
+  --glass: rgba(255, 255, 255, 0.5);
+  --muted: #8b6b52;
   --radius: 24px;
-  --glow: 0 8px 24px rgba(255, 180, 120, 0.25);
-  --muted: #5b4c45;
-  --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --glow: 0 4px 14px rgba(255, 180, 120, 0.35);
 }
 
-body {
+html, body {
   margin: 0;
-  font-family: var(--font);
-  background: linear-gradient(135deg, #f7f3f0, #fff9f4);
-  color: var(--muted);
+  padding: 0;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  color: #4b3b2f;
+  background: linear-gradient(180deg, #f3e1d3 0%, #e5c8a1 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
+
 
 /* ===========================
    🌿 Navbar
