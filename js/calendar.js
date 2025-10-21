@@ -17,32 +17,46 @@ document.addEventListener('DOMContentLoaded', () => {
     "Cleanup": "#cbffbb"
   };
 
+  // 🪣 store everything in memory
   let events = [];
   let today = new Date();
   let currentMonth = today.getMonth();
   let currentYear = today.getFullYear();
   let selectedDate = null;
 
+  // ✅ Load events from your public Gist instead of a local file
   async function loadEvents() {
+    const GIST_ID = "a5807276447d041a9d6793be134e391c"; // 🔁 Replace with your actual Gist ID
+    const GIST_FILENAME = "events.json"; // Make sure this matches your file name
+
     try {
-      const res = await fetch("data/events.json", { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      events = await res.json();
+      const res = await fetch(`https://api.github.com/gists/${GIST_ID}`);
+      if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+
+      const data = await res.json();
+      const file = data.files[GIST_FILENAME];
+      if (!file || !file.content) throw new Error("No events.json found in Gist");
+
+      events = JSON.parse(file.content);
       renderCalendar(currentMonth, currentYear);
     } catch (err) {
-      console.error("Failed to load events.json:", err);
-      calendarDiv.innerHTML = '<p class="error">Could not load calendar events.</p>';
+      console.error("Failed to load events from Gist:", err);
+      calendarDiv.innerHTML = '<p class="error">Could not load events.</p>';
     }
   }
 
-  function daysInMonth(m, y) { return new Date(y, m + 1, 0).getDate(); }
+  function daysInMonth(m, y) {
+    return new Date(y, m + 1, 0).getDate();
+  }
 
   function renderCalendar(month, year) {
     calendarDiv.innerHTML = '';
     monthYearHeader.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+
     const firstDay = new Date(year, month, 1).getDay();
     const totalDays = daysInMonth(month, year);
 
+    // blank boxes for days before the 1st
     for (let i = 0; i < firstDay; i++) {
       const emptyDiv = document.createElement('div');
       emptyDiv.classList.add('empty-day');
@@ -52,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let d = 1; d <= totalDays; d++) {
       const dayDiv = document.createElement('div');
       dayDiv.classList.add('day');
+
       const dn = document.createElement('div');
       dn.classList.add('date-number');
       dn.textContent = d;
@@ -98,17 +113,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Modal close listeners
   closeModal.addEventListener('click', () => modal.style.display = 'none');
   window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
 
+  // Calendar navigation
   prevBtn.addEventListener('click', () => {
-    currentMonth--; if(currentMonth<0){currentMonth=11;currentYear--;}
-    renderCalendar(currentMonth, currentYear);
-  });
-  nextBtn.addEventListener('click', () => {
-    currentMonth++; if(currentMonth>11){currentMonth=0;currentYear++;}
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
     renderCalendar(currentMonth, currentYear);
   });
 
+  nextBtn.addEventListener('click', () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar(currentMonth, currentYear);
+  });
+
+  // load everything
   loadEvents();
 });
