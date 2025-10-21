@@ -7,15 +7,16 @@
   <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
 
   <!-- 🌿 Theme & Page CSS -->
-  <link rel="stylesheet" href="css/theme.css">   <!-- Global theme: fonts, nav, footer, buttons, modals -->
-  <link rel="stylesheet" href="css/main.css">    <!-- Main pages: hero, services, pricing, banner -->
-  <link rel="stylesheet" href="css/calendar.css"> <!-- Calendar & admin extras -->
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/calendar.css">
 
   <!-- 🗓 JS -->
   <script src="js/calendarnav.js" defer></script>
 </head>
 
 <body>
+
   <!-- 🌿 Header -->
   <header class="sticky-header">
     <div class="header-inner container">
@@ -26,6 +27,7 @@
         <strong>Artemis Lawn & Leaf</strong>
       </div>
       <nav class="nav-links" id="navLinks"></nav>
+      <div class="hamburger" id="hamburger">&#9776;</div>
     </div>
   </header>
 
@@ -65,7 +67,15 @@
   <!-- 🌼 Footer -->
   <footer></footer>
 
-  <!-- ✅ Calendar JS -->
+  <!-- ✅ Calendar JS + Hamburger -->
   <script src="js/calendar.js" defer></script>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
 </body>
 </html>
