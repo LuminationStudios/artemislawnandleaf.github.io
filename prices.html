@@ -34,54 +34,58 @@
   <!-- ❄️ Seasonal Banner -->
   <div id="banner" class="banner"></div>
 
-  <!-- 🌸 Main Content -->
-  <main>
-    <section id="pricing">
-      <div class="hero-card" style="text-align:center; max-width:fit-content; margin:0 auto;">
+  <!-- 🌸 Hero Section (just like index.html) -->
+  <section class="hero">
+    <div class="hero-card">
       <h1>Pricing</h1>
       <p class="lead">Affordable, transparent seasonal cleanup packages to fit any yard or budget.</p>
+      <h3>Find the perfect plan for your property.</h3>
+    </div>
+    <img src="img/hero-leaves.png" alt="Leaf Cleanup Illustration" width="360" height="auto" style="border-radius:24px;">
+  </section>
+
+  <!-- 💸 Pricing Section -->
+  <section id="services">
+    <h2>Our Seasonal Packages</h2>
+    <div class="pricing-grid">
+
+      <div class="card">
+        <h2>Leaf Cleanup</h2>
+        <p>Complete yard raking, bagging, and leaf removal.</p>
+        <div class="price">Starting at $60</div>
+        <div class="tiers">
+          <div class="tier">🍂 Basic — Small yard raking + disposal</div>
+          <div class="tier">🍁 Plus — Medium yard raking + disposal</div>
+          <div class="tier">🌳 Premium — Large property + disposal</div>
+        </div>
       </div>
 
-      <div class="pricing-grid">
-
-        <div class="card">
-          <h2>Leaf Cleanup</h2>
-          <p>Complete yard raking, bagging, and leaf removal.</p>
-          <div class="price">Starting at $60</div>
-          <div class="tiers">
-            <div class="tier">🍂 Basic — Small yard raking + disposal</div>
-            <div class="tier">🍁 Plus — Medium yard raking + disposal</div>
-            <div class="tier">🌳 Premium — Large property + disposal</div>
-          </div>
+      <div class="card">
+        <h2>Yard Cleanups</h2>
+        <p>Perfect for post-storm or seasonal refreshes.</p>
+        <p>Add-ons include basic weeding, edging, mulching, flower bed cleanups.</p>
+        <div class="price">Starting at $45</div>
+        <div class="tiers">
+          <div class="tier">🍂 Basic — Quick debris pickup</div>
+          <div class="tier">🍁 Plus — Lawn & pathway cleanup</div>
+          <div class="tier">🌳 Premium — Full yard detailing</div>
         </div>
-
-        <div class="card">
-          <h2>Yard Cleanups</h2>
-          <p>Perfect for post-storm or seasonal refreshes.</p>
-          <p>Add ons can include, mulching, edging, flower bed cleanups.</p>
-          <div class="price">Starting at $45</div>
-          <div class="tiers">
-            <div class="tier">🍂 Basic — Quick debris pickup</div>
-            <div class="tier">🍁 Plus — Lawn & pathway cleanup</div>
-            <div class="tier">🌳 Premium — Basic weeding and cleanup</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Snow Removal</h2>
-          <p>Driveways, walkways, and entryways cleared fast.</p>
-          <p>Add-ons include Ice Removal and Salting, Cleaning up Trash or Debris.</p>
-          <div class="price">Starting at $40</div>
-          <div class="tiers">
-            <div class="tier">❄️ Basic — Walkway + Driveway</div>
-            <div class="tier">⛄ Plus — Basic + Sidewalk</div>
-            <div class="tier">🌨️ Premium — Full property + salting</div>
-          </div>
-        </div>
-
       </div>
-    </section>
-  </main>
+
+      <div class="card">
+        <h2>Snow Removal</h2>
+        <p>Driveways, walkways, and entryways cleared fast.</p>
+        <p>Add-ons include Ice Removal and Salting or cleaning up trash or debris.</p>
+        <div class="price">Starting at $40</div>
+        <div class="tiers">
+          <div class="tier">❄️ Basic — Walkway + Driveway</div>
+          <div class="tier">⛄ Plus — Basic + Sidewalk</div>
+          <div class="tier">🌨️ Premium — Full property + salting</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- 💌 Quote Modal -->
   <div id="quoteModal" class="modal">
@@ -99,6 +103,7 @@
         <select name="service" id="service" required>
           <option value="">Select a Service</option>
           <option>Leaf Cleanup</option>
+          <option>Yard Cleanup</option>
           <option>Snow Removal</option>
         </select>
 
