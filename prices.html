@@ -1,18 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pricing | Artemis Lawn & Leaf</title>
   <meta name="description" content="Artemis Lawn & Leaf — affordable seasonal yard care and cleanup options" /> 
   <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/layout-extras.css">
+
+  <!-- JS -->
   <script src="js/navbar.js" defer></script>
   <script src="js/banner.js" defer></script>
 </head>
 
 <body>
+
   <!-- 🌿 Header -->
   <header class="sticky-header">
     <div class="header-inner container">
@@ -20,7 +25,7 @@
         <div class="logo">
           <img src="logo/leaficon.svg" alt="Logo" width="36" height="36">
         </div>
-        <div class="brand-text"><div style="font-weight:700">Artemis Lawn & Leaf</div></div>
+        <strong>Artemis Lawn & Leaf</strong>
       </div>
       <nav id="navLinks" class="nav-links"></nav>
     </div>
@@ -35,10 +40,12 @@
     <p class="lead">Affordable, transparent seasonal cleanup packages to fit any yard or budget.</p>
 
     <div class="pricing-grid">
+
+      <!-- Leaf Cleanup Card -->
       <div class="card">
         <h2>Leaf Cleanup</h2>
         <p>Complete yard raking, bagging, and leaf removal.</p>
-        <p>Add-Ons Include Stick and Debris Cleanup, Trash Cleanup, Basic Weeding.</p>
+        <p>Add-Ons: Stick & Debris Cleanup, Trash Cleanup, Basic Weeding.</p>
         <div class="price">Starting at $60</div>
         <div class="tiers">
           <div class="tier">🍂 Basic — Small yard raking + disposal</div>
@@ -47,6 +54,7 @@
         </div>
       </div>
 
+      <!-- Yard Cleanups Card -->
       <div class="card">
         <h2>Yard Cleanups</h2>
         <p>Perfect for post-storm or seasonal refreshes.</p>
@@ -58,10 +66,11 @@
         </div>
       </div>
 
+      <!-- Snow Removal Card -->
       <div class="card">
         <h2>Snow Removal</h2>
         <p>Driveways, walkways, and entryways cleared fast.</p>
-        <p>Add-Ons Include Ice and Snow Removal, Cleaning up Trash or Debris.</p>
+        <p>Add-Ons: Ice & Snow Removal, Trash/Debris Cleanup.</p>
         <div class="price">Starting at $40</div>
         <div class="tiers">
           <div class="tier">❄️ Basic — Walkway + Driveway</div>
@@ -69,6 +78,7 @@
           <div class="tier">🌨️ Premium — Full property + salting</div>
         </div>
       </div>
+
     </div>
   </main>
 
@@ -78,21 +88,21 @@
       <span class="close">&times;</span>
       <h2>Request a Quote</h2>
       <form id="quoteForm">
-        <label>Name:</label>
-        <input type="text" name="name" required>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
 
-        <label>Contact Info (Phone or Email):</label>
-        <input type="text" name="contact" required>
+        <label for="contact">Contact Info (Phone or Email):</label>
+        <input type="text" name="contact" id="contact" required>
 
-        <label>Service:</label>
-        <select name="service" required>
+        <label for="service">Service:</label>
+        <select name="service" id="service" required>
           <option value="">Select a Service</option>
           <option>Leaf Cleanup</option>
           <option>Snow Removal</option>
         </select>
 
-        <label>Additional Details:</label>
-        <textarea name="message" rows="3"></textarea>
+        <label for="message">Additional Details:</label>
+        <textarea name="message" id="message" rows="3"></textarea>
 
         <button type="submit" class="btn cta">Submit Quote</button>
       </form>
@@ -109,11 +119,11 @@
   <!-- ✨ Quote Modal Script -->
   <script>
     const modal = document.getElementById("quoteModal");
-    const span = document.querySelector(".close");
+    const closeBtn = document.querySelector(".close");
     const form = document.getElementById("quoteForm");
     const thankYou = document.getElementById("thankYou");
 
-    span.onclick = () => modal.style.display = "none";
+    closeBtn.onclick = () => modal.style.display = "none";
     window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
 
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
@@ -125,12 +135,7 @@
       const payload = Object.fromEntries(formData.entries());
 
       try {
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
+        fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
 
         await fetch(DISCORD_WEBHOOK, {
           method: "POST",
@@ -146,6 +151,7 @@
 
         form.style.display = "none";
         thankYou.style.display = "block";
+
         setTimeout(() => {
           modal.style.display = "none";
           thankYou.style.display = "none";
@@ -159,5 +165,6 @@
       }
     });
   </script>
+
 </body>
 </html>
