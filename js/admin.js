@@ -95,16 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
   prevBtn.addEventListener('click',()=>{currentMonth--; if(currentMonth<0){currentMonth=11; currentYear--;} renderCalendar(currentMonth,currentYear);});
   nextBtn.addEventListener('click',()=>{currentMonth++; if(currentMonth>11){currentMonth=0; currentYear++;} renderCalendar(currentMonth,currentYear);});
 
-  saveJSONBtn.onclick = async ()=>{
-    if(!events.length) return alert("No events to save!");
-    try{
-      const resp=await fetch('/api/dispatch',{
-        method:'GET',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({events})
-      });
-      if(!resp.ok){ const text=await resp.text(); throw new Error(text||`Proxy error ${resp.status}`);}
-      alert('✅ Update triggered — check GitHub Actions for the run.');
-    }catch(err){console.error(err); alert('❌ Failed to trigger update: '+err.message);}
-  };
+saveJSONBtn.onclick = async () => {
+  if(!events.length) return alert("No events to save!");
+  try {
+    const resp = await fetch('/api/dispatch', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({events})
+    });
+    if(!resp.ok){ const text = await resp.text(); throw new Error(text||`Proxy error ${resp.status}`);}
+    alert('✅ Update triggered — check GitHub Actions for the run.');
+  } catch(err) { console.error(err); alert('❌ Failed to trigger update: '+err.message); }
+};
 });
