@@ -16,13 +16,11 @@ async function loadJSON(path) {
 // 🍔 Mobile Menu Toggle
 // ===========================
 function setupMobileMenu() {
-  const menuToggle = document.querySelector(".hamburger"); // matches HTML
+  const menuToggle = document.querySelector(".hamburger");
   const navLinks = document.querySelector(".nav-links");
 
   if (menuToggle && navLinks) {
     menuToggle.addEventListener("click", () => navLinks.classList.toggle("active"));
-
-    // Close menu when clicking a link
     navLinks.addEventListener("click", e => {
       if (e.target.tagName === "A") navLinks.classList.remove("active");
     });
@@ -33,14 +31,15 @@ function setupMobileMenu() {
 // 💌 Quote Modal
 // ===========================
 function setupQuoteModal() {
-  const quoteBtn = document.getElementById("quoteBtn");
   const modal = document.getElementById("quoteModal");
   const closeBtn = modal?.querySelector(".close");
 
+  // Wait until #quoteBtn exists in DOM
+  const quoteBtn = document.getElementById("quoteBtn");
   if (quoteBtn && modal) {
     quoteBtn.addEventListener("click", e => {
       e.preventDefault();
-      modal.style.display = "flex"; // consistent with CSS flex
+      modal.style.display = "flex"; // your CSS uses flex
     });
   }
 
@@ -57,7 +56,6 @@ function setupQuoteModal() {
 async function initSite() {
   console.log("Initializing site...");
   setupMobileMenu();
-  setupQuoteModal();
 
   // Load all JSON concurrently
   const [navbarData, servicesData, footerData] = await Promise.all([
@@ -76,7 +74,12 @@ async function initSite() {
         return `<a href="${link.href}" ${cls} ${id}>${link.text}</a>`;
       })
       .join("");
-  } else console.warn("Navbar JSON missing or nav element not found.");
+
+    // Setup quote modal AFTER navbar is rendered
+    setupQuoteModal();
+  } else {
+    console.warn("Navbar JSON missing or nav element not found.");
+  }
 
   // 🌿 Services
   const servicesGrid = document.getElementById("services-grid");
