@@ -1,4 +1,6 @@
-// ✅ Utility to load JSON with cache-busting
+// ===========================
+// 🌟 Utility to load JSON with cache-busting
+// ===========================
 async function loadJSON(path) {
   try {
     const res = await fetch(`./${path}?v=${Date.now()}`);
@@ -10,21 +12,26 @@ async function loadJSON(path) {
   }
 }
 
-// ✅ Mobile Menu Toggle
+// ===========================
+// 🍔 Mobile Menu Toggle
+// ===========================
 function setupMobileMenu() {
-  const menuToggle = document.querySelector(".menu-toggle");
+  const menuToggle = document.querySelector(".hamburger"); // updated selector
   const navLinks = document.querySelector(".nav-links");
 
   if (menuToggle && navLinks) {
     menuToggle.addEventListener("click", () => navLinks.classList.toggle("active"));
 
+    // Close menu when clicking a link
     navLinks.addEventListener("click", e => {
       if (e.target.tagName === "A") navLinks.classList.remove("active");
     });
   }
 }
 
-// ✅ Quote Modal
+// ===========================
+// 💌 Quote Modal
+// ===========================
 function setupQuoteModal() {
   const quoteBtn = document.getElementById("quoteBtn");
   const modal = document.getElementById("quoteModal");
@@ -44,7 +51,9 @@ function setupQuoteModal() {
   });
 }
 
-// ✅ Initialize Site
+// ===========================
+// 🌸 Initialize Calendar Site
+// ===========================
 async function initSite() {
   console.log("Initializing calendar site...");
   setupMobileMenu();
@@ -77,5 +86,7 @@ async function initSite() {
   console.log("Calendar site initialization complete.");
 }
 
+// ===========================
 // ✅ Attach after DOM is ready
+// ===========================
 document.addEventListener("DOMContentLoaded", initSite);
