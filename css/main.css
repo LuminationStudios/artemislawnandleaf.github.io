@@ -202,31 +202,41 @@
 }
 
 /* ===========================
-   🕒 Hours Section
-=========================== */
-#services p {
-  margin: 8px 0;
-}
-
-/* ===========================
    📱 Mobile Optimizations
 =========================== */
 @media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;
-    padding: 30px 20px;
+    padding: 24px 16px;
+    gap: 20px;
+  }
+
+  .hero-card h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-card p.lead {
+    font-size: 1rem;
+  }
+
+  .hero-card h3 {
+    font-size: 1.1rem;
   }
 
   #services,
   #pricing {
-    padding: 30px 20px;
+    padding: 30px 16px;
   }
 
-  .pricing-grid {
-    gap: 20px;
+  .services {
+    gap: 16px;
   }
 
   .service, .card {
     padding: 20px;
+  }
+
+  .pricing-grid {
+    gap: 20px;
   }
 }
