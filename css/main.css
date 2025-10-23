@@ -282,3 +282,29 @@
     object-fit: contain;
   }
 }
+
+/* ===========================
+   🚀 Navbar Always On Top Fix
+=========================== */
+header,
+.header {
+  position: relative;
+  z-index: 9999 !important; /* Highest possible priority */
+}
+
+nav,
+.nav-links,
+.hamburger {
+  position: relative;
+  z-index: 9999 !important;
+}
+
+/* Ensure all sections stay below the navbar */
+main,
+section,
+.hero,
+#services,
+#pricing {
+  position: relative;
+  z-index: 1;
+}
