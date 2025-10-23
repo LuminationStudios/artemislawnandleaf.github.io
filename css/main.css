@@ -223,6 +223,28 @@
     gap: 20px;
   }
 
+   /* ===== 🌿 Fix Navbar Layering ===== */
+.header {
+  position: relative;
+  z-index: 1000; /* ensures navbar sits above everything else */
+}
+
+.hamburger {
+  position: relative;
+  z-index: 1001; /* ensures button is clickable even if nav overlaps */
+}
+
+/* Optional — when mobile menu opens, make sure it overlays cleanly */
+.nav-links.active {
+  position: absolute;
+  top: 100%; /* just below header */
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
   .hero-card h1 {
     font-size: 1.8rem;
   }
