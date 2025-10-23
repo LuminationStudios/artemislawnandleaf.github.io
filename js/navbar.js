@@ -16,24 +16,20 @@ async function loadJSON(path) {
 // 🍔 Mobile Menu Toggle
 // ===========================
 function setupMobileMenu() {
-  const menuToggle = document.getElementById("hamburger");
-  const navLinks = document.getElementById("navLinks");
-
-  console.log("Initializing mobile menu...", menuToggle, navLinks);
+  const menuToggle = document.querySelector(".hamburger");
+  const navLinks = document.querySelector(".nav-links");
 
   if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
-    });
+    // Remove existing listeners first to prevent duplicates
+    menuToggle.onclick = () => navLinks.classList.toggle("active");
 
-    // Close menu when clicking a link (mobile UX)
-    navLinks.addEventListener("click", e => {
-      if (e.target.tagName === "A") {
-        navLinks.classList.remove("active");
-      }
-    });
+    // Close menu when clicking a link
+    navLinks.onclick = (e) => {
+      if (e.target.tagName === "A") navLinks.classList.remove("active");
+    };
   } else {
-    console.warn("Hamburger or navLinks not found in DOM.");
+    // Retry after small delay in case navbar hasn't rendered yet
+    setTimeout(setupMobileMenu, 300);
   }
 }
 
@@ -46,22 +42,18 @@ function setupQuoteModal() {
   const quoteBtn = document.getElementById("quoteBtn");
 
   if (quoteBtn && modal) {
-    quoteBtn.addEventListener("click", e => {
+    quoteBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      modal.style.display = "flex";
+      modal.style.display = "flex"; // CSS uses flex layout
     });
   }
 
   if (closeBtn && modal) {
-    closeBtn.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
+    closeBtn.addEventListener("click", () => (modal.style.display = "none"));
   }
 
-  window.addEventListener("click", e => {
-    if (modal && e.target === modal) {
-      modal.style.display = "none";
-    }
+  window.addEventListener("click", (e) => {
+    if (modal && e.target === modal) modal.style.display = "none";
   });
 }
 
@@ -69,7 +61,7 @@ function setupQuoteModal() {
 // 🌸 Initialize Site
 // ===========================
 async function initSite() {
-  console.log("Initializing site...");
+  console.log("🌿 Initializing site...");
 
   // Load JSON data concurrently
   const [navbarData, servicesData, footerData] = await Promise.all([
@@ -89,21 +81,26 @@ async function initSite() {
       })
       .join("");
 
-    // Initialize interactive features AFTER navbar is rendered
+    // Setup mobile menu & modal after navbar renders
     setupMobileMenu();
     setupQuoteModal();
   } else {
-    console.warn("Navbar JSON missing or nav element not found.");
+    console.warn("⚠️ Navbar JSON missing or nav element not found.");
   }
 
-  // 🌿 Services
+  // 🌿 Services (only if the section exists)
   const servicesGrid = document.getElementById("services-grid");
   if (Array.isArray(servicesData?.services) && servicesGrid) {
     servicesGrid.innerHTML = servicesData.services
-      .map(service => `<div class="service"><h3>${service.title}</h3><p>${service.desc}</p></div>`)
+      .map(service => `
+        <div class="service">
+          <h3>${service.title}</h3>
+          <p>${service.desc}</p>
+        </div>
+      `)
       .join("");
   } else {
-    console.warn("Services JSON missing or services-grid element not found.");
+    console.log("ℹ️ No services section found on this page.");
   }
 
   // 🌼 Footer
@@ -114,13 +111,13 @@ async function initSite() {
       <div>${footerData.footer.right || ""}</div>
     `;
   } else {
-    console.warn("Footer JSON missing or footer element not found.");
+    console.warn("⚠️ Footer JSON missing or footer element not found.");
   }
 
-  console.log("Site initialization complete.");
+  console.log("✅ Site initialization complete.");
 }
 
 // ===========================
-// ✅ Attach after DOM is ready
+// 📦 Run after DOM is ready
 // ===========================
 document.addEventListener("DOMContentLoaded", initSite);
