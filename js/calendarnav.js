@@ -16,21 +16,36 @@ async function loadJSON(path) {
 // 🍔 Mobile Menu Toggle
 // ===========================
 function setupMobileMenu() {
-  const menuToggle = document.querySelector(".hamburger"); // updated selector
+  const hamburger = document.querySelector(".hamburger");
   const navLinks = document.querySelector(".nav-links");
 
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", () => navLinks.classList.toggle("active"));
+  if (!hamburger || !navLinks) return;
 
-    // Close menu when clicking a link
-    navLinks.addEventListener("click", e => {
-      if (e.target.tagName === "A") navLinks.classList.remove("active");
-    });
-  }
+  // Toggle menu
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("active");
+  });
+
+  // Close menu when a link is clicked
+  navLinks.addEventListener("click", (e) => {
+    if (e.target.tagName === "A") {
+      navLinks.classList.remove("active");
+      hamburger.classList.remove("active");
+    }
+  });
+
+  // Close menu when resizing above mobile width
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      navLinks.classList.remove("active");
+      hamburger.classList.remove("active");
+    }
+  });
 }
 
 // ===========================
-// 💌 Quote Modal
+// 💌 Quote Modal (optional)
 // ===========================
 function setupQuoteModal() {
   const quoteBtn = document.getElementById("quoteBtn");
@@ -38,15 +53,17 @@ function setupQuoteModal() {
   const closeBtn = modal?.querySelector(".close");
 
   if (quoteBtn && modal) {
-    quoteBtn.addEventListener("click", e => {
+    quoteBtn.addEventListener("click", (e) => {
       e.preventDefault();
       modal.style.display = "flex";
     });
   }
 
-  if (closeBtn && modal) closeBtn.addEventListener("click", () => modal.style.display = "none");
+  if (closeBtn && modal) {
+    closeBtn.addEventListener("click", () => (modal.style.display = "none"));
+  }
 
-  window.addEventListener("click", e => {
+  window.addEventListener("click", (e) => {
     if (modal && e.target === modal) modal.style.display = "none";
   });
 }
@@ -59,34 +76,33 @@ async function initSite() {
   setupMobileMenu();
   setupQuoteModal();
 
-  // Load JSON concurrently
   const [navbarData, footerData] = await Promise.all([
     loadJSON("json/calendarnav.json"),
-    loadJSON("json/footer.json")
+    loadJSON("json/footer.json"),
   ]);
 
-  // 🌸 Navbar
+  // 🌿 Navbar
   const navEl = document.getElementById("navLinks");
   if (navbarData?.navbar?.links && navEl) {
     navEl.innerHTML = navbarData.navbar.links
-      .map(link => {
+      .map((link) => {
         const cls = link.class ? `class="${link.class}"` : "";
         const id = link.id ? `id="${link.id}"` : "";
         return `<a href="${link.href}" ${cls} ${id}>${link.text}</a>`;
       })
       .join("");
-  } else console.warn("Navbar JSON missing or nav element not found.");
+  }
 
   // 🌼 Footer
   const footerEl = document.querySelector("footer");
   if (footerData?.footer && footerEl) {
-    footerEl.innerHTML = `<div>${footerData.footer.left || ""}</div><div>${footerData.footer.right || ""}</div>`;
-  } else console.warn("Footer JSON missing or footer element not found.");
+    footerEl.innerHTML = `
+      <div>${footerData.footer.left || ""}</div>
+      <div>${footerData.footer.right || ""}</div>
+    `;
+  }
 
   console.log("Calendar site initialization complete.");
 }
 
-// ===========================
-// ✅ Attach after DOM is ready
-// ===========================
 document.addEventListener("DOMContentLoaded", initSite);
