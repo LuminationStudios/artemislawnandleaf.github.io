@@ -1,0 +1,37 @@
+{
+  "tiers": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "price": 50,
+      "details": [
+        "Lawn mowing: $30",
+        "Leaf cleanup: $20",
+        "Estimated time: 1 hour"
+      ]
+    },
+    {
+      "id": "standard",
+      "name": "Standard",
+      "price": 100,
+      "details": [
+        "Lawn mowing: $50",
+        "Leaf cleanup: $30",
+        "Weed treatment: $20",
+        "Estimated time: 2 hours"
+      ]
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "price": 150,
+      "details": [
+        "Lawn mowing: $70",
+        "Leaf cleanup: $40",
+        "Weed treatment: $30",
+        "Hedge trimming: $10",
+        "Estimated time: 3 hours"
+      ]
+    }
+  ]
+}
