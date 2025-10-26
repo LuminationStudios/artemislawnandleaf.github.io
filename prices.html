@@ -43,7 +43,7 @@
       <h1>Pricing</h1>
       <p class="lead">Affordable, transparent seasonal cleanup packages to fit any yard or budget.</p>
       <h3>Find the perfect plan for your property.</h3>
-      <h3>*Pricing is based on the area, size, and yard condition. Some prices may not fit inside the exact lists below.</h3>
+      <h3>*Pricing varies depending on yard size, condition, and requested add-ons.</h3>
     </div>
     <img src="img/artielawnandleafexample.png" alt="Leaf Cleanup Illustration" class="hero-img">
   </section>
@@ -51,54 +51,18 @@
   <!-- 💸 Pricing Section -->
   <section id="services" class="container">
     <h2>Our Seasonal Packages</h2>
-    <div class="pricing-grid">
-
-      <div class="card">
-        <h2>Leaf Cleanup</h2>
-        <p>Complete yard raking, bagging, and leaf removal.</p>
-        <div class="price">Starting at $60</div>
-        <div class="tiers">
-          <div class="tier">🍂 Basic — Small yard raking + disposal</div>
-          <div class="tier">🍁 Plus — Medium yard raking + disposal</div>
-          <div class="tier">🌳 Premium — Large property + disposal</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Yard Cleanups</h2>
-        <p>Perfect for post-storm or seasonal refreshes.</p>
-        <p>Add-ons include basic weeding, edging, mulching, flower bed cleanups.</p>
-        <div class="price">Starting at $45</div>
-        <div class="tiers">
-          <div class="tier">🍂 $45 — Quick debris pickup (Sticks/branches, Pinecones, Trash, etc.)</div>
-          <div class="tier">🍁 $60+ — Lawn & pathway cleanup (Edging, Pulling weeds, etc.)</div>
-          <div class="tier">🌳 $100+ — Full yard detailing</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Snow Removal</h2>
-        <p>Driveways, walkways, and entryways cleared fast.</p>
-        <p>Add-ons include Ice Removal and Salting or cleaning up trash or debris.</p>
-        <div class="price">Starting at $40</div>
-        <div class="tiers">
-          <div class="tier">❄️ Basic — Walkway + Driveway</div>
-          <div class="tier">⛄ Plus — Basic + Sidewalk</div>
-          <div class="tier">🌨️ Premium — Full property + salting</div>
-        </div>
-      </div>
-
-    </div>
+    <!-- ✅ Cards now load automatically from prices.json -->
+    <div class="pricing-grid"></div>
   </section>
 
   <!-- Pricing Modal -->
-<div id="priceModal">
-  <div class="modal-content">
-    <button class="close-btn" id="closePriceModal">&times;</button>
-    <h3 id="priceModalTitle"></h3>
-    <p id="priceModalDetails"></p>
+  <div id="priceModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closePriceModal">&times;</button>
+      <h3 id="priceModalTitle"></h3>
+      <p id="priceModalDetails"></p>
+    </div>
   </div>
-</div>
 
   <!-- 💌 Quote Modal -->
   <div id="quoteModal" class="modal">
