@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
       dayDiv.appendChild(dn);
 
       const dateObj = new Date(year, month, d);
-      const dateStr = dateObj.toISOString().split('T')[0];
+      const dateStr = [
+      year,
+      String(month + 1).padStart(2, '0'),
+      String(d).padStart(2, '0')
+      ].join('-');
 
       if (dateObj.toDateString() === today.toDateString()) dayDiv.classList.add('today');
       if (dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate())) dayDiv.classList.add('past');
