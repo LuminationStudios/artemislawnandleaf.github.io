@@ -17,17 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     "Cleanup": "#cbffbb"
   };
 
-  // 🪣 store everything in memory
   let events = [];
   let today = new Date();
   let currentMonth = today.getMonth();
   let currentYear = today.getFullYear();
   let selectedDate = null;
 
-  // ✅ Load events from your public Gist instead of a local file
+  // ✅ Load & Normalize Dates From Gist
   async function loadEvents() {
-    const GIST_ID = "a5807276447d041a9d6793be134e391c"; // 🔁 Replace with your actual Gist ID
-    const GIST_FILENAME = "events.json"; // Make sure this matches your file name
+    const GIST_ID = "a5807276447d041a9d6793be134e391c";
+    const GIST_FILENAME = "events.json";
 
     try {
       const res = await fetch(`https://api.github.com/gists/${GIST_ID}`);
@@ -37,7 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const file = data.files[GIST_FILENAME];
       if (!file || !file.content) throw new Error("No events.json found in Gist");
 
-      events = JSON.parse(file.content);
+      // ✅ Normalize all event dates to guaranteed YYYY-MM-DD
+      events = JSON.parse(file.content).map(ev => ({
+        ...ev,
+        date: ev.date.split('T')[0] // Remove any time or timezone component
+      }));
+
       renderCalendar(currentMonth, currentYear);
     } catch (err) {
       console.error("Failed to load events from Gist:", err);
@@ -56,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const firstDay = new Date(year, month, 1).getDay();
     const totalDays = daysInMonth(month, year);
 
-    // blank boxes for days before the 1st
     for (let i = 0; i < firstDay; i++) {
       const emptyDiv = document.createElement('div');
       emptyDiv.classList.add('empty-day');
@@ -73,11 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
       dayDiv.appendChild(dn);
 
       const dateObj = new Date(year, month, d);
-      const dateStr = [
-      year,
-      String(month + 1).padStart(2, '0'),
-      String(d).padStart(2, '0')
-      ].join('-');
+
+      // ✅ Use local timezone-safe formatting
+      const dateStr = dateObj.toLocaleDateString('en-CA'); // YYYY-MM-DD, local time
 
       if (dateObj.toDateString() === today.toDateString()) dayDiv.classList.add('today');
       if (dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate())) dayDiv.classList.add('past');
@@ -117,11 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Modal close listeners
   closeModal.addEventListener('click', () => modal.style.display = 'none');
   window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
 
-  // Calendar navigation
   prevBtn.addEventListener('click', () => {
     currentMonth--;
     if (currentMonth < 0) { currentMonth = 11; currentYear--; }
@@ -134,6 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCalendar(currentMonth, currentYear);
   });
 
-  // load everything
   loadEvents();
 });
