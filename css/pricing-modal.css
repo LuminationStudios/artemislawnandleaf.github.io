@@ -45,15 +45,19 @@
 /* ------------------------------ */
 /* Pricing Modal Overlay */
 #price-modal {
-  display: none;
+  display: none; /* Hidden by default */
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+/* Show modal when .show is added */
+#price-modal.show {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
 
 /* Modal Content Box */
@@ -103,17 +107,19 @@
 /* Close Button */
 #price-modal .close {
   position: absolute;
-  top: 10px;
+  top: 12px;
   right: 12px;
-  background: rgba(250, 91, 61, 0.3);
-  border: none;
-  color: #fa5b3d;
-  font-weight: bold;
-  border-radius: 50%;
   width: 30px;
   height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(250, 91, 61, 0.3);
+  color: #fa5b3d;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 30px;  /* Vertically center the X */
+  text-align: center; /* Horizontally center */
   cursor: pointer;
-  font-size: 1rem;
   transition: all 0.2s ease;
 }
 
