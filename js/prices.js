@@ -1,5 +1,5 @@
 
-fetch('prices.json')
+fetch('json/prices.json')
   .then(response => response.json())
   .then(data => {
     const container = document.querySelector('.pricing-grid');
