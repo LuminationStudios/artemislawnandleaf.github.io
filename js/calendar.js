@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentYear = today.getFullYear();
   let selectedDate = null;
 
-  // ✅ Load & Normalize Dates From Gist
+  // Load & Normalize Dates From Gist
   async function loadEvents() {
     const GIST_ID = "a5807276447d041a9d6793be134e391c";
     const GIST_FILENAME = "events.json";
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const file = data.files[GIST_FILENAME];
       if (!file || !file.content) throw new Error("No events.json found in Gist");
 
-      // ✅ Normalize all event dates to guaranteed YYYY-MM-DD
+      // Normalize all event dates to guaranteed YYYY-MM-DD
       events = JSON.parse(file.content).map(ev => ({
         ...ev,
         date: ev.date.split('T')[0] // Remove any time or timezone component
@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const firstDay = new Date(year, month, 1).getDay();
     const totalDays = daysInMonth(month, year);
 
+    // Empty days for first week
     for (let i = 0; i < firstDay; i++) {
       const emptyDiv = document.createElement('div');
       emptyDiv.classList.add('empty-day');
@@ -75,10 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
       dn.textContent = d;
       dayDiv.appendChild(dn);
 
+      // ✅ Create date safely without timezone shifts
       const dateObj = new Date(year, month, d);
-
-      // ✅ Use local timezone-safe formatting
-      const dateStr = dateObj.toLocaleDateString('en-CA'); // YYYY-MM-DD, local time
+      const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 
       if (dateObj.toDateString() === today.toDateString()) dayDiv.classList.add('today');
       if (dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate())) dayDiv.classList.add('past');
@@ -100,7 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function openModal(dateStr) {
     selectedDate = dateStr;
     modal.style.display = 'flex';
-    modalDate.textContent = new Date(dateStr).toDateString();
+
+    // ✅ Parse date manually to avoid timezone issues
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const dateObj = new Date(y, m - 1, d);
+    modalDate.textContent = dateObj.toDateString();
+
     modalEvents.innerHTML = '';
 
     const dayEvents = events.filter(ev => ev.date === dateStr);
