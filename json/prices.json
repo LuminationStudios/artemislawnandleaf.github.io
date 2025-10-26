@@ -1,36 +1,61 @@
 {
   "tiers": [
     {
-      "id": "basic",
-      "name": "Basic",
-      "price": 50,
+      "id": "leaf",
+      "name": "Leaf Removal",
       "details": [
-        "Lawn mowing: $30",
-        "Leaf cleanup: $20",
-        "Estimated time: 1 hour"
+        {
+          "size": "Small Lawn",
+          "price": 150,
+          "estimated_time": "1–2 hours"
+        },
+        {
+          "size": "Medium Lawn",
+          "price": 180,
+          "estimated_time": "2–3 hours"
+        },
+        {
+          "size": "Large Lawn",
+          "price": 220,
+          "estimated_time": "3–4 hours"
+        }
       ]
     },
     {
-      "id": "standard",
-      "name": "Standard",
-      "price": 100,
+      "id": "snow",
+      "name": "Snow Removal",
       "details": [
-        "Lawn mowing: $50",
-        "Leaf cleanup: $30",
-        "Weed treatment: $20",
-        "Estimated time: 2 hours"
+        {
+          "area": "Driveway",
+          "price": 60,
+          "notes": "Per visit for up to 6 inches of snow"
+        },
+        {
+          "area": "Sidewalk",
+          "price": 50,
+          "notes": "Per visit for up to 6 inches of snow"
+        },
+        {
+          "area": "Doorway/Porch",
+          "price": 30,
+          "notes": "Often included with driveway or sidewalk"
+        },
+        {
+          "area": "All Areas",
+          "price": 120,
+          "notes": "Combined driveway, sidewalk, and porch clearing per visit"
+        }
       ]
     },
     {
-      "id": "premium",
-      "name": "Premium",
-      "price": 150,
+      "id": "snow_seasonal",
+      "name": "Snow Removal – Seasonal Contract",
       "details": [
-        "Lawn mowing: $70",
-        "Leaf cleanup: $40",
-        "Weed treatment: $30",
-        "Hedge trimming: $10",
-        "Estimated time: 3 hours"
+        {
+          "description": "Unlimited snow removal visits for the winter season",
+          "price_range": "300–700",
+          "notes": "Covers driveway, sidewalks, and doorways/porches for typical snowfall in Boise"
+        }
       ]
     }
   ]
