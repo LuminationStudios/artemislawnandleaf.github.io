@@ -6,17 +6,17 @@
       "details": [
         {
           "size": "Small Lawn",
-          "price": 150,
+          "price": 150–250 For a small property with light-to-moderate leaf coverage,
           "estimated_time": "1–2 hours"
         },
         {
           "size": "Medium Lawn",
-          "price": 180,
+          "price": 210-470 For a half-acre yard with moderate-to-heavy coverage,
           "estimated_time": "2–3 hours"
         },
         {
           "size": "Large Lawn",
-          "price": 220,
+          "price": 400-850 For a full-acre property with significant leaf accumulation,
           "estimated_time": "3–4 hours"
         }
       ]
