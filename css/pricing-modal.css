@@ -1,3 +1,4 @@
+/* ------------------------------ */
 /* Pricing Cards Container */
 .pricing-cards {
   display: flex;
@@ -9,10 +10,10 @@
 
 /* Individual Card */
 .card {
-  background: #ffe5ec;
+  background: rgba(255, 229, 236, 0.9);
   padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(255, 180, 200, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(255, 180, 200, 0.5);
   text-align: center;
   width: 220px;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -28,57 +29,116 @@
   margin-top: 10px;
   padding: 8px 15px;
   border: none;
-  border-radius: 10px;
-  background: #ffb3c1;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fa5b3d, #f9b75d);
   cursor: pointer;
   color: #fff;
   font-weight: bold;
-  transition: background 0.2s, transform 0.2s;
+  transition: all 0.25s ease;
 }
 
 .card button:hover {
-  background: #ff87a0;
   transform: scale(1.05);
+  background: linear-gradient(135deg, #f9b75d, #fa5b3d);
 }
 
-/* Modal Overlay */
-.modal {
+/* ------------------------------ */
+/* Pricing Modal Overlay */
+#price-modal {
   display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
+  top: 0; left: 0;
   width: 100%; height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 /* Modal Content Box */
-.modal-content {
-  background: #fff0f5;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 15px;
-  width: 80%;
-  max-width: 500px;
-  box-shadow: 0 0 20px rgba(255, 180, 200, 0.6);
+#price-modal .modal-content {
+  background: linear-gradient(180deg, #fff4ef, #fff7e6);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 420px;
+  width: 90%;
+  border: 1px solid rgba(249, 183, 93, 0.25);
+  position: relative;
+  box-shadow: 0 4px 20px rgba(255, 180, 200, 0.6);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal Title */
+#price-modal h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fa5b3d;
+  margin-bottom: 16px;
+  border-bottom: 2px dashed rgba(249, 183, 93, 0.3);
+  padding-bottom: 8px;
+}
+
+/* Modal Details List */
+#modal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#modal-details li {
+  background: rgba(255, 244, 239, 0.9);
+  border-left: 5px solid #f9b75d;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 16px;
+  color: #8b4f3b;
+  transition: transform 0.2s ease;
+}
+
+#modal-details li:hover {
+  transform: translateY(-2px);
 }
 
 /* Close Button */
-.modal .close {
-  float: right;
-  font-size: 28px;
-  cursor: pointer;
+#price-modal .close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: rgba(250, 91, 61, 0.3);
+  border: none;
+  color: #fa5b3d;
   font-weight: bold;
-  color: #ff5a87;
-  transition: color 0.2s;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
 }
 
-.modal .close:hover {
-  color: #ff1f60;
+#price-modal .close:hover {
+  background: linear-gradient(135deg, #f9b75d, #fa5b3d);
+  color: #fff;
 }
 
-/* Modal List Items */
-#modal-details li {
-  margin-bottom: 8px;
-  font-size: 16px;
+/* ------------------------------ */
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ------------------------------ */
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #price-modal .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
 }
