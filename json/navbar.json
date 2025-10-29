@@ -4,7 +4,7 @@
       { "text": "Home", "href": "https://artielawnandleaf.com", "class": "btn" },
       { "text": "Prices", "href": "prices.html", "class": "btn" },
       { "text": "Calendar", "href": "calendar.html", "class": "btn" },
-      {"text": "Get Free Quote", "href": "#", "class": "btn cta", "id": "quoteBtn" }
+      { "text": "Get Free Quote", "class": "btn cta", "data-open-quote": true }
     ]
   }
 }
