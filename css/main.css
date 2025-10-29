@@ -309,7 +309,6 @@ section,
   z-index: 1;
 }
 
-
 /* ===========================
    🌸 Quote Modal Glow Upgrade
 =========================== */
@@ -334,6 +333,8 @@ section,
 }
 
 .modal {
+  position: relative;        /* ✅ Required so it stacks above blur */
+  z-index: 100000;           /* ✅ Ensures modal is on top */
   background: linear-gradient(
     180deg,
     rgba(255,255,255,0.85),
@@ -351,8 +352,8 @@ section,
 }
 
 .modal-overlay.active .modal {
-  transform: translateY(0px);
-  opacity: 1;
+  transform: translateY(0px) !important; /* ✅ Ensures animation fires */
+  opacity: 1 !important;                /* ✅ Forces visible */
 }
 
 .modal h2 {
@@ -421,3 +422,4 @@ section,
 .modal .close:hover {
   transform: rotate(90deg) scale(1.1);
 }
+
