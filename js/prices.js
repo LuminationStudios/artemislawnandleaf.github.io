@@ -1,16 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Elements
   const pricingContainer = document.querySelector(".pricing-cards");
-  const modal = document.getElementById("price-modal");
-  const modalTitle = document.getElementById("modal-title");
-  const modalDetails = document.getElementById("modal-details");
-  const closeBtn = modal.querySelector(".close"); // scoped to price modal
+  const priceModal = document.getElementById("price-modal");
+  const modalTitle = priceModal.querySelector("#modal-title");
+  const modalDetails = priceModal.querySelector("#modal-details");
+  const closeBtn = priceModal.querySelector(".close");
 
   // Fetch pricing JSON
   fetch("json/prices.json")
     .then(res => res.json())
     .then(data => {
-      // Build pricing cards
       data.tiers.forEach(tier => {
         const card = document.createElement("div");
         card.className = "card";
@@ -21,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
         pricingContainer.appendChild(card);
       });
 
-      // Event delegation: click on any details button
-      pricingContainer.addEventListener("click", (e) => {
+      // Event delegation: open modal when a details button is clicked
+      pricingContainer.addEventListener("click", e => {
         if (!e.target.classList.contains("details-btn")) return;
 
         const tier = data.tiers.find(t => t.id === e.target.dataset.tier);
@@ -37,17 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
           </li>
         `).join("");
 
-        modal.classList.add("show");
+        priceModal.classList.add("show");
       });
 
-      // Close button
-      closeBtn.addEventListener("click", () => modal.classList.remove("show"));
-
-      // Click outside modal content
-      modal.addEventListener("click", e => {
-        if (e.target === modal) modal.classList.remove("show");
+      // Close modal
+      closeBtn.addEventListener("click", () => priceModal.classList.remove("show"));
+      priceModal.addEventListener("click", e => {
+        if (e.target === priceModal) priceModal.classList.remove("show");
       });
-
     })
     .catch(err => console.error("Error loading pricing JSON:", err));
 });
