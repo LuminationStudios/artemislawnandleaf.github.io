@@ -1,6 +1,6 @@
 // ✅ banner.js
 (async function() {
-  const bannerEl = document.getElementById("banner");
+  const bannerEl = document.getElementById("discount");
   if (!bannerEl) return console.warn("Banner element not found in HTML.");
 
   try {
