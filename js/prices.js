@@ -22,42 +22,31 @@ fetch('json/prices.json')
     const modalDetails = document.getElementById('modal-details');
     const closeBtn = modal.querySelector('.close');
 
-    // Open modal when button clicked
+    // Open modal when View Details is clicked
     document.querySelectorAll('.details-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const tier = data.tiers.find(t => t.id === btn.dataset.tier);
         if (!tier) return;
 
-        modalTitle.textContent = `${tier.name} Tier Breakdown`;
+        modalTitle.textContent = tier.name;
 
-        // Build modal details dynamically
-        modalDetails.innerHTML = tier.details.map(item => {
-          let content = '<li>';
+        // Build tier details (using your actual JSON structure)
+        modalDetails.innerHTML = tier.details.map(item => `
+          <li>
+            <strong>${item.label}</strong><br>
+            <strong>Price:</strong> $${item.price}<br>
+            ${item.notes ? `<em>${item.notes}</em>` : ""}
+          </li>
+        `).join("");
 
-          if (item.size) content += `<strong>Size:</strong> ${item.size}<br>`;
-          if (item.area) content += `<strong>Area:</strong> ${item.area}<br>`;
-          if (item.description) content += `<strong>Description:</strong> ${item.description}<br>`;
-
-          if (item.price) content += `<strong>Price:</strong> $${item.price}<br>`;
-          if (item.price_range) content += `<strong>Price Range:</strong> $${item.price_range}<br>`;
-
-          if (item.estimated_time) content += `<strong>Estimated Time:</strong> ${item.estimated_time}<br>`;
-          if (item.notes) content += `<strong>Notes:</strong> ${item.notes}<br>`;
-
-          content += '</li>';
-          return content;
-        }).join('');
-
-        modal.classList.add('show'); // Show modal
+        modal.classList.add('show');
       });
     });
 
-    // Close modal on close button
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('show');
-    });
+    // Close modal button
+    closeBtn.addEventListener('click', () => modal.classList.remove('show'));
 
-    // Close modal if clicked outside content
+    // Close modal if clicking outside content
     modal.addEventListener('click', e => {
       if (e.target === modal) modal.classList.remove('show');
     });
