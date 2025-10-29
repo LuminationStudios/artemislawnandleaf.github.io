@@ -1,3 +1,4 @@
+// modals.js
 document.addEventListener("DOMContentLoaded", () => {
 
   // ------------------------------
@@ -11,18 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = modal.querySelector("form");
     const thankYou = modal.querySelector("#thankYou");
 
-    // Close modal on X button
-    if (closeBtn) closeBtn.addEventListener("click", () => {
-      modal.classList.remove("show");
-      modal.style.display = "none";
-    });
+    // Close modal on X
+    if (closeBtn) closeBtn.addEventListener("click", () => modal.classList.remove("show"));
 
     // Close modal on click outside content
     modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("show");
-        modal.style.display = "none";
-      }
+      if (e.target === modal) modal.classList.remove("show");
     });
 
     // Form submission if a form exists
@@ -32,12 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const formData = new FormData(form);
-        const payload = Object.fromEntries(formData.entries());
+        const data = Object.fromEntries(new FormData(form).entries());
 
         try {
           if (GOOGLE_SCRIPT_URL)
-            fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+            fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
 
           if (DISCORD_WEBHOOK)
             await fetch(DISCORD_WEBHOOK, {
@@ -45,10 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 content: `📬 **New Quote Request**
-**Name:** ${payload.name}
-**Contact:** ${payload.contact}
-**Service:** ${payload.service}
-**Message:** ${payload.message || "No message provided."}`
+**Name:** ${data.name}
+**Contact:** ${data.contact}
+**Service:** ${data.service}
+**Message:** ${data.message || "No message provided."}`
               })
             });
 
@@ -59,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
           setTimeout(() => {
             modal.classList.remove("show");
-            modal.style.display = "none";
             if (thankYou) thankYou.style.display = "none";
             form.reset();
             form.style.display = "block";
@@ -67,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (err) {
           console.error(err);
-          alert("There was a problem submitting the form. Please try again later.");
+          alert("Error submitting form.");
         }
       });
     }
@@ -76,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ------------------------------
-  // Initialize Pricing Modal
+  // Pricing Modal
   // ------------------------------
   const pricingContainer = document.querySelector(".pricing-cards");
   const priceModal = initModal("price-modal");
@@ -101,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Event delegation for dynamically created buttons
         pricingContainer.addEventListener("click", e => {
           if (!e.target.classList.contains("details-btn")) return;
+
           const tier = data.tiers.find(t => t.id === e.target.dataset.tier);
           if (!tier) return;
 
@@ -120,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ------------------------------
-  // Initialize Quote Modal
+  // Quote Modal
   // ------------------------------
   initModal("quoteModal", {
     googleScript: "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec",
