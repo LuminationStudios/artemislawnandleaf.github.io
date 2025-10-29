@@ -20,40 +20,28 @@ function setupMobileMenu() {
   const navLinks = document.querySelector(".nav-links");
 
   if (menuToggle && navLinks) {
-    // Remove existing listeners first to prevent duplicates
     menuToggle.onclick = () => navLinks.classList.toggle("active");
-
-    // Close menu when clicking a link
     navLinks.onclick = (e) => {
       if (e.target.tagName === "A") navLinks.classList.remove("active");
     };
   } else {
-    // Retry after small delay in case navbar hasn't rendered yet
     setTimeout(setupMobileMenu, 300);
   }
 }
 
 // ===========================
-// 💌 Quote Modal
+// 💌 Quote Modal Trigger Setup
 // ===========================
-function setupQuoteModal() {
-  const modal = document.getElementById("quoteModal");
-  const closeBtn = modal?.querySelector(".close");
-  const quoteBtn = document.getElementById("quoteBtn");
+function setupQuoteTriggers() {
+  const overlay = document.getElementById("quoteOverlay");
+  if (!overlay) return;
 
-  if (quoteBtn && modal) {
-    quoteBtn.addEventListener("click", (e) => {
+  // Any element with data-open-quote opens the modal
+  document.querySelectorAll("[data-open-quote]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
       e.preventDefault();
-      modal.style.display = "flex"; // CSS uses flex layout
+      overlay.classList.add("active");
     });
-  }
-
-  if (closeBtn && modal) {
-    closeBtn.addEventListener("click", () => (modal.style.display = "none"));
-  }
-
-  window.addEventListener("click", (e) => {
-    if (modal && e.target === modal) modal.style.display = "none";
   });
 }
 
@@ -63,7 +51,6 @@ function setupQuoteModal() {
 async function initSite() {
   console.log("🌿 Initializing site...");
 
-  // Load JSON data concurrently
   const [navbarData, servicesData, footerData] = await Promise.all([
     loadJSON("json/navbar.json"),
     loadJSON("json/services.json"),
@@ -76,19 +63,22 @@ async function initSite() {
     navEl.innerHTML = navbarData.navbar.links
       .map(link => {
         const cls = link.class ? `class="${link.class}"` : "";
-        const id = link.id ? `id="${link.id}"` : "";
-        return `<a href="${link.href}" ${cls} ${id}>${link.text}</a>`;
+
+        // If link is a modal trigger, create a button-like element
+        if (link["data-open-quote"]) {
+          return `<a ${cls} data-open-quote>${link.text}</a>`;
+        }
+
+        // Otherwise normal navigation link
+        return `<a href="${link.href}" ${cls}>${link.text}</a>`;
       })
       .join("");
 
-    // Setup mobile menu & modal after navbar renders
     setupMobileMenu();
-    setupQuoteModal();
-  } else {
-    console.warn("⚠️ Navbar JSON missing or nav element not found.");
+    setupQuoteTriggers(); // ✅ enable modal from navbar
   }
 
-  // 🌿 Services (only if the section exists)
+  // 🌿 Services
   const servicesGrid = document.getElementById("services-grid");
   if (Array.isArray(servicesData?.services) && servicesGrid) {
     servicesGrid.innerHTML = servicesData.services
@@ -99,8 +89,6 @@ async function initSite() {
         </div>
       `)
       .join("");
-  } else {
-    console.log("ℹ️ No services section found on this page.");
   }
 
   // 🌼 Footer
@@ -110,8 +98,6 @@ async function initSite() {
       <div>${footerData.footer.left || ""}</div>
       <div>${footerData.footer.right || ""}</div>
     `;
-  } else {
-    console.warn("⚠️ Footer JSON missing or footer element not found.");
   }
 
   console.log("✅ Site initialization complete.");
