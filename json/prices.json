@@ -5,19 +5,19 @@
       "name": "Leaf Removal",
       "details": [
         {
-          "size": "Small Lawn: For a small property with light-to-moderate leaf coverage",
+          "label": "Small Lawn: Light-to-moderate leaf coverage",
           "price": "150-250",
-          "estimated_time": "1–2 hours"
+          "notes": "Estimated time: 1–2 hours"
         },
         {
-          "size": "Medium Lawn: For a half-acre yard with moderate-to-heavy coverage",
+          "label": "Medium Lawn: Half-acre with moderate-to-heavy coverage",
           "price": "210-470",
-          "estimated_time": "2–3 hours"
+          "notes": "Estimated time: 2–3 hours"
         },
         {
-          "size": "Large Lawn: For a full-acre property with significant leaf accumulation",
+          "label": "Large Lawn: Full-acre with significant leaf accumulation",
           "price": "400-850",
-          "estimated_time": "3–4 hours"
+          "notes": "Estimated time: 3–4 hours"
         }
       ]
     },
@@ -26,24 +26,24 @@
       "name": "Snow Removal",
       "details": [
         {
-          "area": "Driveway",
-          "price": 60,
-          "notes": "Per visit for up to 6 inches of snow"
+          "label": "Driveway",
+          "price": "60",
+          "notes": "Per visit, up to 6 inches"
         },
         {
-          "area": "Sidewalk",
-          "price": 50,
-          "notes": "Per visit for up to 6 inches of snow"
+          "label": "Sidewalk",
+          "price": "50",
+          "notes": "Per visit, up to 6 inches"
         },
         {
-          "area": "Doorway/Porch",
-          "price": 30,
+          "label": "Doorway / Porch",
+          "price": "30",
           "notes": "Often included with driveway or sidewalk"
         },
         {
-          "area": "All Areas",
-          "price": 120,
-          "notes": "Combined driveway, sidewalk, and porch clearing per visit"
+          "label": "All Areas (Driveway + Sidewalk + Porch)",
+          "price": "120",
+          "notes": "Per visit"
         }
       ]
     },
@@ -52,14 +52,14 @@
       "name": "Seasonal Contracts",
       "details": [
         {
-          "description": "Weekly leaf removal visits for the fall season",
-          "price_range": "175-450",
-          "notes": "Price depends on Size, and tree coverage."
+          "label": "Fall Leaf Removal Contract",
+          "price": "175-450",
+          "notes": "Weekly visits; price varies by yard size + tree coverage"
         },
         {
-          "description": "Weekly/Daily snow removal visits for the winter season",
-          "price_range": "300-700",
-          "notes": "Covers driveway, sidewalks, and doorways/porches for typical snowfall in Boise"
+          "label": "Winter Snow Removal Contract",
+          "price": "150-425",
+          "notes": "Weekly or daily clearing of driveway, sidewalk, and porch"
         }
       ]
     }
