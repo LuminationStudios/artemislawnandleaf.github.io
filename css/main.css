@@ -214,84 +214,10 @@
 }
 
 /* ===========================
-   🧭 Navbar Z-Index Fix
-=========================== */
-.header {
-  position: relative;
-  z-index: 1000; /* Ensures navbar sits above everything */
-}
-
-.hamburger {
-  position: relative;
-  z-index: 1001; /* Keeps button clickable */
-}
-
-.nav-links.active {
-  position: absolute;
-  top: 100%; /* Just below header */
-  left: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-/* ===========================
-   📱 Mobile Optimizations
-=========================== */
-@media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr;
-    padding: 24px 16px;
-    gap: 20px;
-  }
-
-  .hero-card h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero-card p.lead {
-    font-size: 1rem;
-  }
-
-  .hero-card h3 {
-    font-size: 1.1rem;
-  }
-
-  #services,
-  #pricing {
-    padding: 30px 16px;
-  }
-
-  .services {
-    gap: 16px;
-  }
-
-  .service,
-  .card {
-    padding: 20px;
-  }
-
-  .pricing-grid {
-    gap: 20px;
-  }
-
-  .hero-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-}
-
-/* ===========================
-   🚀 Navbar Always On Top Fix
+   🧭 Navbar Always Visible Fix
 =========================== */
 header,
-.header {
-  position: relative;
-  z-index: 9999 !important; /* Highest possible priority */
-}
-
+.header,
 nav,
 .nav-links,
 .hamburger {
@@ -299,71 +225,45 @@ nav,
   z-index: 9999 !important;
 }
 
-/* Ensure all sections stay below the navbar */
-main,
-section,
-.hero,
-#services,
-#pricing {
-  position: relative;
-  z-index: 1;
-}
-
 /* ===========================
-   🌸 Quote Modal (robust)
+   🌸 Quote Modal — Centered & Animated
 =========================== */
-
 .modal-overlay {
   position: fixed;
   inset: 0;
-  display: none;              /* default hidden until activated */
+  display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(255, 200, 160, 0.35);
   backdrop-filter: blur(8px);
-  z-index: 99999;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.28s ease;
+  z-index: 99999;
 }
 
-/* active overlay */
 .modal-overlay.active {
-  display: flex !important;   /* ensure flex rendering */
-  opacity: 1 !important;
-  pointer-events: all !important;
+  opacity: 1;
+  pointer-events: all;
 }
 
-/* modal itself */
 .modal {
-  /* make sure it can't be pushed behind anything */
-  position: relative !important;
-  z-index: 100001 !important;
-
-  display: block !important;      /* override any accidental display:none */
-  visibility: visible !important;  /* override hidden */
-  box-sizing: border-box;
-
-  width: 95%;
   max-width: 480px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,245,235,0.9));
+  width: 92%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.97), rgba(255,245,235,0.92));
   border-radius: 26px;
   padding: 32px;
-  box-shadow: 0 18px 64px rgba(0,0,0,0.15), 0 12px 48px rgba(255, 180, 120, 0.35);
-  backdrop-filter: blur(10px);
-
-  transform: translateY(20px);
+  box-shadow: 0 18px 64px rgba(0,0,0,0.16), 0 12px 48px rgba(255, 180, 120, 0.35);
+  transform: scale(0.96);
   opacity: 0;
-  transition: transform 0.28s ease, opacity 0.28s ease;
+  transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
-/* visible modal */
 .modal-overlay.active .modal {
-  transform: translateY(0) !important;
-  opacity: 1 !important;
+  transform: scale(1);
+  opacity: 1;
 }
 
-/* small safety: ensure close button positioned relative to modal */
 .modal .close {
   position: absolute;
   top: 12px;
@@ -371,25 +271,25 @@ section,
   font-size: 1.4rem;
   cursor: pointer;
   color: #a1682a;
-  transition: transform 0.18s ease;
 }
 
-/* same inputs + buttons as before but with !important fallbacks */
+/* Inputs & Button */
 .modal input,
-.modal textarea,
-.modal select {
-  width: 100% !important;
+.modal textarea {
+  width: 100%;
   padding: 14px;
   border-radius: 14px;
   border: none;
   background: rgba(255,255,255,0.92);
   box-shadow: 0 4px 14px rgba(255, 190, 140, 0.22);
   margin-bottom: 12px;
-  font-size: 1rem;
   outline: none;
 }
 
-.modal textarea { height: 110px; resize: none; }
+.modal textarea {
+  height: 110px;
+  resize: none;
+}
 
 .modal button.submit {
   width: 100%;
@@ -401,13 +301,50 @@ section,
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(255,180,120,0.28);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.18s ease;
 }
 
-.modal button.submit:hover { transform: translateY(-3px); }
+.modal button.submit:hover {
+  transform: translateY(-3px);
+}
 
-/* Accessibility: small-screen spacing */
-@media (max-width: 420px) {
-  .modal { padding: 20px; border-radius: 18px; }
-  .modal .close { top: 10px; right: 10px; }
+/* ===========================
+   🌼 Dropdown Menu (Click-to-open)
+=========================== */
+.nav-links .dropdown {
+  position: relative;
+}
+
+.nav-links .dropdown > a {
+  cursor: pointer;
+}
+
+.nav-links .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  min-width: 180px;
+  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.28);
+  padding: 10px 0;
+  display: none;
+  flex-direction: column;
+}
+
+.nav-links .dropdown.active .dropdown-menu {
+  display: flex;
+}
+
+.nav-links .dropdown-menu a {
+  padding: 10px 18px;
+  text-align: left;
+  white-space: nowrap;
+  color: #5b4c45;
+  transition: background 0.2s ease;
+}
+
+.nav-links .dropdown-menu a:hover {
+  background: rgba(255,235,210,0.6);
 }
