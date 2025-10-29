@@ -49,10 +49,15 @@
     },
     {
       "id": "snow_seasonal",
-      "name": "Snow Removal – Seasonal Contract",
+      "name": "Seasonal Contracts",
       "details": [
         {
-          "description": "Unlimited snow removal visits for the winter season",
+          "description": "Weekly leaf removal visits for the fall season",
+          "price_range": "175-450",
+          "notes": "Price depends on Size, and tree coverage."
+        },
+        {
+          "description": "Weekly/Daily snow removal visits for the winter season",
           "price_range": "300-700",
           "notes": "Covers driveway, sidewalks, and doorways/porches for typical snowfall in Boise"
         }
