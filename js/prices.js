@@ -4,13 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("price-modal");
   const modalTitle = document.getElementById("modal-title");
   const modalDetails = document.getElementById("modal-details");
-  const closeBtn = modal.querySelector(".close");
+  const closeBtn = modal.querySelector(".close"); // scoped to price modal
 
-  // Fetch pricing JSON and build cards
+  // Fetch pricing JSON
   fetch("json/prices.json")
     .then(res => res.json())
     .then(data => {
-      // Build cards dynamically
+      // Build pricing cards
       data.tiers.forEach(tier => {
         const card = document.createElement("div");
         card.className = "card";
@@ -21,14 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
         pricingContainer.appendChild(card);
       });
 
-      // Event delegation: handle clicks on buttons
+      // Event delegation: click on any details button
       pricingContainer.addEventListener("click", (e) => {
         if (!e.target.classList.contains("details-btn")) return;
 
         const tier = data.tiers.find(t => t.id === e.target.dataset.tier);
         if (!tier) return;
 
-        // Fill modal content
         modalTitle.textContent = tier.name;
         modalDetails.innerHTML = tier.details.map(item => `
           <li>
@@ -41,10 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.classList.add("show");
       });
 
-      // Close modal button
+      // Close button
       closeBtn.addEventListener("click", () => modal.classList.remove("show"));
 
-      // Close modal when clicking outside content
+      // Click outside modal content
       modal.addEventListener("click", e => {
         if (e.target === modal) modal.classList.remove("show");
       });
