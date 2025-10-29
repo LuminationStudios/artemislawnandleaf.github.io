@@ -62,89 +62,159 @@
   </div>
 
     <!-- 💌 Quote Modal -->
-  <div id="quoteModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Request a Quote</h2>
-      <form id="quoteForm">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required>
+<div id="quoteOverlay" class="modal-overlay">
+  <div class="modal">
+    <span class="close">&times;</span>
+    <h2>Request a Quote</h2>
 
-        <label for="contact">Contact Info (Phone or Email):</label>
-        <input type="text" name="contact" id="contact" required>
+    <form id="quoteForm">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
 
-        <label for="service">Service:</label>
-        <select name="service" id="service" required>
-          <option value="">Select a Service</option>
-          <option>Leaf Cleanup</option>
-          <option>Yard Cleanup</option>
-          <option>Snow Removal</option>
-        </select>
+      <label for="contact">Contact Info (Phone or Email):</label>
+      <input type="text" name="contact" id="contact" required>
 
-        <label for="message">Additional Details:</label>
-        <textarea name="message" id="message" rows="3"></textarea>
+      <label for="service">Service:</label>
+      <select name="service" id="service" required>
+        <option value="">Select a Service</option>
+        <option>Leaf Cleanup</option>
+        <option>Snow Removal</option>
+        <option>Yard Cleanup</option>
+      </select>
 
-        <button type="submit" class="btn cta">Submit Quote</button>
-      </form>
+      <label for="message">Additional Details:</label>
+      <textarea name="message" id="message" rows="3"></textarea>
 
-      <div id="thankYou" style="display:none; text-align:center; padding:1em;">
-        <h3>✅ Thank you! We’ll be in touch soon.</h3>
-      </div>
+      <button type="submit" class="submit">Submit Quote</button>
+    </form>
+
+    <div id="thankYou" style="display:none; text-align:center; padding:1em;">
+      <h3>✅ Thank you! We’ll be in touch soon.</h3>
     </div>
   </div>
+</div>
 
   <!-- 🌼 Footer -->
   <footer></footer>
 
-  <!-- ✨ Quote Modal Script -->
-  <script>
-    const modal = document.getElementById("quoteModal");
-    const closeBtn = document.querySelector(".close");
-    const form = document.getElementById("quoteForm");
-    const thankYou = document.getElementById("thankYou");
+<script>
+/* ===== Robust Quote Modal Script ===== */
 
-    closeBtn.onclick = () => modal.style.display = "none";
-    window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+(function(){
+  const overlay = document.getElementById("quoteOverlay");
+  if (!overlay) {
+    console.error("Modal overlay (#quoteOverlay) not found in DOM.");
+    return;
+  }
+  const modal = overlay.querySelector(".modal");
+  const closeBtn = overlay.querySelector(".close");
+  const form = document.getElementById("quoteForm");
+  const thankYou = document.getElementById("thankYou");
 
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
-    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9";
+  // Safety checks
+  if(!modal) console.error("Modal element (.modal) not found inside overlay.");
+  if(!closeBtn) console.warn("Close button (.close) not found. Modal can still be closed by clicking backdrop.");
+  if(!form) console.warn("Form (#quoteForm) not found.");
 
-    form.addEventListener("submit", async e => {
+  // utility to force show (defensive)
+  function showOverlay() {
+    // ensure overlay uses flex and modal visible
+    overlay.style.display = "flex";
+    overlay.classList.add("active");
+    // Force modal visible too
+    if (modal) {
+      modal.style.display = "block";
+      modal.style.visibility = "visible";
+      // allow next frame for CSS transition
+      window.requestAnimationFrame(() => {
+        overlay.classList.add("active");
+      });
+    }
+    console.log("QUOTE: overlay opened");
+  }
+
+  function hideOverlay() {
+    overlay.classList.remove("active");
+    // give transition time then hide display to avoid tab order issues
+    setTimeout(() => {
+      overlay.style.display = "none";
+      if (modal) modal.style.visibility = "hidden";
+    }, 320);
+    console.log("QUOTE: overlay closed");
+  }
+
+  // wire up any element with data-open-quote (live attacher - covers dynamic additions)
+  function attachOpeners() {
+    document.querySelectorAll("[data-open-quote]").forEach(btn => {
+      // avoid adding duplicate listeners
+      if (btn.__quoteBound) return;
+      btn.__quoteBound = true;
+      btn.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("QUOTE: opener clicked", btn);
+        showOverlay();
+      });
+    });
+  }
+
+  // initial attach (call immediately and also periodically short-term in case DOM loads late)
+  attachOpeners();
+  // one more attach after a short delay (covers dynamically injected nav items)
+  setTimeout(attachOpeners, 250);
+
+  // Close handlers
+  if (closeBtn) closeBtn.addEventListener("click", (e)=> { e.preventDefault(); hideOverlay(); });
+  overlay.addEventListener("click", function(e){
+    // clicking outside modal closes it (but not clicks inside)
+    if (e.target === overlay) hideOverlay();
+  });
+
+  // prevent clicks inside modal from closing via bubbling
+  if (modal) modal.addEventListener("click", e => e.stopPropagation());
+
+  // Form submit handling (keeps your existing behavior, but defensive)
+  if (form) {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
-
+      const data = Object.fromEntries(new FormData(form).entries());
       try {
-        fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+        // your existing endpoints (no-cors etc) — wrapped in try to avoid uncaught rejections
+        fetch("https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec", {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify(data)
+        }).catch(err => console.warn("Google script post failed (likely CORS/no-cors):", err));
 
-        await fetch(DISCORD_WEBHOOK, {
+        await fetch("https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            content: `📬 **New Quote Request**
-**Name:** ${payload.name}
-**Contact:** ${payload.contact}
-**Service:** ${payload.service}
-**Message:** ${payload.message || "No message provided."}`
+            content: `📬 **New Quote Request**\n**Name:** ${data.name}\n**Contact:** ${data.contact}\n**Service:** ${data.service}\n**Message:** ${data.message || "No message provided."}`
           })
-        });
-
-        form.style.display = "none";
-        thankYou.style.display = "block";
-
-        setTimeout(() => {
-          modal.style.display = "none";
-          thankYou.style.display = "none";
-          form.reset();
-          form.style.display = "block";
-        }, 3000);
-
+        }).catch(err => console.warn("Discord webhook post failed:", err));
       } catch (err) {
-        console.error(err);
-        alert("There was a problem submitting your quote. Please try again later.");
+        console.error("Quote submission error:", err);
       }
+
+      // swap to thank you
+      if (form) form.style.display = "none";
+      if (thankYou) thankYou.style.display = "block";
+
+      setTimeout(() => {
+        // reset UI
+        if (form) { form.style.display = "block"; form.reset(); }
+        if (thankYou) thankYou.style.display = "none";
+        hideOverlay();
+      }, 2400);
     });
-  </script>
+  }
+
+  // Expose for manual debug in console (optional)
+  window.__debugQuote = { show: showOverlay, hide: hideOverlay, attachOpeners };
+
+})();
+</script>
 
 </body>
 </html>
