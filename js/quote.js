@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const discordPayload = {
         embeds: [{
           title: "New Quote Request 📬",
+          color: 0xffb6c1,
           fields: [
             { name: "Name", value: data.Name },
             { name: "Contact", value: data.Contact },
