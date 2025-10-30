@@ -3,21 +3,21 @@
     {
       "id": "leaf",
       "name": "Leaf Removal",
-      "price": "120",
+      "price": "60-850",
       "details": [
         {
           "label": "Small Lawn: Light-to-moderate leaf coverage",
-          "price": "150-250",
+          "price": "60-200",
           "notes": "Estimated time: 1–2 hours"
         },
         {
           "label": "Medium Lawn: Half-acre with moderate-to-heavy coverage",
-          "price": "210-470",
+          "price": "200-425",
           "notes": "Estimated time: 2–3 hours"
         },
         {
           "label": "Large Lawn: Full-acre with significant leaf accumulation",
-          "price": "400-850",
+          "price": "450-850",
           "notes": "Estimated time: 3–4 hours"
         }
       ]
@@ -25,7 +25,7 @@
     {
       "id": "snow",
       "name": "Snow Removal",
-      "price": "120",
+      "price": "30-120",
       "details": [
         {
           "label": "Driveway",
@@ -52,7 +52,7 @@
     {
       "id": "snow_seasonal",
       "name": "Seasonal Contracts",
-      "price": "150",
+      "price": "150-450",
       "details": [
         {
           "label": "Fall Leaf Removal Contract",
