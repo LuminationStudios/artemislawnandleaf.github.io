@@ -1,4 +1,4 @@
-const scriptURL = "YOUR_GOOGLE_WEB_APP_URL_HERE";
+const scriptURL = "https://script.google.com/macros/s/AKfycbxPu-hx1SV_14NLNiujx37TSXFlzV8xtgTOt0e3ZxywZJBMTS9Qn7MA9KRLv8ZBUdJy/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("quoteForm");
