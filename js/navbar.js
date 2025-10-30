@@ -44,8 +44,12 @@ async function initSite() {
   // 🌸 Navbar
   const navEl = document.getElementById("navLinks");
   if (navbarData?.navbar?.links && navEl) {
+    const isQuotePage = window.location.pathname.includes("quote"); // Detect quote page
+
     navEl.innerHTML = navbarData.navbar.links
       .map(link => {
+        // Skip Quote button entirely on quote page
+        if (isQuotePage && link["data-open-quote"]) return "";
         const cls = link.class ? `class="${link.class}"` : "";
         if (link["data-open-quote"]) return `<a ${cls} data-open-quote>${link.text}</a>`;
         return `<a href="${link.href}" ${cls}>${link.text}</a>`;
