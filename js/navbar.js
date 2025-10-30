@@ -30,22 +30,6 @@ function setupMobileMenu() {
 }
 
 // ===========================
-// 💌 Quote Modal Trigger Setup
-// ===========================
-function setupQuoteTriggers() {
-  const overlay = document.getElementById("quoteOverlay");
-  if (!overlay) return;
-
-  // Any element with data-open-quote opens the modal
-  document.querySelectorAll("[data-open-quote]").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      overlay.classList.add("active");
-    });
-  });
-}
-
-// ===========================
 // 🌸 Initialize Site
 // ===========================
 async function initSite() {
@@ -63,19 +47,12 @@ async function initSite() {
     navEl.innerHTML = navbarData.navbar.links
       .map(link => {
         const cls = link.class ? `class="${link.class}"` : "";
-
-        // If link is a modal trigger, create a button-like element
-        if (link["data-open-quote"]) {
-          return `<a ${cls} data-open-quote>${link.text}</a>`;
-        }
-
-        // Otherwise normal navigation link
+        if (link["data-open-quote"]) return `<a ${cls} data-open-quote>${link.text}</a>`;
         return `<a href="${link.href}" ${cls}>${link.text}</a>`;
       })
       .join("");
 
     setupMobileMenu();
-    setupQuoteTriggers(); // ✅ enable modal from navbar
   }
 
   // 🌿 Services
