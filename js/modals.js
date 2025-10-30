@@ -107,12 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
     discordWebhook: "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9"
   });
 
-  // ✅ Navbar button + any element with data-open-quote opens the quote modal
-  document.querySelectorAll("[data-open-quote]").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.preventDefault();
-      if (quoteModal) quoteModal.classList.add("show");
-    });
-  });
+// ✅ Works even if navbar loads later
+document.addEventListener("click", (e) => {
+  const trigger = e.target.closest("[data-open-quote]");
+  if (!trigger) return;
+  e.preventDefault();
+  if (quoteModal) quoteModal.classList.add("show");
+});
+
 
 });
