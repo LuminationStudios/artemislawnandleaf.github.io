@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("json/prices.json")
       .then(res => res.json())
       .then(data => {
-        // Build pricing cards
         data.tiers.forEach(tier => {
           const card = document.createElement("div");
           card.className = "card";
@@ -81,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
           pricingContainer.appendChild(card);
         });
 
-        // Event delegation for dynamic buttons
         pricingContainer.addEventListener("click", e => {
           if (!e.target.classList.contains("details-btn")) return;
 
@@ -104,9 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Quote modal setup
-  initModal("quoteModal", {
+  const quoteModal = initModal("quoteModal", {
     googleScript: "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec",
     discordWebhook: "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9"
+  });
+
+  // ✅ Navbar button + any element with data-open-quote opens the quote modal
+  document.querySelectorAll("[data-open-quote]").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      if (quoteModal) quoteModal.classList.add("show");
+    });
   });
 
 });
