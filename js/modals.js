@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         pricingContainer.appendChild(card);
       });
-// <button class="quote-btn" data-service="${tier.name}">Request Quote</button> 
+
       // Pricing Details Modal
       pricingContainer.addEventListener("click", e => {
         if (e.target.classList.contains("details-btn")) {
