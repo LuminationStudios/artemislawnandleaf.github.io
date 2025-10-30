@@ -52,7 +52,7 @@
 =========================== */
 .hero-card .hero-quote-btn {
   margin-top: 18px;
-  display: block;
+  display: inline-block;
   width: 100%;
   text-align: center;
   padding: 14px 20px;
