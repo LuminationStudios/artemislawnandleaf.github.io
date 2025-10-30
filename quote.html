@@ -33,50 +33,33 @@
     </div>
   </header>
 
-  <main class="container" style="max-width: 800px; margin-top: 60px;">
+  <main style="display:flex; justify-content:center; margin-top:70px; padding: 20px;">
 
-    <section class="hero-card" style="padding: 40px;">
-      <h1 style="text-align:center;">Request a Quote</h1>
-      <p class="lead" style="text-align:center; margin-bottom: 32px;">
-        Tell me what you need, and I’ll get back to you ASAP!
-      </p>
+    <section class="quote-card">
+      <h1>Request a Quote</h1>
+      <p class="lead">Tell me what you need, and I’ll get back to you ASAP!</p>
 
-      <form id="quoteForm" style="display:flex; flex-direction:column; gap:18px;">
+      <form id="quoteForm">
 
-        <div>
-          <label><strong>Your Name</strong></label>
-          <input type="text" name="Name" required
-                 style="width:100%; padding:12px; border-radius:12px; border:1px solid #d7c7b9;">
-        </div>
+        <label><strong>Your Name</strong></label>
+        <input type="text" name="Name" required>
 
-        <div>
-          <label><strong>Contact (Phone or Email)</strong></label>
-          <input type="text" name="Contact" required
-                 style="width:100%; padding:12px; border-radius:12px; border:1px solid #d7c7b9;">
-        </div>
+        <label><strong>Contact (Phone or Email)</strong></label>
+        <input type="text" name="Contact" required>
 
-        <div>
-          <label><strong>Service Needed</strong></label>
-          <select name="Service" required
-                  style="width:100%; padding:12px; border-radius:12px; border:1px solid #d7c7b9;">
-            <option value="" disabled selected>Select a service...</option>
-            <option>Leaf Removal</option>
-            <option>Snow Removal</option>
-            <option>Leaf Seasonal Contract</option>
-            <option>Snow Seasonal Contract</option>
-          </select>
-        </div>
+        <label><strong>Service Needed</strong></label>
+        <select name="Service" required>
+          <option value="" disabled selected>Select a service...</option>
+          <option>Leaf Removal</option>
+          <option>Snow Removal</option>
+          <option>Leaf Seasonal Contract</option>
+          <option>Snow Seasonal Contract</option>
+        </select>
 
-        <div>
-          <label><strong>Additional Details</strong></label>
-          <textarea name="Details" rows="5"
-                    placeholder="Example: Approximate yard size, special request, preferred schedule, etc."
-                    style="width:100%; padding:12px; border-radius:12px; border:1px solid #d7c7b9;"></textarea>
-        </div>
+        <label><strong>Additional Details</strong></label>
+        <textarea name="Details" rows="5" placeholder="Yard size, preferred schedule, etc."></textarea>
 
-        <button type="submit" class="btn cta" style="margin-top:8px; align-self:center;">
-          Submit Request
-        </button>
+        <button type="submit" class="btn cta">Submit Request</button>
 
       </form>
     </section>
