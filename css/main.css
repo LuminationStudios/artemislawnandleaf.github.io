@@ -323,3 +323,41 @@ nav,
   transform: translateY(-3px);
   box-shadow: 0 12px 28px rgba(255, 190, 140, 0.45);
 }
+/* ===========================
+   📱 Mobile Adjustments
+=========================== */
+@media (max-width: 600px) {
+  .quote-card {
+    padding: 26px 20px;
+    border-radius: 20px;
+  }
+
+  .quote-card h1 {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+  }
+
+  #quoteForm input,
+  #quoteForm textarea,
+  #quoteForm select {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    border-radius: 14px;
+  }
+
+  #quoteForm button {
+    padding: 12px 22px;
+    font-size: 1rem;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .quote-card {
+    padding: 20px 16px;
+  }
+
+  .quote-card h1 {
+    font-size: 1.4rem;
+  }
+}
