@@ -48,6 +48,39 @@
 }
 
 /* ===========================
+   💬 Hero Contact Button
+=========================== */
+.hero-card .hero-quote-btn {
+  margin-top: 18px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffcf94, #f4a45f);
+  color: #4c3a2f;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 6px 16px rgba(255, 180, 120, 0.35);
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(4px);
+}
+
+.hero-card .hero-quote-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 14px rgba(255, 180, 100, 0.45),
+              0 8px 26px rgba(255, 165, 80, 0.3);
+  background: linear-gradient(135deg, #f9b75d, #fa7b3d);
+}
+
+.hero-card .hero-quote-btn:active {
+  transform: scale(0.98);
+}
+
+/* ===========================
    🌅 Hero Image Fix
 =========================== */
 .hero-img {
