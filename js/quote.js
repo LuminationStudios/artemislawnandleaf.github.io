@@ -1,7 +1,5 @@
-
-// Replace with your deployed Google Apps Script Web App URL
-const scriptURL = "https://script.google.com/macros/s/AKfycbxVkZHbsPC48yV0G6V1nLGRTz-mVe48f-wL2jZSs1PfylkeybJrOLza8TFt1PpfDpY/exec";
-
+// Discord webhook URL (unsafe if public)
+const discordWebhookURL = "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("quoteForm");
@@ -9,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Collect form data
     const data = {
       Name: form.Name.value,
       Contact: form.Contact.value,
@@ -17,17 +14,28 @@ document.addEventListener("DOMContentLoaded", () => {
       Details: form.Details.value
     };
 
-    // Remove previous messages
+    // Remove previous message
     const existingMsg = document.getElementById("formMsg");
     if (existingMsg) existingMsg.remove();
 
     try {
-      const res = await fetch(scriptURL, {
+      // Send to Discord webhook
+      const discordPayload = {
+        embeds: [{
+          title: "New Quote Request 📬",
+          fields: [
+            { name: "Name", value: data.Name },
+            { name: "Contact", value: data.Contact },
+            { name: "Service", value: data.Service },
+            { name: "Details", value: data.Details || "No extra details" }
+          ]
+        }]
+      };
+
+      const res = await fetch(discordWebhookURL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(discordPayload)
       });
 
       const msg = document.createElement("p");
@@ -37,23 +45,20 @@ document.addEventListener("DOMContentLoaded", () => {
       msg.style.textAlign = "center";
 
       if (res.ok) {
-        // Success
-        msg.textContent = "✅ Thanks! Your quote request has been sent.";
+        msg.textContent = "✅ Quote sent successfully to Discord!";
         msg.style.color = "#4CAF50";
         form.reset();
       } else {
-        // Error from server
-        msg.textContent = "⚠️ There was an issue — please contact directly.";
+        msg.textContent = "⚠️ Failed to send to Discord.";
         msg.style.color = "#E53935";
       }
 
       form.appendChild(msg);
 
     } catch (error) {
-      // Network / CORS error
       const msg = document.createElement("p");
       msg.id = "formMsg";
-      msg.textContent = "⚠️ Network error — please try again or text me.";
+      msg.textContent = "⚠️ Network error — could not send.";
       msg.style.color = "#E53935";
       msg.style.fontWeight = "600";
       msg.style.marginTop = "16px";
