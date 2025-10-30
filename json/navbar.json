@@ -3,8 +3,7 @@
     "links": [
       { "text": "Home", "href": "https://artielawnandleaf.com", "class": "btn" },
       { "text": "Prices", "href": "prices.html", "class": "btn" },
-      { "text": "Calendar", "href": "calendar.html", "class": "btn" },
-      { "text": "Request Quote", "data-open-quote": true, "class": "cta" }
+      { "text": "Calendar", "href": "calendar.html", "class": "btn" }
     ]
   }
 }
