@@ -1,9 +1,6 @@
-// modals.js
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ------------------------------
-  // Helper: Initialize a modal
-  // ------------------------------
+  // Generic modal initializer
   function initModal(modalId, options = {}) {
     const modal = document.getElementById(modalId);
     if (!modal) return;
@@ -12,20 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = modal.querySelector("form");
     const thankYou = modal.querySelector("#thankYou");
 
-    // Close modal on X
+    // Close modal
     if (closeBtn) closeBtn.addEventListener("click", () => modal.classList.remove("show"));
+    modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("show"); });
 
-    // Close modal on click outside content
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.classList.remove("show");
-    });
-
-    // Form submission if a form exists
+    // Form submission
     if (form) {
       const GOOGLE_SCRIPT_URL = options.googleScript || "";
       const DISCORD_WEBHOOK = options.discordWebhook || "";
 
-      form.addEventListener("submit", async (e) => {
+      form.addEventListener("submit", async e => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form).entries());
 
@@ -68,9 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return modal;
   }
 
-  // ------------------------------
-  // Pricing Modal
-  // ------------------------------
+  // Pricing modal setup
   const pricingContainer = document.querySelector(".pricing-cards");
   const priceModal = initModal("price-modal");
 
@@ -81,17 +72,16 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("json/prices.json")
       .then(res => res.json())
       .then(data => {
+        // Build pricing cards
         data.tiers.forEach(tier => {
           const card = document.createElement("div");
           card.className = "card";
-          card.innerHTML = `
-            <h3>${tier.name}</h3>
-            <button class="details-btn" data-tier="${tier.id}">View Details</button>
-          `;
+          card.innerHTML = `<h3>${tier.name}</h3>
+            <button class="details-btn" data-tier="${tier.id}">View Details</button>`;
           pricingContainer.appendChild(card);
         });
 
-        // Event delegation for dynamically created buttons
+        // Event delegation for dynamic buttons
         pricingContainer.addEventListener("click", e => {
           if (!e.target.classList.contains("details-btn")) return;
 
@@ -113,9 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error("Error loading pricing JSON:", err));
   }
 
-  // ------------------------------
-  // Quote Modal
-  // ------------------------------
+  // Quote modal setup
   initModal("quoteModal", {
     googleScript: "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec",
     discordWebhook: "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9"
