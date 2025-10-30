@@ -3,7 +3,7 @@
     {
       "id": "leaf",
       "name": "Leaf Removal",
-      "price": "Varies",
+      "price": "120",
       "details": [
         {
           "label": "Small Lawn: Light-to-moderate leaf coverage",
@@ -25,7 +25,7 @@
     {
       "id": "snow",
       "name": "Snow Removal",
-      "price": "Varies",
+      "price": "60",
       "details": [
         {
           "label": "Driveway",
@@ -52,7 +52,7 @@
     {
       "id": "snow_seasonal",
       "name": "Seasonal Contracts",
-      "price": "Varies",
+      "price": "150",
       "details": [
         {
           "label": "Fall Leaf Removal Contract",
