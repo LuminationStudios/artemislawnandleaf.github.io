@@ -60,22 +60,74 @@ document.addEventListener("DOMContentLoaded", () => {
     return modal;
   }
 
+  // ==========================
+  // Quote Modal
+  // ==========================
   const quoteModal = initModal("quoteModal", {
     googleScript: "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec",
     discordWebhook: "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9"
   });
 
-  // Open from any button with `data-open-quote`
+  // ==========================
+  // Open Quote Modal (any trigger)
+  // ==========================
   document.addEventListener("click", (e) => {
     const trigger = e.target.closest("[data-open-quote], .quote-btn");
     if (!trigger) return;
     e.preventDefault();
 
-    // Auto-fill service if available
     const serviceInput = quoteModal.querySelector('[name="service"]');
     if (serviceInput && trigger.dataset.service) serviceInput.value = trigger.dataset.service;
 
     quoteModal.classList.add("show");
   });
+
+  // ==========================
+  // Pricing Cards + Details Modal
+  // ==========================
+  const pricingContainer = document.querySelector(".pricing-cards");
+  const priceModal = initModal("price-modal");
+
+  if (pricingContainer && priceModal) {
+    const modalTitle = priceModal.querySelector("#modal-title");
+    const modalDetails = priceModal.querySelector("#modal-details");
+
+    // Load pricing JSON
+    fetch("json/prices.json")
+      .then(res => res.json())
+      .then(data => {
+        data.tiers.forEach(tier => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <h3>${tier.name}</h3>
+            <p>${tier.description || ""}</p>
+            <button class="details-btn" data-tier="${tier.id}">View Details</button>
+            <button class="quote-btn" data-service="${tier.name}">Request Quote</button>
+          `;
+          pricingContainer.appendChild(card);
+        });
+
+        // Pricing Details Button
+        pricingContainer.addEventListener("click", e => {
+          if (!e.target.classList.contains("details-btn")) return;
+
+          const tier = data.tiers.find(t => t.id === e.target.dataset.tier);
+          if (!tier) return;
+
+          modalTitle.textContent = tier.name;
+          modalDetails.innerHTML = tier.details.map(item => `
+            <li>
+              <strong>${item.label}</strong><br>
+              <strong>Price:</strong> $${item.price}<br>
+              ${item.notes ? `<em>${item.notes}</em>` : ""}
+            </li>
+          `).join("");
+
+          priceModal.classList.add("show");
+        });
+      })
+      .catch(err => console.error("Error loading pricing JSON:", err));
+  }
 
 });
