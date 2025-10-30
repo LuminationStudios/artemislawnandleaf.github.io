@@ -32,13 +32,13 @@
 
 .hero-card h1 {
   font-size: 2.2rem;
-  margin: 0 0 12px;
+  margin-bottom: 12px;
 }
 
 .hero-card p.lead {
   font-size: 1.1rem;
   color: #5b4c45;
-  margin: 0 0 16px;
+  margin-bottom: 16px;
 }
 
 .hero-card h3 {
@@ -48,41 +48,7 @@
 }
 
 /* ===========================
-   💬 Hero Contact Button
-=========================== */
-.hero-card .hero-quote-btn {
-  margin-top: 18px;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  text-decoration: none;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #ffcf94, #f4a45f);
-  color: #4c3a2f;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s ease;
-  box-shadow: 0 6px 16px rgba(255, 180, 120, 0.35);
-  letter-spacing: 0.3px;
-  backdrop-filter: blur(4px);
-}
-
-.hero-card .hero-quote-btn:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 14px rgba(255, 180, 100, 0.45),
-              0 8px 26px rgba(255, 165, 80, 0.3);
-  background: linear-gradient(135deg, #f9b75d, #fa7b3d);
-}
-
-.hero-card .hero-quote-btn:active {
-  transform: scale(0.98);
-}
-
-/* ===========================
-   🌅 Hero Image Fix
+   🌅 Hero Image
 =========================== */
 .hero-img {
   width: 100%;
@@ -215,13 +181,13 @@
 }
 
 .card h2 {
-  margin: 0 0 12px;
+  margin-bottom: 12px;
   font-weight: 700;
   color: var(--muted);
 }
 
 .card p {
-  margin: 0 0 12px;
+  margin-bottom: 12px;
   color: #5b4c45;
   line-height: 1.4;
 }
@@ -241,14 +207,8 @@
   padding-top: 8px;
 }
 
-.tier {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: #5b4c45;
-}
-
 /* ===========================
-   🧭 Navbar Always Visible Fix
+   🧭 Navbar Always Visible
 =========================== */
 header,
 .header,
@@ -280,14 +240,11 @@ nav,
 
   .hero-img {
     width: 100%;
-    height: auto;
     max-height: 260px;
-    object-fit: cover;
     border-radius: 20px;
   }
 }
 
-/* Even smaller screens (really small phones) */
 @media (max-width: 480px) {
   .hero {
     padding: 22px 16px;
