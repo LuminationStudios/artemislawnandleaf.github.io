@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const res = await fetch(scriptURL, {
         method: "POST",
+        headers: { "Content-Type": "application/json" }, // ✅ THIS WAS MISSING
         body: JSON.stringify(data)
       });
 
