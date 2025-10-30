@@ -28,9 +28,9 @@
       "price": "30-120",
       "details": [
         {
-          "label": "Driveway",
-          "price": "60",
-          "notes": "Per visit, up to 6 inches"
+          "label": "Doorway / Porch",
+          "price": "30",
+          "notes": "Often included with driveway or sidewalk"
         },
         {
           "label": "Sidewalk",
@@ -38,9 +38,9 @@
           "notes": "Per visit, up to 6 inches"
         },
         {
-          "label": "Doorway / Porch",
-          "price": "30",
-          "notes": "Often included with driveway or sidewalk"
+          "label": "Driveway",
+          "price": "60",
+          "notes": "Per visit, up to 6 inches"
         },
         {
           "label": "All Areas (Driveway + Sidewalk + Porch)",
@@ -56,7 +56,7 @@
       "details": [
         {
           "label": "Fall Leaf Removal Contract",
-          "price": "175-450",
+          "price": "150-450",
           "notes": "Weekly visits; price varies by yard size + tree coverage"
         },
         {
