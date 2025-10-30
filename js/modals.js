@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Form submission
     if (form) {
-      const GOOGLE_SCRIPT_URL = options.googleScript || "";
-      const DISCORD_WEBHOOK = options.discordWebhook || "";
+      const GOOGLE_SCRIPT_URL = options.googleScript || "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec";
+      const DISCORD_WEBHOOK = options.discordWebhook || "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9";
 
       form.addEventListener("submit", async e => {
         e.preventDefault();
@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const pricingContainer = document.querySelector(".pricing-cards");
   const priceModal = initModal("price-modal");
   const quoteModal = initModal("quoteModal", {
-    googleScript: "https://script.google.com/macros/s/YOUR_SCRIPT/exec",
-    discordWebhook: "https://discord.com/api/webhooks/YOUR_WEBHOOK"
+    googleScript: "https://script.google.com/macros/s/AKfycbwD-Eo5w-kMu1YRXw6-l9ALCliOEPzKBe5G4hxnQ_X3lVXqBbr49SwZTD5oIQi8Pa6kig/exec",
+    discordWebhook: "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9"
   });
 
   fetch("json/prices.json")
