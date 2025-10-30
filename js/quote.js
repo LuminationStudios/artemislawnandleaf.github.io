@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbxPu-hx1SV_14NLNiujx37TSXFlzV8xtgTOt0e3ZxywZJBMTS9Qn7MA9KRLv8ZBUdJy/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbxVkZHbsPC48yV0G6V1nLGRTz-mVe48f-wL2jZSs1PfylkeybJrOLza8TFt1PpfDpY/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("quoteForm");
@@ -16,12 +16,22 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const res = await fetch(scriptURL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" }, // ✅ THIS WAS MISSING
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(data)
       });
 
       if (res.ok) {
-        alert("Thanks! Your quote request has been sent ✅");
+        // ✅ Show success message
+        const successMsg = document.createElement("p");
+        successMsg.textContent = "✅ Thanks! Your quote request has been sent.";
+        successMsg.style.color = "#4CAF50";
+        successMsg.style.fontWeight = "600";
+        successMsg.style.marginTop = "16px";
+        form.appendChild(successMsg);
+
+        // Reset form fields
         form.reset();
       } else {
         alert("There was an issue — feel free to contact me directly 😓");
