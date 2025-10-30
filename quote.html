@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Request a Quote — Artemis Lawn & Leaf</title>
+  <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- JS -->
+  <script src="js/navbar.js" defer></script>
+  <script src="js/banner.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner container">
+      <div class="brand">
+        <div class="logo">
+          <img src="logo/leaficon.svg" alt="Logo" width="36" height="36">
+        </div>
+        <strong>Artemis Lawn & Leaf</strong>
+      </div>
+      <nav class="nav-links" id="navLinks"></nav>
+      <div class="hamburger" id="hamburger">&#9776;</div>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 800px; margin-top: 60px;">
+
+    <section class="hero-card" style="padding: 40px;">
+      <h1 style="text-align:center;">Request a Quote</h1>
+      <p class="lead" style="text-align:center; margin-bottom: 32px;">
+        Tell me what you need, and I’ll get back to you ASAP!
+      </p>
+
+      <form action="https://formspree.io/f/mleqwkye" method="POST" style="display:flex; flex-direction:column; gap:18px;">
+
+        <div>
+          <label><strong>Your Name</strong></label>
+          <input type="text" name="Name" required
+                 style="width:100%; padding:12px; border-radius:12px; border:1px solid #d7c7b9;">
+        </div>
+
+        <div>
+          <label><strong>Contact (Phone or Email)</strong></label>
+          <input type="text" name="Contact" required
+                 style="width:100%; padding:12px; border-radius:12px; border:1px solid #d7c7b9;">
+        </div>
+
+        <div>
+          <label><strong>Service Needed</strong></label>
+          <select name="Service" required
+                  style="width:100%; padding:12px; border-radius:12px; border:1px solid #d7c7b9;">
+            <option value="" disabled selected>Select a service...</option>
+            <option>Fall Leaf Cleanup</option>
+            <option>Lawn Mowing</option>
+            <option>Gutter Cleaning</option>
+            <option>Tree/Branch Pickup</option>
+            <option>Snow Removal</option>
+            <option>General Yard Cleanup</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label><strong>Additional Details</strong></label>
+          <textarea name="Details" rows="5"
+                    placeholder="Example: Approximate yard size, special request, preferred schedule, etc."
+                    style="width:100%; padding:12px; border-radius:12px; border:1px solid #d7c7b9;"></textarea>
+        </div>
+
+        <button type="submit" class="btn cta" style="margin-top:8px; align-self:center;">
+          Submit Request
+        </button>
+
+      </form>
+    </section>
+
+  </main>
+
+  <footer></footer>
+
+</body>
+</html>
