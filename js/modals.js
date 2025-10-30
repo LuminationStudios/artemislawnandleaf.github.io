@@ -75,27 +75,33 @@ document.addEventListener("DOMContentLoaded", () => {
         data.tiers.forEach(tier => {
           const card = document.createElement("div");
           card.className = "card";
-          card.innerHTML = `<h3>${tier.name}</h3>
-            <button class="details-btn" data-tier="${tier.id}">View Details</button>`;
+
+          // ✅ Added Request Quote button with auto-fill service name
+          card.innerHTML = `
+            <h3>${tier.name}</h3>
+            <button class="details-btn" data-tier="${tier.id}">View Details</button>
+            <button class="quote-btn" data-service="${tier.name}">Request Quote</button>
+          `;
+
           pricingContainer.appendChild(card);
         });
 
         pricingContainer.addEventListener("click", e => {
-          if (!e.target.classList.contains("details-btn")) return;
+          if (e.target.classList.contains("details-btn")) {
+            const tier = data.tiers.find(t => t.id === e.target.dataset.tier);
+            if (!tier) return;
 
-          const tier = data.tiers.find(t => t.id === e.target.dataset.tier);
-          if (!tier) return;
+            modalTitle.textContent = tier.name;
+            modalDetails.innerHTML = tier.details.map(item => `
+              <li>
+                <strong>${item.label}</strong><br>
+                <strong>Price:</strong> $${item.price}<br>
+                ${item.notes ? `<em>${item.notes}</em>` : ""}
+              </li>
+            `).join("");
 
-          modalTitle.textContent = tier.name;
-          modalDetails.innerHTML = tier.details.map(item => `
-            <li>
-              <strong>${item.label}</strong><br>
-              <strong>Price:</strong> $${item.price}<br>
-              ${item.notes ? `<em>${item.notes}</em>` : ""}
-            </li>
-          `).join("");
-
-          priceModal.classList.add("show");
+            priceModal.classList.add("show");
+          }
         });
       })
       .catch(err => console.error("Error loading pricing JSON:", err));
@@ -107,13 +113,17 @@ document.addEventListener("DOMContentLoaded", () => {
     discordWebhook: "https://discord.com/api/webhooks/1425416157275492456/sOL9u2X6Gj61gFuAPaGXMcRTNhIMiiddF21StQ41530JjDivKmMAXFgSqsA4K6KAVjh9"
   });
 
-// ✅ Works even if navbar loads later
-document.addEventListener("click", (e) => {
-  const trigger = e.target.closest("[data-open-quote]");
-  if (!trigger) return;
-  e.preventDefault();
-  if (quoteModal) quoteModal.classList.add("show");
-});
+  // ✅ Open Quote Modal from service/pricing cards + auto-fill service field
+  document.addEventListener("click", e => {
+    const btn = e.target.closest(".quote-btn");
+    if (!btn) return;
 
+    const serviceName = btn.dataset.service;
+    const serviceField = quoteModal.querySelector("[name='service']");
+
+    if (serviceField) serviceField.value = serviceName;
+
+    quoteModal.classList.add("show");
+  });
 
 });
