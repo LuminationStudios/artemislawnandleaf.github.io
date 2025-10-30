@@ -46,13 +46,15 @@
     </div>
     <img src="img/artielawnandleafexample.png" alt="Leaf Cleanup Illustration" class="hero-img">
   </section>
-  
-    <!-- 💸 Pricing Section -->
+
+  <!-- 💸 Pricing Section -->
   <section id="services" class="container">
     <h2>Our Seasonal Packages</h2>
+    <!-- Dynamic pricing cards will be injected here -->
     <div class="pricing-cards"></div>
   </section>
 
+  <!-- Pricing Details Modal -->
   <div id="price-modal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -61,38 +63,38 @@
     </div>
   </div>
 
-    <!-- 💌 Quote Modal -->
-<div id="quoteModal" class="modal">
-  <div class="modal">
-    <span class="close">&times;</span>
-    <h2>Request a Quote</h2>
+  <!-- 💌 Quote Modal -->
+  <div id="quoteModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Request a Quote</h2>
 
-    <form id="quoteForm">
-      <label for="name">Name:</label>
-      <input type="text" name="name" id="name" required>
+      <form id="quoteForm">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
 
-      <label for="contact">Contact Info (Phone or Email):</label>
-      <input type="text" name="contact" id="contact" required>
+        <label for="contact">Contact Info (Phone or Email):</label>
+        <input type="text" name="contact" id="contact" required>
 
-      <label for="service">Service:</label>
-      <select name="service" id="service" required>
-        <option value="">Select a Service</option>
-        <option>Leaf Cleanup</option>
-        <option>Snow Removal</option>
-        <option>Yard Cleanup</option>
-      </select>
+        <label for="service">Service:</label>
+        <select name="service" id="service" required>
+          <option value="">Select a Service</option>
+          <option>Leaf Cleanup</option>
+          <option>Snow Removal</option>
+          <option>Yard Cleanup</option>
+        </select>
 
-      <label for="message">Additional Details:</label>
-      <textarea name="message" id="message" rows="3"></textarea>
+        <label for="message">Additional Details:</label>
+        <textarea name="message" id="message" rows="3"></textarea>
 
-      <button type="submit" class="submit">Submit Quote</button>
-    </form>
+        <button type="submit" class="submit">Submit Quote</button>
+      </form>
 
-    <div id="thankYou" style="display:none; text-align:center; padding:1em;">
-      <h3>✅ Thank you! We’ll be in touch soon.</h3>
+      <div id="thankYou" style="display:none; text-align:center; padding:1em;">
+        <h3>✅ Thank you! We’ll be in touch soon.</h3>
+      </div>
     </div>
   </div>
-</div>
 
   <!-- 🌼 Footer -->
   <footer></footer>
