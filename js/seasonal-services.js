@@ -13,24 +13,6 @@ async function loadJSON(path) {
 }
 
 // ===========================
-// 🌿 Utility: parse MM-DD to Date
-// ===========================
-function parseMonthDay(str) {
-  const [m, d] = str.split('-').map(Number);
-  const now = new Date();
-  return new Date(now.getFullYear(), m - 1, d);
-}
-
-// ===========================
-// 🌿 Check if today is in range
-// ===========================
-function isDateInRange(today, start, end) {
-  if (start <= end) return today >= start && today <= end;
-  // crosses year boundary
-  return today >= start || today <= end;
-}
-
-// ===========================
 // 🌿 Load Seasonal Services
 // ===========================
 async function loadServices() {
@@ -44,9 +26,19 @@ async function loadServices() {
   let services = [];
 
   for (const season of data.seasons) {
-    const start = parseMonthDay(season.start);
-    const end = parseMonthDay(season.end);
-    if (isDateInRange(today, start, end)) {
+    let start = season.start.split("-").map(Number);
+    let end = season.end.split("-").map(Number);
+
+    let startDate = new Date(today.getFullYear(), start[0] - 1, start[1]);
+    let endDate = new Date(today.getFullYear(), end[0] - 1, end[1]);
+
+    // Handle seasons crossing year boundary
+    if (endDate < startDate) {
+      if (today < startDate) startDate.setFullYear(today.getFullYear() - 1);
+      else endDate.setFullYear(today.getFullYear() + 1);
+    }
+
+    if (today >= startDate && today <= endDate) {
       services = season.services || [];
       break;
     }
