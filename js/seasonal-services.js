@@ -10,21 +10,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const todayNum = (new Date().getMonth() + 1) * 100 + new Date().getDate();
     let services = [];
 
-    // Loop through seasons to find the matching one
     for (const season of data.seasons) {
       const startNum = Number(season.start.replace("-", ""));
       const endNum = Number(season.end.replace("-", ""));
-      
       const inRange = (startNum <= endNum && todayNum >= startNum && todayNum <= endNum) ||
                       (startNum > endNum && (todayNum >= startNum || todayNum <= endNum));
-      
       if (inRange) {
         services = season.services || [];
         break;
       }
     }
 
-    // Render the services
     grid.innerHTML = services
       .map(s => `<div class="service"><h3>${s.title}</h3><p>${s.desc}</p></div>`)
       .join("");
