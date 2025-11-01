@@ -8,17 +8,16 @@
         "css/winter/winter-modal.css",
         "css/winter/winter-calendar.css"
       ],
-      "start": "11-01",
+      "start": "12-01",
       "end": "02-27"
     },
     {
       "name": "spring",
       "cssFiles": [
-        "css/spring-base.css",
-        "css/spring-glow.css",
-        "css/spring-extra.css"
+        "css/spring/spring-main.css",
+        "css/spring/spring-theme.css"
       ],
-      "start": "02-28",
+      "start": "11-01",
       "end": "05-30"
     },
     {
