@@ -17,10 +17,10 @@
       "price": "30-80",
       "season": { "start": "09/02", "end": "03/01" },
       "details": [
-        { "label": "Doorway / Porch", "price": "30", "notes": "" },
-        { "label": "Sidewalk", "price": "30", "notes": "" },
-        { "label": "Driveway", "price": "80", "notes": "" },
-        { "label": "All Areas", "price": "120", "notes": "" }
+        { "label": "Doorway / Porch", "price": "30", "notes": "Often included with driveway/sidewalk" },
+        { "label": "Sidewalk", "price": "30", "notes": "Per visit, up to 6 inches" },
+        { "label": "Driveway", "price": "80", "notes": "Per visit, up to 6 inches" },
+        { "label": "All Areas", "price": "120", "notes": "Per visit" }
       ]
     },
     {
