@@ -30,14 +30,33 @@ function setupMobileMenu() {
 }
 
 // ===========================
+// 🌿 Load Seasonal Services
+// ===========================
+async function loadServices() {
+  const servicesGrid = document.getElementById("services-grid");
+  if (!servicesGrid) return;
+
+  const servicesData = await loadJSON("json/seasonal-services.json");
+  if (!Array.isArray(servicesData?.services)) return;
+
+  servicesGrid.innerHTML = servicesData.services
+    .map(service => `
+      <div class="service">
+        <h3>${service.title}</h3>
+        <p>${service.desc}</p>
+      </div>
+    `)
+    .join("");
+}
+
+// ===========================
 // 🌸 Initialize Site
 // ===========================
 async function initSite() {
   console.log("🌿 Initializing site...");
 
-  const [navbarData, servicesData, footerData] = await Promise.all([
+  const [navbarData, footerData] = await Promise.all([
     loadJSON("json/navbar.json"),
-    loadJSON("json/services.json"),
     loadJSON("json/footer.json")
   ]);
 
@@ -48,7 +67,6 @@ async function initSite() {
 
     navEl.innerHTML = navbarData.navbar.links
       .map(link => {
-        // Skip Quote button entirely on quote page
         if (isQuotePage && link["data-open-quote"]) return "";
         const cls = link.class ? `class="${link.class}"` : "";
         if (link["data-open-quote"]) return `<a ${cls} data-open-quote>${link.text}</a>`;
@@ -60,17 +78,7 @@ async function initSite() {
   }
 
   // 🌿 Services
-  const servicesGrid = document.getElementById("services-grid");
-  if (Array.isArray(servicesData?.services) && servicesGrid) {
-    servicesGrid.innerHTML = servicesData.services
-      .map(service => `
-        <div class="service">
-          <h3>${service.title}</h3>
-          <p>${service.desc}</p>
-        </div>
-      `)
-      .join("");
-  }
+  await loadServices();
 
   // 🌼 Footer
   const footerEl = document.querySelector("footer");
