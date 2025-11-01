@@ -1,13 +1,10 @@
 import prices from './prices.json';
 
-// Get today's day-of-year
-const today = new Date();
-const startOfYear = new Date(today.getFullYear(), 0, 0);
-const diff = today - startOfYear;
-const oneDay = 1000 * 60 * 60 * 24;
-const dayOfYear = Math.floor(diff / oneDay);
+// Define the start date of fall/winter
+const FALL_WINTER_START = "09/02"; // MM/DD
+const SPRING_SUMMER_START = "03/02"; // MM/DD
 
-// Convert MM/DD string to day-of-year
+// Convert MM/DD to day-of-year
 function mmddToDayOfYear(mmdd) {
   const [month, day] = mmdd.split('/').map(Number);
   const date = new Date(new Date().getFullYear(), month - 1, day);
@@ -17,28 +14,25 @@ function mmddToDayOfYear(mmdd) {
   return Math.floor(diff / oneDay);
 }
 
-// Check if today is in season
-function isInSeason(season) {
-  if (!season || !season.start || !season.end) return true;
+const today = new Date();
+const startFallWinter = mmddToDayOfYear(FALL_WINTER_START);
+const startSpringSummer = mmddToDayOfYear(SPRING_SUMMER_START);
+const dayOfYear = mmddToDayOfYear(`${today.getMonth() + 1}/${today.getDate()}`);
 
-  const startDay = mmddToDayOfYear(season.start);
-  const endDay = mmddToDayOfYear(season.end);
-
-  if (startDay <= endDay) {
-    // Season within same year
-    return dayOfYear >= startDay && dayOfYear <= endDay;
-  } else {
-    // Season wraps over year-end
-    return dayOfYear >= startDay || dayOfYear <= endDay;
-  }
+// Determine current season
+let currentSeason;
+if (dayOfYear >= startFallWinter || dayOfYear < startSpringSummer) {
+  currentSeason = "fallWinter";
+} else {
+  currentSeason = "springSummer";
 }
 
 // Filter active tiers
 function getActiveTiers() {
-  return prices.tiers.filter(tier => isInSeason(tier.season));
+  return prices.tiers.filter(tier => tier.season === currentSeason);
 }
 
-// Render tiers in the page
+// Render tiers on page
 function renderTiers(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
