@@ -1,7 +1,7 @@
 // seasonal.js
 
 async function loadSeasonCSS() {
-    const res = await fetch('seasons.json'); // your external JSON file
+    const res = await fetch('json/seasonal-css.json'); // external JSON
     const data = await res.json();
     const today = new Date();
 
