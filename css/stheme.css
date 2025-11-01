@@ -1,0 +1,93 @@
+:root {
+  --accent-1: #ffb88c;
+  --accent-2: #ffe29f;
+  --card: rgba(35, 28, 24, 0.8);
+  --glass: rgba(40, 32, 28, 0.6);
+  --muted: #f3e1c4;
+  --radius: 24px;
+  --glow: 0 0 18px rgba(255, 190, 140, 0.4);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top right, #2b1d16 0%, #3a2a20 40%, #1a120e 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--muted);
+}
+
+header {
+  background: rgba(30, 24, 20, 0.75);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 200, 150, 0.2);
+  box-shadow: 0 6px 20px rgba(255, 180, 120, 0.1);
+}
+
+.nav-links a { color: var(--muted); }
+.nav-links a:hover {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #3a2519;
+  box-shadow: 0 0 10px rgba(255, 200, 150, 0.6);
+  transform: translateY(-1px);
+}
+
+.hero, #services, #pricing, .quote-card {
+  background: linear-gradient(180deg, rgba(40, 32, 28, 0.85), rgba(28, 22, 18, 0.8));
+  box-shadow: 0 8px 28px rgba(255, 180, 120, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.card, .service {
+  background: linear-gradient(180deg, rgba(50, 40, 32, 0.8), rgba(28, 22, 18, 0.75));
+  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
+  color: var(--muted);
+}
+
+.service:hover, .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(255, 200, 150, 0.4);
+}
+
+h1, h2, h3 {
+  color: var(--muted);
+  text-shadow: 0 0 10px rgba(255, 180, 120, 0.25);
+}
+
+p, .lead { color: #d5c3a8; }
+
+.btn {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #3b251a;
+  box-shadow: 0 0 14px rgba(255, 200, 150, 0.4);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px rgba(255, 220, 170, 0.6);
+}
+
+footer {
+  background: rgba(30, 24, 20, 0.8);
+  border-top: 1px solid rgba(255, 200, 150, 0.2);
+  box-shadow: 0 -6px 16px rgba(255, 180, 120, 0.15);
+  color: var(--muted);
+}
+
+.banner {
+  background: rgba(40, 30, 24, 0.9);
+  color: var(--muted);
+  box-shadow: var(--glow);
+  border: 1px solid rgba(255, 190, 140, 0.25);
+}
+
+.contact {
+  background: linear-gradient(180deg, #3a2a20, #2b1d16);
+  box-shadow: 0 0 20px rgba(255, 200, 150, 0.15);
+  color: var(--muted);
+}
+
+.contact .avatar {
+  background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+  color: #3b2419;
+}
