@@ -4,7 +4,7 @@
       "id": "leaf",
       "name": "Leaf Removal",
       "price": "40-850",
-      "season": { "start": "09/02", "end": "03/01" },
+      "season": { "start": "09/02", "end": "11/30" },
       "details": [
         { "label": "Small Lawn", "price": "40-80", "notes": "1–2 hours" },
         { "label": "Medium Lawn", "price": "100-300", "notes": "2–3 hours" },
@@ -15,12 +15,22 @@
       "id": "snow",
       "name": "Snow Removal",
       "price": "30-80",
-      "season": { "start": "09/02", "end": "03/01" },
+      "season": { "start": "12/01", "end": "03/31" },
       "details": [
         { "label": "Doorway / Porch", "price": "30", "notes": "Often included with driveway/sidewalk" },
         { "label": "Sidewalk", "price": "30", "notes": "Per visit, up to 6 inches" },
         { "label": "Driveway", "price": "80", "notes": "Per visit, up to 6 inches" },
         { "label": "All Areas", "price": "120", "notes": "Per visit" }
+      ]
+    },
+    {
+      "id": "seasonal",
+      "name": "Seasonal Contracts",
+      "price": "150-450",
+      "season": { "start": "09/02", "end": "03/31" },
+      "details": [
+        { "label": "Fall Leaf Removal Contract", "price": "40-850", "notes": "Weekly visits; price varies by yard size & tree coverage" },
+        { "label": "Winter Snow Removal Contract", "price": "30-80", "notes": "Weekly or daily driveway, sidewalk, and porch clearing" }
       ]
     },
     {
