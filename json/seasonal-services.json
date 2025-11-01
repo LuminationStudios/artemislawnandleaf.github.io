@@ -2,7 +2,7 @@
   "seasons": [
     {
       "name": "fallWinter",
-      "start": "11-01",
+      "start": "09-02",
       "end": "03-01",
       "services": [
         { "title": "Full Lawn Leaf Removal", "desc": "Let’s keep your yard feeling cozy and clean! I’ll carefully remove fallen leaves so your outdoor space stays tidy, inviting, and ready to enjoy." },
@@ -13,7 +13,7 @@
     {
       "name": "springSummer",
       "start": "03-02",
-      "end": "10-31",
+      "end": "09-01",
       "services": [
         { "title": "Lawn Mowing", "desc": "Keep your lawn neat and green." },
         { "title": "Garden Care", "desc": "Weed, trim, and maintain your garden." }
