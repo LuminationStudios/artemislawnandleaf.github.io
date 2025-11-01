@@ -1,7 +1,7 @@
 {
   "banners": [
     {
-      "text": "❄️ Snow Season is coming! Book your snow removal early! 15% Discount for new Customers!",
+      "text": "❄️ Snow Season is coming! Book your snow removal early!",
       "background": "linear-gradient(90deg, #aab5ee, #bed9fd)",
       "startDate": "2025-10-01",
       "endDate": "2026-02-28"
