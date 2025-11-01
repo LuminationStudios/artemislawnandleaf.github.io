@@ -1,38 +1,32 @@
-// ===========================
-// 🌟 Load JSON with cache-busting
-// ===========================
-async function loadJSON(path) {
-  try {
-    const res = await fetch(`./${path}?v=${Date.now()}`);
-    if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
-    return await res.json();
-  } catch (err) {
-    console.error(`Error loading ${path}:`, err);
-    return null;
-  }
+// seasonal.js
+
+async function loadSeasonCSS() {
+    const res = await fetch('seasons.json'); // your external JSON file
+    const data = await res.json();
+    const today = new Date();
+
+    function parseMD(str) {
+        const [m, d] = str.split('-').map(Number);
+        return new Date(today.getFullYear(), m - 1, d);
+    }
+
+    function inRange(today, start, end) {
+        return start <= end ? today >= start && today <= end : today >= start || today <= end;
+    }
+
+    for (const season of data.seasons) {
+        const start = parseMD(season.start);
+        const end = parseMD(season.end);
+        if (inRange(today, start, end)) {
+            season.cssFiles.forEach(file => {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = file;
+                document.head.appendChild(link);
+            });
+            break;
+        }
+    }
 }
 
-// ===========================
-// 🌿 Load Seasonal Services
-// ===========================
-async function loadServices() {
-  const grid = document.getElementById("services-grid");
-  if (!grid) return;
-
-  const data = await loadJSON("json/seasonal-services.json");
-  if (!data) return;
-
-  // Determine season
-  const month = new Date().getMonth() + 1;
-  const season = (month >= 9 || month <= 2) ? "fallWinter" : "springSummer";
-  const services = data[season]?.services || [];
-
-  grid.innerHTML = services
-    .map(s => `<div class="service"><h3>${s.title}</h3><p>${s.desc}</p></div>`)
-    .join("");
-}
-
-// ===========================
-// 🌸 Initialize Services
-// ===========================
-document.addEventListener("DOMContentLoaded", loadServices);
+document.addEventListener('DOMContentLoaded', loadSeasonCSS);
