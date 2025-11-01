@@ -8,7 +8,7 @@
         "css/winter/winter-modal.css",
         "css/winter/winter-calendar.css"
       ],
-      "start": "11-01",
+      "start": "11-02",
       "end": "03-01"
     },
     {
@@ -39,7 +39,7 @@
         "css/pricing-modal.css"
       ],
       "start": "09-02",
-      "end": "10-31"
+      "end": "11-01"
     }
   ]
 }
