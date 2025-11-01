@@ -13,6 +13,24 @@ async function loadJSON(path) {
 }
 
 // ===========================
+// 🌿 Convert MM-DD to number MMDD
+// ===========================
+function mmddToNumber(str) {
+  const [m, d] = str.split("-").map(Number);
+  return m * 100 + d;
+}
+
+// ===========================
+// 🌿 Check if today is in season range
+// ===========================
+function isInSeason(todayNum, startNum, endNum) {
+  // If season doesn’t cross year
+  if (startNum <= endNum) return todayNum >= startNum && todayNum <= endNum;
+  // If season crosses year (e.g., Nov → Mar)
+  return todayNum >= startNum || todayNum <= endNum;
+}
+
+// ===========================
 // 🌿 Load Seasonal Services
 // ===========================
 async function loadServices() {
@@ -23,22 +41,15 @@ async function loadServices() {
   if (!data) return;
 
   const today = new Date();
+  const todayNum = (today.getMonth() + 1) * 100 + today.getDate(); // MMDD
+
   let services = [];
 
   for (const season of data.seasons) {
-    let start = season.start.split("-").map(Number);
-    let end = season.end.split("-").map(Number);
+    const startNum = mmddToNumber(season.start);
+    const endNum = mmddToNumber(season.end);
 
-    let startDate = new Date(today.getFullYear(), start[0] - 1, start[1]);
-    let endDate = new Date(today.getFullYear(), end[0] - 1, end[1]);
-
-    // Handle seasons crossing year boundary
-    if (endDate < startDate) {
-      if (today < startDate) startDate.setFullYear(today.getFullYear() - 1);
-      else endDate.setFullYear(today.getFullYear() + 1);
-    }
-
-    if (today >= startDate && today <= endDate) {
+    if (isInSeason(todayNum, startNum, endNum)) {
       services = season.services || [];
       break;
     }
