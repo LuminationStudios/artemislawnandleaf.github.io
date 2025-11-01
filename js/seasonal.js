@@ -1,29 +1,45 @@
-fetch('json/seasonal-css.json')
-  .then(res => res.json())
-  .then(data => {
-    const today = new Date();
-    const month = today.getMonth() + 1; // 0-based
-    const day = today.getDate();
+(function() {
+  // Synchronously load JSON
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'json/seasonal-css.json', false);
+  xhr.send(null);
 
-    const formatMD = (m, d) => `${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const todayMD = formatMD(month, day);
+  if (xhr.status === 200) {
+    try {
+      const data = JSON.parse(xhr.responseText);
+      const today = new Date();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      const formatMD = (m, d) => `${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const todayMD = formatMD(month, day);
 
-    data.seasons.forEach(season => {
-      let start = season.start;
-      let end = season.end;
+      data.seasons.forEach(season => {
+        let start = season.start;
+        let end = season.end;
+        let crossesYear = start > end;
+        let inRange = crossesYear ? (todayMD >= start || todayMD <= end) : (todayMD >= start && todayMD <= end);
 
-      // Handle seasons crossing the year boundary (e.g., winter)
-      let crossesYear = start > end;
-      let inRange = crossesYear ? (todayMD >= start || todayMD <= end) : (todayMD >= start && todayMD <= end);
-
-      if (inRange) {
-        season.cssFiles.forEach(file => {
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = file;
-          document.head.appendChild(link);
-        });
-      }
-    });
-  })
-  .catch(err => console.error('Error loading seasonal CSS:', err));
+        if (inRange) {
+          // Preload all CSS files
+          season.cssFiles.forEach(file => {
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.href = file;
+            preloadLink.as = 'style';
+            preloadLink.onload = () => {
+              const styleLink = document.createElement('link');
+              styleLink.rel = 'stylesheet';
+              styleLink.href = file;
+              document.head.appendChild(styleLink);
+            };
+            document.head.appendChild(preloadLink);
+          });
+        }
+      });
+    } catch (e) {
+      console.error('Error parsing seasonal JSON:', e);
+    }
+  } else {
+    console.error('Error loading seasonal JSON:', xhr.status);
+  }
+})();
