@@ -12,25 +12,25 @@ function isInSeason(season) {
   const end = season.end;
 
   if (start <= end) {
-    // Same-year season
+    // Normal season within the same year
     return mmdd >= start && mmdd <= end;
   } else {
-    // Season spans year-end (e.g., 09/02 - 03/01)
+    // Season spans year-end (e.g., 12/01 - 03/31)
     return mmdd >= start || mmdd <= end;
   }
 }
 
-// Get active tiers based on current date
+// Filter active tiers based on current date
 function getActiveTiers() {
   return prices.tiers.filter(tier => isInSeason(tier.season));
 }
 
-// Render tiers on the page
+// Render tiers in the DOM
 function renderTiers(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  container.innerHTML = ''; // Clear container
+  container.innerHTML = ''; // Clear previous content
 
   getActiveTiers().forEach(tier => {
     const tierDiv = document.createElement('div');
@@ -41,7 +41,7 @@ function renderTiers(containerId) {
     title.textContent = `${tier.name} (${tier.price})`;
     tierDiv.appendChild(title);
 
-    // Render each detail
+    // Each detail with notes
     tier.details.forEach(detail => {
       const detailDiv = document.createElement('div');
       detailDiv.className = 'tier-detail';
