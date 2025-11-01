@@ -1,35 +1,31 @@
-// prices.js (or main.js)
-import prices from './prices.json'; // Make sure your JSON is in the same folder or adjust path
+import prices from './prices.json';
 
 // Get today's date as MM/DD
 const today = new Date();
 const mmdd = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}`;
 
-// Function to check if a service is in season
+// Check if a service is in season
 function isInSeason(season) {
-  if (!season || !season.start || !season.end) return true; // Always available if no season specified
+  if (!season || !season.start || !season.end) return true;
+
   const start = season.start;
   const end = season.end;
 
   if (start <= end) {
-    // Season within the same year
+    // Same-year season
     return mmdd >= start && mmdd <= end;
   } else {
-    // Season wraps over year-end (e.g., 12/01 - 03/31)
+    // Season spans year-end (e.g., 09/02 - 03/01)
     return mmdd >= start || mmdd <= end;
   }
 }
 
-// Filter active tiers based on season
+// Get active tiers based on current date
 function getActiveTiers() {
   return prices.tiers.filter(tier => isInSeason(tier.season));
 }
 
-// Example: Display active tiers in console
-const activeTiers = getActiveTiers();
-console.log('Active Services Today:', activeTiers);
-
-// Optional: Function to render tiers on a webpage
+// Render tiers on the page
 function renderTiers(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -40,19 +36,19 @@ function renderTiers(containerId) {
     const tierDiv = document.createElement('div');
     tierDiv.className = 'tier-card';
 
+    // Service name and price
     const title = document.createElement('h2');
     title.textContent = `${tier.name} (${tier.price})`;
     tierDiv.appendChild(title);
 
+    // Render each detail
     tier.details.forEach(detail => {
       const detailDiv = document.createElement('div');
       detailDiv.className = 'tier-detail';
-
       detailDiv.innerHTML = `
         <strong>${detail.label}</strong>: ${detail.price}<br>
         <em>${detail.notes}</em>
       `;
-
       tierDiv.appendChild(detailDiv);
     });
 
