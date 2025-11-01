@@ -1,23 +1,48 @@
 // seasonal.js
 
+// ===========================
+// 🌟 Utility: Fetch JSON with cache-busting
+// ===========================
+async function loadJSON(path) {
+    try {
+        const res = await fetch(`${path}?v=${Date.now()}`);
+        if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
+        return await res.json();
+    } catch (err) {
+        console.error(`Error loading ${path}:`, err);
+        return null;
+    }
+}
+
+// ===========================
+// 🌿 Convert MM-DD to number MMDD
+// ===========================
+function mmddToNumber(str) {
+    const [m, d] = str.split('-').map(Number);
+    return m * 100 + d;
+}
+
+// ===========================
+// 🌿 Check if today is in season range
+// ===========================
+function isInSeason(todayNum, startNum, endNum) {
+    return startNum <= endNum ? todayNum >= startNum && todayNum <= endNum : todayNum >= startNum || todayNum <= endNum;
+}
+
+// ===========================
+// 🌿 Load Seasonal CSS
+// ===========================
 async function loadSeasonCSS() {
-    const res = await fetch('json/seasonal-css.json'); // external JSON
-    const data = await res.json();
-    const today = new Date();
+    const data = await loadJSON('json/seasonal-css.json');
+    if (!data) return;
 
-    function parseMD(str) {
-        const [m, d] = str.split('-').map(Number);
-        return new Date(today.getFullYear(), m - 1, d);
-    }
-
-    function inRange(today, start, end) {
-        return start <= end ? today >= start && today <= end : today >= start || today <= end;
-    }
+    const todayNum = (new Date().getMonth() + 1) * 100 + new Date().getDate();
 
     for (const season of data.seasons) {
-        const start = parseMD(season.start);
-        const end = parseMD(season.end);
-        if (inRange(today, start, end)) {
+        const startNum = mmddToNumber(season.start);
+        const endNum = mmddToNumber(season.end);
+
+        if (isInSeason(todayNum, startNum, endNum)) {
             season.cssFiles.forEach(file => {
                 const link = document.createElement('link');
                 link.rel = 'stylesheet';
@@ -29,4 +54,38 @@ async function loadSeasonCSS() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', loadSeasonCSS);
+// ===========================
+// 🌿 Load Seasonal Services
+// ===========================
+async function loadSeasonServices() {
+    const grid = document.getElementById("services-grid");
+    if (!grid) return;
+
+    const data = await loadJSON("json/seasonal-services.json");
+    if (!data) return;
+
+    const todayNum = (new Date().getMonth() + 1) * 100 + new Date().getDate();
+    let services = [];
+
+    for (const season of data.seasons) {
+        const startNum = mmddToNumber(season.start);
+        const endNum = mmddToNumber(season.end);
+
+        if (isInSeason(todayNum, startNum, endNum)) {
+            services = season.services || [];
+            break;
+        }
+    }
+
+    grid.innerHTML = services
+        .map(s => `<div class="service"><h3>${s.title}</h3><p>${s.desc}</p></div>`)
+        .join("");
+}
+
+// ===========================
+// 🌸 Initialize Everything
+// ===========================
+document.addEventListener('DOMContentLoaded', () => {
+    loadSeasonCSS();
+    loadSeasonServices();
+});
