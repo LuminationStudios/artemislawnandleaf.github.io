@@ -4,66 +4,55 @@
       "id": "leaf",
       "name": "Leaf Removal",
       "price": "40-850",
+      "season": { "start": "2025-09-01", "end": "2025-11-30" },
       "details": [
-        {
-          "label": "Small Lawn: Light-to-moderate leaf coverage",
-          "price": "40-80",
-          "notes": "Estimated time: 1–2 hours"
-        },
-        {
-          "label": "Medium Lawn: Half-acre with moderate-to-heavy coverage",
-          "price": "100-300",
-          "notes": "Estimated time: 2–3 hours"
-        },
-        {
-          "label": "Large Lawn: Full-acre with significant leaf accumulation",
-          "price": "450-850",
-          "notes": "Estimated time: 3–4 hours"
-        }
+        { "label": "Small Lawn", "price": "40-80", "notes": "1–2 hours" },
+        { "label": "Medium Lawn", "price": "100-300", "notes": "2–3 hours" },
+        { "label": "Large Lawn", "price": "450-850", "notes": "3–4 hours" }
       ]
     },
     {
       "id": "snow",
       "name": "Snow Removal",
       "price": "30-80",
+      "season": { "start": "2025-12-01", "end": "2026-03-31" },
       "details": [
-        {
-          "label": "Doorway / Porch",
-          "price": "30",
-          "notes": "Often included with driveway or sidewalk"
-        },
-        {
-          "label": "Sidewalk",
-          "price": "30",
-          "notes": "Per visit, up to 6 inches"
-        },
-        {
-          "label": "Driveway",
-          "price": "80",
-          "notes": "Per visit, up to 6 inches"
-        },
-        {
-          "label": "All Areas (Driveway + Sidewalk + Porch)",
-          "price": "120",
-          "notes": "Per visit"
-        }
+        { "label": "Doorway / Porch", "price": "30", "notes": "Often included with driveway/sidewalk" },
+        { "label": "Sidewalk", "price": "30", "notes": "Per visit, up to 6 inches" },
+        { "label": "Driveway", "price": "80", "notes": "Per visit, up to 6 inches" },
+        { "label": "All Areas", "price": "120", "notes": "Per visit" }
       ]
     },
     {
-      "id": "snow_seasonal",
+      "id": "seasonal",
       "name": "Seasonal Contracts",
       "price": "150-450",
+      "season": { "start": "2025-09-01", "end": "2026-03-31" },
       "details": [
-        {
-          "label": "Fall Leaf Removal Contract",
-          "price": "40-850",
-          "notes": "Weekly visits; price varies by yard size + tree coverage"
-        },
-        {
-          "label": "Winter Snow Removal Contract",
-          "price": "30-80",
-          "notes": "Weekly or daily clearing of driveway, sidewalk, and porch"
-        }
+        { "label": "Fall Leaf Removal Contract", "price": "40-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
+        { "label": "Winter Snow Removal Contract", "price": "30-80", "notes": "Weekly/daily driveway, sidewalk, porch clearing" }
+      ]
+    },
+    {
+      "id": "mowing",
+      "name": "Mowing",
+      "price": "25-150",
+      "season": { "start": "2025-04-01", "end": "2025-10-31" },
+      "details": [
+        { "label": "Small Lawn", "price": "25-50", "notes": "Up to 1/4 acre, weekly or biweekly" },
+        { "label": "Medium Lawn", "price": "60-100", "notes": "1/4–1/2 acre, weekly or biweekly" },
+        { "label": "Large Lawn", "price": "120-150", "notes": "Over 1/2 acre, weekly or biweekly" }
+      ]
+    },
+    {
+      "id": "garden",
+      "name": "Garden Care",
+      "price": "50-300",
+      "season": { "start": "2025-04-01", "end": "2025-10-31" },
+      "details": [
+        { "label": "Flower Beds", "price": "50-100", "notes": "Weeding, mulching, and planting" },
+        { "label": "Vegetable Garden", "price": "75-150", "notes": "Planting, weeding, and care" },
+        { "label": "Full Garden Maintenance", "price": "150-300", "notes": "Includes flower beds & vegetable garden" }
       ]
     }
   ]
