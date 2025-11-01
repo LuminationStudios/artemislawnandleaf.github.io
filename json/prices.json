@@ -32,28 +32,6 @@
         { "label": "Fall Leaf Removal Contract", "price": "40-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
         { "label": "Winter Snow Removal Contract", "price": "30-200", "notes": "Weekly or daily driveway, sidewalk, porch clearing" }
       ]
-    },
-    {
-      "id": "mowing",
-      "name": "Mowing",
-      "price": "25-150",
-      "season": "springSummer",
-      "details": [
-        { "label": "Small Lawn", "price": "25-50", "notes": "Weekly or biweekly" },
-        { "label": "Medium Lawn", "price": "60-100", "notes": "Weekly or biweekly" },
-        { "label": "Large Lawn", "price": "120-150", "notes": "Weekly or biweekly" }
-      ]
-    },
-    {
-      "id": "garden",
-      "name": "Garden Care",
-      "price": "50-300",
-      "season": "springSummer",
-      "details": [
-        { "label": "Flower Beds", "price": "50-100", "notes": "Weeding, mulching, planting" },
-        { "label": "Vegetable Garden", "price": "75-150", "notes": "Planting, weeding, care" },
-        { "label": "Full Garden Maintenance", "price": "150-300", "notes": "Includes flower & vegetable beds" }
-      ]
     }
   ]
 }
