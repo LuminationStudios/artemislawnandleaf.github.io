@@ -1,0 +1,128 @@
+/* ------------------------------ */
+/* Pricing Cards Container */
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* Individual Card */
+.card {
+  background: rgba(240, 250, 255, 0.9); /* frosty light blue */
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(100, 180, 255, 0.5); /* icy blue glow */
+  text-align: center;
+  width: 220px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(100, 200, 255, 0.7); /* brighter icy glow */
+}
+
+/* Card Button */
+.card button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #74c0ff, #1c7ed6); /* icy blue gradient */
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.25s ease;
+}
+
+.card button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #1c7ed6, #74c0ff); /* reverse gradient */
+}
+
+/* ------------------------------ */
+/* Modal Overlay */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 30, 60, 0.5); /* dark frosty overlay */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+/* Modal Content */
+.modal .modal-content {
+  background: linear-gradient(180deg, #e6f0ff, #f0f8ff); /* soft icy gradient */
+  border-radius: 24px;
+  padding: 30px;
+  max-width: 480px;
+  width: 90%;
+  border: 1px solid rgba(100, 180, 255, 0.25);
+  position: relative;
+  box-shadow: 0 8px 24px rgba(100, 180, 255, 0.6); /* icy shadow */
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal Title */
+.modal h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1c7ed6; /* deep winter blue */
+  margin-bottom: 20px;
+  border-bottom: 2px dashed rgba(100, 180, 255, 0.3);
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+/* Close Button */
+.modal .close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(28, 126, 214, 0.3);
+  color: #1c7ed6;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal .close:hover {
+  background: linear-gradient(135deg, #74c0ff, #1c7ed6);
+  color: #fff;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal .modal-content {
+    width: 95%;
+    padding: 24px;
+  }
+}
