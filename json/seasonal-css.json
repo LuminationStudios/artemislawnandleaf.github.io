@@ -5,7 +5,8 @@
       "cssFiles": [
         "css/winter/winter-main.css",
         "css/winter/winter-theme.css",
-        "css/winter/winter-modal.css"
+        "css/winter/winter-modal.css",
+        "css/winter/winter-calendar.css"
       ],
       "start": "11-01",
       "end": "02-27"
