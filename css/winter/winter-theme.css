@@ -1,0 +1,108 @@
+/* ===========================
+   ❄️ Dark Winter Theme
+=========================== */
+:root {
+  --accent-1: #5aa8e8;
+  --accent-2: #9fd4ff;
+  --card: rgba(255, 255, 255, 0.12);
+  --glass: rgba(255, 255, 255, 0.08);
+  --muted: #dbe9ff;
+  --radius: 24px;
+  --glow: 0 4px 14px rgba(120, 170, 255, 0.45);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #020b16 0%, #0b2340 50%, #4f7fae 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--muted);
+}
+
+header {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(200, 225, 255, 0.2);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+.nav-links a {
+  margin-left: 24px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 500;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #00101e;
+  box-shadow: 0 0 10px rgba(150, 200, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.nav-links a.quote,
+.nav-links a#quoteBtn {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #00101e;
+  box-shadow: 0 0 10px rgba(150, 200, 255, 0.6);
+  font-weight: 600;
+}
+
+.banner {
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: var(--glow);
+}
+
+h1, h2, h3 {
+  color: var(--muted);
+}
+
+p, .lead {
+  color: #d0e0f5;
+}
+
+.btn {
+  background: var(--accent-1);
+  color: #00101e;
+}
+
+.btn:hover {
+  background: var(--accent-2);
+}
+
+.modal-content {
+  background: var(--card);
+}
+
+.contact {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--glow);
+}
+
+.contact .avatar {
+  background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+  box-shadow: var(--glow);
+}
+
+footer {
+  background: rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(200, 225, 255, 0.15);
+  color: var(--muted);
+  box-shadow: 0 -6px 18px rgba(120, 170, 255, 0.25);
+}
