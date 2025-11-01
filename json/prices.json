@@ -26,7 +26,7 @@
     {
       "id": "seasonal",
       "name": "Seasonal Contracts",
-      "price": "150-450",
+      "price": "100+",
       "season": "fallWinter",
       "details": [
         { "label": "Fall Leaf Removal Contract", "price": "100-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
