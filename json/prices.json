@@ -17,10 +17,10 @@
       "price": "30-80",
       "season": "fallWinter",
       "details": [
-        { "label": "Doorway / Porch", "price": "30", "notes": "Often included with driveway/sidewalk" },
-        { "label": "Sidewalk", "price": "30", "notes": "Per visit, up to 6 inches" },
-        { "label": "Driveway", "price": "80", "notes": "Per visit, up to 6 inches" },
-        { "label": "All Areas", "price": "120", "notes": "Per visit" }
+        { "label": "Doorway / Porch", "price": "30", "notes": "" },
+        { "label": "Sidewalk", "price": "30", "notes": "" },
+        { "label": "Driveway", "price": "80", "notes": "" },
+        { "label": "All Areas", "price": "120", "notes": "" }
       ]
     },
     {
@@ -29,8 +29,8 @@
       "price": "150-450",
       "season": "fallWinter",
       "details": [
-        { "label": "Fall Leaf Removal Contract", "price": "40-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
-        { "label": "Winter Snow Removal Contract", "price": "30-80", "notes": "Weekly or daily driveway, sidewalk, porch clearing" }
+        { "label": "Fall Leaf Removal Contract", "price": "100-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
+        { "label": "Winter Snow Removal Contract", "price": "120-200", "notes": "Weekly or daily driveway, sidewalk, porch clearing" }
       ]
     },
     {
