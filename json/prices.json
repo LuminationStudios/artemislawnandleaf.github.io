@@ -29,8 +29,8 @@
       "price": "100+",
       "season": "fallWinter",
       "details": [
-        { "label": "Fall Leaf Removal Contract", "price": "100-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
-        { "label": "Winter Snow Removal Contract", "price": "120-200", "notes": "Weekly or daily driveway, sidewalk, porch clearing" }
+        { "label": "Fall Leaf Removal Contract", "price": "40-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
+        { "label": "Winter Snow Removal Contract", "price": "30-200", "notes": "Weekly or daily driveway, sidewalk, porch clearing" }
       ]
     },
     {
