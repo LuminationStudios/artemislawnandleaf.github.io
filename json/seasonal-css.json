@@ -1,0 +1,44 @@
+{
+  "seasons": [
+    {
+      "name": "winter",
+      "cssFiles": [
+        "css/winter-base.css",
+        "css/winter-glow.css",
+        "css/winter-extra.css"
+      ],
+      "start": "12-01",
+      "end": "02-28"
+    },
+    {
+      "name": "spring",
+      "cssFiles": [
+        "css/spring-base.css",
+        "css/spring-glow.css",
+        "css/spring-extra.css"
+      ],
+      "start": "03-01",
+      "end": "05-31"
+    },
+    {
+      "name": "summer",
+      "cssFiles": [
+        "css/summer-base.css",
+        "css/summer-glow.css",
+        "css/summer-extra.css"
+      ],
+      "start": "06-01",
+      "end": "08-31"
+    },
+    {
+      "name": "autumn",
+      "cssFiles": [
+        "css/autumn-base.css",
+        "css/autumn-glow.css",
+        "css/autumn-extra.css"
+      ],
+      "start": "09-01",
+      "end": "11-30"
+    }
+  ]
+}
