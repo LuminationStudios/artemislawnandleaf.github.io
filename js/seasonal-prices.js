@@ -1,6 +1,6 @@
-import prices from 'json/prices.json';
+import prices from './prices.json';
 
-// Define the start date of fall/winter
+// Season start dates
 const FALL_WINTER_START = "09/02"; // MM/DD
 const SPRING_SUMMER_START = "03/02"; // MM/DD
 
@@ -15,19 +15,21 @@ function mmddToDayOfYear(mmdd) {
 }
 
 const today = new Date();
+const dayOfYear = mmddToDayOfYear(`${today.getMonth() + 1}/${today.getDate()}`);
 const startFallWinter = mmddToDayOfYear(FALL_WINTER_START);
 const startSpringSummer = mmddToDayOfYear(SPRING_SUMMER_START);
-const dayOfYear = mmddToDayOfYear(`${today.getMonth() + 1}/${today.getDate()}`);
 
-// Determine current season
+// Determine current season properly
 let currentSeason;
 if (dayOfYear >= startFallWinter || dayOfYear < startSpringSummer) {
+  // Fall/Winter: from Sep 2 → Dec 31 + Jan 1 → Mar 1
   currentSeason = "fallWinter";
 } else {
+  // Spring/Summer: from Mar 2 → Sep 1
   currentSeason = "springSummer";
 }
 
-// Filter active tiers
+// Filter active tiers based on season
 function getActiveTiers() {
   return prices.tiers.filter(tier => tier.season === currentSeason);
 }
