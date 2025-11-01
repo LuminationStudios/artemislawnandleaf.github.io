@@ -4,7 +4,7 @@
       "id": "leaf",
       "name": "Leaf Removal",
       "price": "40-850",
-      "season": { "start": "09/02", "end": "11/30" },
+      "season": "fallWinter",
       "details": [
         { "label": "Small Lawn", "price": "40-80", "notes": "1–2 hours" },
         { "label": "Medium Lawn", "price": "100-300", "notes": "2–3 hours" },
@@ -15,7 +15,7 @@
       "id": "snow",
       "name": "Snow Removal",
       "price": "30-80",
-      "season": { "start": "12/01", "end": "03/31" },
+      "season": "fallWinter",
       "details": [
         { "label": "Doorway / Porch", "price": "30", "notes": "Often included with driveway/sidewalk" },
         { "label": "Sidewalk", "price": "30", "notes": "Per visit, up to 6 inches" },
@@ -27,17 +27,17 @@
       "id": "seasonal",
       "name": "Seasonal Contracts",
       "price": "150-450",
-      "season": { "start": "09/02", "end": "03/31" },
+      "season": "fallWinter",
       "details": [
-        { "label": "Fall Leaf Removal Contract", "price": "40-850", "notes": "Weekly visits; price varies by yard size & tree coverage" },
-        { "label": "Winter Snow Removal Contract", "price": "30-80", "notes": "Weekly or daily driveway, sidewalk, and porch clearing" }
+        { "label": "Fall Leaf Removal Contract", "price": "40-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
+        { "label": "Winter Snow Removal Contract", "price": "30-80", "notes": "Weekly or daily driveway, sidewalk, porch clearing" }
       ]
     },
     {
       "id": "mowing",
       "name": "Mowing",
       "price": "25-150",
-      "season": { "start": "03/02", "end": "09/01" },
+      "season": "springSummer",
       "details": [
         { "label": "Small Lawn", "price": "25-50", "notes": "Weekly or biweekly" },
         { "label": "Medium Lawn", "price": "60-100", "notes": "Weekly or biweekly" },
@@ -48,7 +48,7 @@
       "id": "garden",
       "name": "Garden Care",
       "price": "50-300",
-      "season": { "start": "03/02", "end": "09/01" },
+      "season": "springSummer",
       "details": [
         { "label": "Flower Beds", "price": "50-100", "notes": "Weeding, mulching, planting" },
         { "label": "Vegetable Garden", "price": "75-150", "notes": "Planting, weeding, care" },
