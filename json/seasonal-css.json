@@ -8,8 +8,8 @@
         "css/winter/winter-modal.css",
         "css/winter/winter-calendar.css"
       ],
-      "start": "12-01",
-      "end": "02-27"
+      "start": "11-02",
+      "end": "03-01"
     },
     {
       "name": "spring",
@@ -17,8 +17,8 @@
         "css/spring/spring-main.css",
         "css/spring/spring-theme.css"
       ],
-      "start": "11-01",
-      "end": "05-30"
+      "start": "03-02",
+      "end": "06-01"
     },
     {
       "name": "summer",
@@ -27,18 +27,19 @@
         "css/summer-glow.css",
         "css/summer-extra.css"
       ],
-      "start": "05-31",
-      "end": "08-31"
+      "start": "06-02",
+      "end": "09-01"
     },
     {
       "name": "autumn",
       "cssFiles": [
-        "css/autumn-base.css",
-        "css/autumn-glow.css",
-        "css/autumn-extra.css"
+        "css/main.css",
+        "css/theme.css",
+        "css/calendar.css",
+        "css/pricing-modal.css"
       ],
-      "start": "09-01",
-      "end": "10-31"
+      "start": "09-02",
+      "end": "11-01"
     }
   ]
 }
