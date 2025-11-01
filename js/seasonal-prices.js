@@ -1,4 +1,4 @@
-import prices from './prices.json';
+import prices from 'json/prices.json';
 
 // Season start dates
 const FALL_WINTER_START = "09/02"; // MM/DD
