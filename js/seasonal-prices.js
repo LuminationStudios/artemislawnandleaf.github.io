@@ -1,34 +1,37 @@
-import prices from './prices.json';
+import prices from 'json/prices.json';
 
-// Define what your season strings mean
+// Define what your seasons mean
 const SEASON_RANGES = {
-  fallWinter: { start: "09/02", end: "03/01" },   // fall → winter
-  springSummer: { start: "03/02", end: "09/01" }  // spring → summer
+  fallWinter: { start: "09/02", end: "03/01" },
+  springSummer: { start: "03/02", end: "09/01" }
 };
 
-// Convert MM/DD to day-of-year
-function mmddToDayOfYear(mmdd) {
+// Convert MM/DD to a Date object for the current or next year if needed
+function mmddToDate(mmdd) {
   const [month, day] = mmdd.split('/').map(Number);
-  const date = new Date(new Date().getFullYear(), month - 1, day);
-  const startOfYear = new Date(date.getFullYear(), 0, 0);
-  const diff = date - startOfYear;
-  return Math.floor(diff / (1000 * 60 * 60 * 24));
+  const now = new Date();
+  let year = now.getFullYear();
+
+  // If the date is in the first part of the year but represents a wrap-around, add 1 to year
+  if (month < 3 && now.getMonth() + 1 >= 9) year += 1;
+
+  return new Date(year, month - 1, day);
 }
 
 // Check if today is in the given season
 function isInSeason(seasonKey) {
-  if (!SEASON_RANGES[seasonKey]) return true;
+  const range = SEASON_RANGES[seasonKey];
+  if (!range) return true;
 
-  const { start, end } = SEASON_RANGES[seasonKey];
-  const startDay = mmddToDayOfYear(start);
-  const endDay = mmddToDayOfYear(end);
-  const todayDay = mmddToDayOfYear(`${new Date().getMonth() + 1}/${new Date().getDate()}`);
+  const startDate = mmddToDate(range.start);
+  const endDate = mmddToDate(range.end);
+  const today = new Date();
 
-  if (startDay <= endDay) {
-    return todayDay >= startDay && todayDay <= endDay;
+  // If season wraps around the year
+  if (startDate <= endDate) {
+    return today >= startDate && today <= endDate;
   } else {
-    // Wrap-around (e.g., 09/02 → 03/01)
-    return todayDay >= startDay || todayDay <= endDay;
+    return today >= startDate || today <= endDate;
   }
 }
 
@@ -37,7 +40,7 @@ function getActiveTiers() {
   return prices.tiers.filter(tier => isInSeason(tier.season));
 }
 
-// Render tiers
+// Render tiers on the page
 function renderTiers(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
