@@ -13,14 +13,14 @@
   margin: 40px auto;
   max-width: 1100px;
   border-radius: 32px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
   box-shadow: 0 8px 24px rgba(120, 170, 255, 0.2);
   backdrop-filter: blur(12px);
   color: #dbe9ff;
 }
 
 .hero-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
   border-radius: 24px;
   padding: 28px;
   box-shadow: 0 8px 24px rgba(120, 170, 255, 0.2);
