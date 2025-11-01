@@ -1,8 +1,10 @@
-import prices from 'json/prices.json';
+import prices from './prices.json';
 
-// Season start dates
-const FALL_WINTER_START = "09/02"; // MM/DD
-const SPRING_SUMMER_START = "03/02"; // MM/DD
+// Define what your season strings mean
+const SEASON_RANGES = {
+  fallWinter: { start: "09/02", end: "03/01" },   // fall → winter
+  springSummer: { start: "03/02", end: "09/01" }  // spring → summer
+};
 
 // Convert MM/DD to day-of-year
 function mmddToDayOfYear(mmdd) {
@@ -10,31 +12,32 @@ function mmddToDayOfYear(mmdd) {
   const date = new Date(new Date().getFullYear(), month - 1, day);
   const startOfYear = new Date(date.getFullYear(), 0, 0);
   const diff = date - startOfYear;
-  const oneDay = 1000 * 60 * 60 * 24;
-  return Math.floor(diff / oneDay);
+  return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
-const today = new Date();
-const dayOfYear = mmddToDayOfYear(`${today.getMonth() + 1}/${today.getDate()}`);
-const startFallWinter = mmddToDayOfYear(FALL_WINTER_START);
-const startSpringSummer = mmddToDayOfYear(SPRING_SUMMER_START);
+// Check if today is in the given season
+function isInSeason(seasonKey) {
+  if (!SEASON_RANGES[seasonKey]) return true;
 
-// Determine current season properly
-let currentSeason;
-if (dayOfYear >= startFallWinter || dayOfYear < startSpringSummer) {
-  // Fall/Winter: from Sep 2 → Dec 31 + Jan 1 → Mar 1
-  currentSeason = "fallWinter";
-} else {
-  // Spring/Summer: from Mar 2 → Sep 1
-  currentSeason = "springSummer";
+  const { start, end } = SEASON_RANGES[seasonKey];
+  const startDay = mmddToDayOfYear(start);
+  const endDay = mmddToDayOfYear(end);
+  const todayDay = mmddToDayOfYear(`${new Date().getMonth() + 1}/${new Date().getDate()}`);
+
+  if (startDay <= endDay) {
+    return todayDay >= startDay && todayDay <= endDay;
+  } else {
+    // Wrap-around (e.g., 09/02 → 03/01)
+    return todayDay >= startDay || todayDay <= endDay;
+  }
 }
 
-// Filter active tiers based on season
+// Filter active tiers
 function getActiveTiers() {
-  return prices.tiers.filter(tier => tier.season === currentSeason);
+  return prices.tiers.filter(tier => isInSeason(tier.season));
 }
 
-// Render tiers on page
+// Render tiers
 function renderTiers(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
