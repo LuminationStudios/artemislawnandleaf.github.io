@@ -13,6 +13,24 @@ async function loadJSON(path) {
 }
 
 // ===========================
+// 🌿 Utility: parse MM-DD to Date
+// ===========================
+function parseMonthDay(str) {
+  const [m, d] = str.split('-').map(Number);
+  const now = new Date();
+  return new Date(now.getFullYear(), m - 1, d);
+}
+
+// ===========================
+// 🌿 Check if today is in range
+// ===========================
+function isDateInRange(today, start, end) {
+  if (start <= end) return today >= start && today <= end;
+  // crosses year boundary
+  return today >= start || today <= end;
+}
+
+// ===========================
 // 🌿 Load Seasonal Services
 // ===========================
 async function loadServices() {
@@ -22,10 +40,17 @@ async function loadServices() {
   const data = await loadJSON("json/seasonal-services.json");
   if (!data) return;
 
-  // Determine season
-  const month = new Date().getMonth() + 1;
-  const season = (month >= 9 || month <= 2) ? "fallWinter" : "springSummer";
-  const services = data[season]?.services || [];
+  const today = new Date();
+  let services = [];
+
+  for (const season of data.seasons) {
+    const start = parseMonthDay(season.start);
+    const end = parseMonthDay(season.end);
+    if (isDateInRange(today, start, end)) {
+      services = season.services || [];
+      break;
+    }
+  }
 
   grid.innerHTML = services
     .map(s => `<div class="service"><h3>${s.title}</h3><p>${s.desc}</p></div>`)
