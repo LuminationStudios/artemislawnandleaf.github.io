@@ -1,66 +1,35 @@
-// ===========================
-// 🌟 Load JSON with cache-busting
-// ===========================
-async function loadJSON(path) {
-  try {
-    const res = await fetch(`./${path}?v=${Date.now()}`);
-    if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
-    return await res.json();
-  } catch (err) {
-    console.error(`Error loading ${path}:`, err);
-    return null;
-  }
-}
-
-// ===========================
-// 🌿 Convert MM-DD to number MMDD
-// ===========================
-function mmddToNumber(str) {
-  const [m, d] = str.split("-").map(Number);
-  return m * 100 + d;
-}
-
-// ===========================
-// 🌿 Check if today is in season range
-// ===========================
-function isInSeason(todayNum, startNum, endNum) {
-  // If season doesn’t cross year
-  if (startNum <= endNum) return todayNum >= startNum && todayNum <= endNum;
-  // If season crosses year (e.g., Nov → Mar)
-  return todayNum >= startNum || todayNum <= endNum;
-}
-
-// ===========================
-// 🌿 Load Seasonal Services
-// ===========================
-async function loadServices() {
+document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.getElementById("services-grid");
   if (!grid) return;
 
-  const data = await loadJSON("json/seasonal-services.json");
-  if (!data) return;
+  try {
+    const res = await fetch("json/seasonal-services.json?v=" + Date.now());
+    if (!res.ok) throw new Error("Failed to load JSON");
+    const data = await res.json();
 
-  const today = new Date();
-  const todayNum = (today.getMonth() + 1) * 100 + today.getDate(); // MMDD
+    const todayNum = (new Date().getMonth() + 1) * 100 + new Date().getDate();
+    let services = [];
 
-  let services = [];
-
-  for (const season of data.seasons) {
-    const startNum = mmddToNumber(season.start);
-    const endNum = mmddToNumber(season.end);
-
-    if (isInSeason(todayNum, startNum, endNum)) {
-      services = season.services || [];
-      break;
+    // Loop through seasons to find the matching one
+    for (const season of data.seasons) {
+      const startNum = Number(season.start.replace("-", ""));
+      const endNum = Number(season.end.replace("-", ""));
+      
+      const inRange = (startNum <= endNum && todayNum >= startNum && todayNum <= endNum) ||
+                      (startNum > endNum && (todayNum >= startNum || todayNum <= endNum));
+      
+      if (inRange) {
+        services = season.services || [];
+        break;
+      }
     }
+
+    // Render the services
+    grid.innerHTML = services
+      .map(s => `<div class="service"><h3>${s.title}</h3><p>${s.desc}</p></div>`)
+      .join("");
+
+  } catch (err) {
+    console.error("Error loading seasonal services:", err);
   }
-
-  grid.innerHTML = services
-    .map(s => `<div class="service"><h3>${s.title}</h3><p>${s.desc}</p></div>`)
-    .join("");
-}
-
-// ===========================
-// 🌸 Initialize Services
-// ===========================
-document.addEventListener("DOMContentLoaded", loadServices);
+});
