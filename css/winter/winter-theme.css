@@ -88,21 +88,29 @@ header {
   cursor: pointer;
   font-size: 1.8rem;
 }
-
 @media (max-width: 768px) {
+
+  /* Keep the header transparent & blurred just like desktop */
+  header {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200, 225, 255, 0.2);
+  }
 
   .hamburger {
     display: block;
+    cursor: pointer;
+    font-size: 1.8rem;
   }
 
-  /* 🍨 Mobile Dropdown Menu (Soft Snow Gradient + Centered Links) */
+  /* Dropdown Menu — now solid + centered links */
   .nav-links {
     display: none;
     flex-direction: column;
-    align-items: center; /* ✅ centers items */
-    text-align: center; /* ✅ centers text */
+    align-items: center;
+    text-align: center;
     gap: 12px;
-    background: linear-gradient(180deg, #ffffff, #e9f4ff); /* ❄️ soft snow gradient */
+    background: #ffffff; /* ✅ solid white */
     position: absolute;
     right: 16px;
     top: 60px;
@@ -121,9 +129,9 @@ header {
     margin-left: 0;
     font-size: 1.15rem;
     padding: 14px 18px;
-    color: #00101e; /* readable on white/ice */
     border-radius: 12px;
     width: 100%;
+    color: #00101e; /* readable on solid white */
   }
 
   .nav-links a:hover {
