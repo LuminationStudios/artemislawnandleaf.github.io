@@ -7,9 +7,9 @@
   <link rel="icon" href="logo/leaficon.svg" type="image/svg+xml">
 
   <!-- Base CSS -->
-  <link rel="stylesheet" href="css/theme.css">
+  <!--<link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/calendar.css">
+  <link rel="stylesheet" href="css/calendar.css">-->
   
   <!-- Seasonal CSS Loader -->
   <script src="js/seasonal.js"></script>
@@ -17,51 +17,6 @@
   <!-- Other JS -->
   <script src="js/calendarnav.js" defer></script>
   <script src="js/calendar.js" defer></script>
-
-  <style>
-    /* 📱 Mobile Navbar Styling */
-    .hamburger {
-      font-size: 2rem;
-      cursor: pointer;
-      display: none;
-      z-index: 9999;
-    }
-
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(12px);
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 100%;
-        text-align: center;
-        padding: 1.5rem 0;
-        z-index: 9998;
-      }
-      .nav-links.active {
-        display: flex;
-      }
-    }
-
-    /* Ensure navbar is always above cards */
-    header, .header, nav, .nav-links, .hamburger {
-      position: relative;
-      z-index: 9999 !important;
-    }
-
-    /* Sections stay below navbar */
-    main, section, #calendar-container {
-      position: relative;
-      z-index: 1;
-    }
-  </style>
 </head>
 
 <body>
