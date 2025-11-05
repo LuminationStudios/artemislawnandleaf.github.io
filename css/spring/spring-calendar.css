@@ -20,7 +20,7 @@
 #calendar-nav h2 {
   font-size: 1.8rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #74c0ff, #1c7ed6); /* icy gradient */
+  background: linear-gradient(90deg, #FFB6C1, #A8E6CF); /* icy gradient */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 8px rgba(100, 200, 255, 0.5);
@@ -30,7 +30,7 @@
 #calendar-nav h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #a5d8ff; /* soft icy cyan */
+  color: #FFB6C1; /* soft icy cyan */
   margin-top: 4px;
   text-shadow: 0 0 5px rgba(150, 210, 255, 0.4);
 }
@@ -43,7 +43,7 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
-  background: linear-gradient(135deg, #74c0ff, #1c7ed6);
+  background: linear-gradient(135deg, #FFB6C1, #A8E6CF);
   color: #fff;
   box-shadow: 0 0 12px rgba(100, 180, 255, 0.4);
   transition: all 0.25s ease;
@@ -51,7 +51,7 @@
 
 #calendar-nav button:hover {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #1c7ed6, #74c0ff);
+  background: linear-gradient(135deg, #FFB6C1, #A8E6CF);
   box-shadow: 0 0 18px rgba(100, 200, 255, 0.6);
 }
 
@@ -75,19 +75,19 @@
 }
 
 .day {
-  background-color: rgba(240, 250, 255, 0.9); /* frosty card bg */
-  border: 1px solid rgba(100, 180, 255, 0.5); /* icy border */
+  background-color: rgba(255, 182, 193, 0.9); /* frosty card bg */
+  border: 1px solid rgba(255, 182, 193, 0.5); /* icy border */
   border-radius: 10px;
   padding: 8px;
   min-height: 80px;
-  box-shadow: 0 4px 15px rgba(100, 180, 255, 0.25);
+  box-shadow: 0 4px 15px rgba(255, 195, 200, 0.25);
   cursor: pointer;
   transition: all 0.2s ease;
   color: #1a1a1a; /* dark text */
 }
 
 .day:hover {
-  background-color: rgba(100, 180, 255, 0.15); /* soft icy highlight */
+  background-color: rgba(255, 182, 193, 0.15); /* soft icy highlight */
   color: #1a1a1a;
 }
 
