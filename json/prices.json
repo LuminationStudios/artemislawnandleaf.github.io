@@ -6,9 +6,9 @@
       "price": "40-850",
       "season": "fallWinter",
       "details": [
-        { "label": "Small Lawn", "price": "40-80", "notes": "1–2 hours" },
-        { "label": "Medium Lawn", "price": "100-300", "notes": "2–3 hours" },
-        { "label": "Large Lawn", "price": "450-850", "notes": "3–4 hours" }
+        { "label": "Small Lawn- 1/4 Acre", "price": "40-80", "notes": "1–2 hours" },
+        { "label": "Medium Lawn- 1/2 Acre to 1 Acre", "price": "100-300", "notes": "2–3 hours" },
+        { "label": "Large Lawn- 1 Acre and More", "price": "450-850", "notes": "3–4 hours" }
       ]
     },
     {
