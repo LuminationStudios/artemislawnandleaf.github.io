@@ -1,93 +1,164 @@
+/* =========================== 🌼 Spring Theme — Peach Blossom + Sakura Sunset Glow =========================== */
 :root {
-  --accent-1: #ffb88c;
-  --accent-2: #ffe29f;
-  --card: rgba(35, 28, 24, 0.8);
-  --glass: rgba(40, 32, 28, 0.6);
-  --muted: #f3e1c4;
+  --accent-1: #ff9acb;   /* blossom pink */
+  --accent-2: #ffd6e8;   /* soft petal highlight */
+  --card: rgba(255, 255, 255, 0.14); /* glassy panels */
+  --glass: rgba(255, 255, 255, 0.10);
+  --muted: #ffeef8; /* soft creamy pink-white */
   --radius: 24px;
-  --glow: 0 0 18px rgba(255, 190, 140, 0.4);
+  --glow: 0 4px 14px rgba(255, 160, 200, 0.45);
 }
 
+/* =========================== 🌅 Background — Sakura Sunset Glow =========================== */
 html, body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top right, #2b1d16 0%, #3a2a20 40%, #1a120e 100%);
+  background: linear-gradient(180deg, #fff3f8 0%, #ffd8e6 40%, #ffb4cf 70%, #ff9acb 100%);
   background-attachment: fixed;
   min-height: 100vh;
   color: var(--muted);
 }
 
+/* =========================== 🌿 Navbar =========================== */
 header {
-  background: rgba(30, 24, 20, 0.75);
+  background: rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 200, 150, 0.2);
-  box-shadow: 0 6px 20px rgba(255, 180, 120, 0.1);
+  border-bottom: 1px solid rgba(255, 220, 240, 0.4);
 }
 
-.nav-links a { color: var(--muted); }
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.brand img {
+  width: 36px;
+  height: 36px;
+}
+
+/* =========================== ✨ Nav Links =========================== */
+.nav-links a {
+  margin-left: 24px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 500;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
 .nav-links a:hover {
   background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-  color: #3a2519;
-  box-shadow: 0 0 10px rgba(255, 200, 150, 0.6);
+  color: #3f0020;
+  box-shadow: var(--glow);
   transform: translateY(-1px);
 }
 
-.hero, #services, #pricing, .quote-card {
-  background: linear-gradient(180deg, rgba(40, 32, 28, 0.85), rgba(28, 22, 18, 0.8));
-  box-shadow: 0 8px 28px rgba(255, 180, 120, 0.2);
-  backdrop-filter: blur(12px);
+.nav-links a.quote,
+.nav-links a#quoteBtn {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #3f0020;
+  box-shadow: var(--glow);
+  font-weight: 600;
 }
 
-.card, .service {
-  background: linear-gradient(180deg, rgba(50, 40, 32, 0.8), rgba(28, 22, 18, 0.75));
-  box-shadow: 0 8px 24px rgba(255, 180, 120, 0.25);
-  color: var(--muted);
+.nav-links a.quote:hover,
+.nav-links a#quoteBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 160, 200, 0.7);
 }
 
-.service:hover, .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 25px rgba(255, 200, 150, 0.4);
+/* =========================== 🍔 Hamburger (Mobile) =========================== */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+@media (max-width: 768px) {
+  header {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+  }
+  .hamburger { display: block; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    background: #fff6fb;
+    position: absolute;
+    right: 16px;
+    top: 60px;
+    width: calc(100% - 32px);
+    padding: 20px 16px;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(255, 160, 200, 0.4);
+    z-index: 999;
+  }
+  .nav-links.active { display: flex; }
+  .nav-links a {
+    margin-left: 0;
+    font-size: 1.15rem;
+    padding: 14px 18px;
+    border-radius: 12px;
+    width: 100%;
+    color: #3f0020;
+  }
+  .nav-links a:hover {
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    color: #3f0020;
+    box-shadow: var(--glow);
+  }
 }
 
-h1, h2, h3 {
-  color: var(--muted);
-  text-shadow: 0 0 10px rgba(255, 180, 120, 0.25);
-}
-
-p, .lead { color: #d5c3a8; }
+/* =========================== ✍ Typography & Buttons =========================== */
+h1, h2, h3 { color: var(--muted); }
+p, .lead { color: #ffdced; }
 
 .btn {
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-  color: #3b251a;
-  box-shadow: 0 0 14px rgba(255, 200, 150, 0.4);
-}
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 22px rgba(255, 220, 170, 0.6);
-}
-
-footer {
-  background: rgba(30, 24, 20, 0.8);
-  border-top: 1px solid rgba(255, 200, 150, 0.2);
-  box-shadow: 0 -6px 16px rgba(255, 180, 120, 0.15);
-  color: var(--muted);
-}
-
-.banner {
-  background: rgba(40, 30, 24, 0.9);
-  color: var(--muted);
+  display: inline-block;
+  background: var(--accent-1);
+  color: #3f0020;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s, transform 0.2s;
   box-shadow: var(--glow);
-  border: 1px solid rgba(255, 190, 140, 0.25);
 }
 
-.contact {
-  background: linear-gradient(180deg, #3a2a20, #2b1d16);
-  box-shadow: 0 0 20px rgba(255, 200, 150, 0.15);
+.btn:hover {
+  background: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+/* =========================== 🌼 Footer =========================== */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 220, 240, 0.4);
   color: var(--muted);
-}
-
-.contact .avatar {
-  background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
-  color: #3b2419;
+  font-size: 0.95rem;
+  box-shadow: 0 -6px 18px rgba(255, 160, 200, 0.25);
 }
