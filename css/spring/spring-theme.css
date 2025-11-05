@@ -2,20 +2,20 @@
    🌸 Background & Base Theme
 =========================== */
 :root {
-  --accent-1: #ffbdba;
-  --accent-2: #B2AC88;
+  --accent-1: #FFB6C1;
+  --accent-2: #A8E6CF;
   --card: rgba(255, 255, 255, 0.8);
   --glass: rgba(255, 255, 255, 0.5);
   --muted: #ffe7e9;
   --radius: 24px;
-  --glow: 0 4px 14px rgba(255, 182, 193, 0.35);
+  --glow: 0 4px 14px rgba(255, 195, 200, 0.35);
 }
 
 html, body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", "Segoe UI", sans-serif;
-  background: linear-gradient(180deg, #1A1A1A 0%, #757575 50%, #F8F8F8 100%);
+  background: linear-gradient(180deg, #FFB6C1 0%, #FFE4E1 50%, #A8E6CF 100%);
   background-attachment: fixed;
   min-height: 100vh;
 }
