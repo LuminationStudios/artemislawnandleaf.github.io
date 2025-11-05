@@ -149,7 +149,7 @@ header {
   align-items: center;
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--muted);
+  color: var(--accent-2);
   padding: 16px 24px;
   border-radius: 16px;
   margin: 16px auto;
