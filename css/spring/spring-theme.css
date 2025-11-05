@@ -6,7 +6,7 @@
   --accent-2: #A8E6CF;
   --card: rgba(255, 255, 255, 0.8);
   --glass: rgba(255, 255, 255, 0.5);
-  --muted: #ffe7e9;
+  --muted: #333333;
   --radius: 24px;
   --glow: 0 4px 14px rgba(255, 195, 200, 0.35);
 }
