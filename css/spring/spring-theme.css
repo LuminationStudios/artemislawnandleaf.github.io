@@ -6,7 +6,7 @@
   --accent-2: #ffd27f;
   --card: rgba(255, 255, 255, 0.8);
   --glass: rgba(255, 255, 255, 0.5);
-  --muted: #8b6b52;
+  --muted: #ffe7e9;
   --radius: 24px;
   --glow: 0 4px 14px rgba(255, 180, 120, 0.35);
 }
@@ -67,8 +67,8 @@ header {
 
 .nav-links a:hover {
   background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-  color: #5a3c2a;
-  box-shadow: 0 0 10px rgba(255, 184, 140, 0.6);
+  color: #d90166;
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
   transform: translateY(-1px);
 }
 
