@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Artemis Lawn & Leaf</title>
-  <meta name="description" content="Artemis Lawn & Leaf — affordable seasonal yard care and cleanup options" /> 
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Artemis Lawn & Leaf — Calendar</title>
   <link rel="icon" href="logo/snowicon.svg" type="image/svg+xml">
-  
-  <!-- Base CSS -->
-  <link rel="stylesheet" href="css/spring/spring-theme.css">
-  <link rel="stylesheet" href="css/spring/spring-main.css">
 
+  <!-- Base CSS -->
+  <!--<link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/calendar.css">-->
+  
   <!-- Seasonal CSS Loader -->
-  <!--<script src="js/seasonal.js"></script>-->
+  <script src="js/seasonal.js"></script>
 
   <!-- Other JS -->
-  <script src="js/navbar.js" defer></script>
-  <script src="js/banner.js" defer></script>
-  <script src="js/seasonal-services.js" defer></script>
+  <script src="js/calendarnav.js" defer></script>
+  <script src="js/calendar.js" defer></script>
 </head>
 
-
 <body>
-
   <!-- 🌿 Header -->
-  <header class="header">
+  <header class="sticky-header">
     <div class="header-inner container">
       <div class="brand">
         <div class="logo">
@@ -37,47 +34,40 @@
     </div>
   </header>
 
-  <!-- ❄️ Seasonal Banner -->
-  <div id="banner" class="banner"></div>
+  <!-- 🗓 Calendar Title -->
+  <h1 class="container" style="text-align:center;">Calendar</h1>
 
-  <!-- 🌸 Main Content -->
-  <main>
+  <!-- 🌿 Calendar Container -->
+  <div id="calendar-container" class="container">
+    <div id="calendar-nav">
+      <button id="prevMonth">&lt; Previous</button>
+      <h2 id="monthYear"></h2>
+      <button id="nextMonth">Next &gt;</button>
+    </div>
 
-<!-- Hero Section -->
-<section id="home" class="hero container">
-  <div class="hero-card">
-    <h1>Fast, Friendly, Year-Round Lawn Care</h1>
-    <p class="lead">
-      Welcome to <strong>Artemis Lawn & Leaf</strong> — your local lawn care service in the Boise 83713 area.<br>
-      From seasonal cleanups and leaf removal to snow shoveling and year-round yard care, we keep your outdoor space looking its best in every season.<br>
-      Your lawn is part of your home — and we treat it with care. 🌱<br>
-      Sit back, relax, and let us handle the hard work.
-    </p>
+    <div class="weekdays">
+      <div class="weekday">Sun</div>
+      <div class="weekday">Mon</div>
+      <div class="weekday">Tue</div>
+      <div class="weekday">Wed</div>
+      <div class="weekday">Thu</div>
+      <div class="weekday">Fri</div>
+      <div class="weekday">Sat</div>
+    </div>
+
+    <div id="calendar"></div>
   </div>
-  <aside class="hero-card">
 
-  <h3>Contact</h3>
-  <div class="contact">
-    <div class="avatar">AA</div>
-    <div class="info">
-      <div><strong>Artemis Aldrich</strong></div>
-      <div class="phone">Text: (208) 994-5679</div>
-      <div class="phone">artielawnandleaf@gmail.com</div>
+  <!-- 💌 Public Event Modal -->
+  <div id="eventModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">X</button>
+      <h3 id="modalDate"></h3>
+      <div id="modalEvents"></div>
     </div>
   </div>
-      </aside>
-        </section>
-
-    <!-- Services Section -->
-    <section id="services" class="container">
-      <h2>Services</h2>
-      <div class="services" id="services-grid"></div>
-    </section>
-
-  </main>
 
   <!-- 🌼 Footer -->
   <footer></footer>
-
 </body>
 </html>
