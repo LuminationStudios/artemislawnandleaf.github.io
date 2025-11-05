@@ -2,8 +2,8 @@
    🌸 Background & Base Theme
 =========================== */
 :root {
-  --accent-1: #FFB6C1;
-  --accent-2: #90EE90;
+  --accent-1: #ffbdba;
+  --accent-2: #B2AC88;
   --card: rgba(255, 255, 255, 0.8);
   --glass: rgba(255, 255, 255, 0.5);
   --muted: #ffe7e9;
@@ -296,7 +296,7 @@ footer div:first-child {
 
 footer div:last-child {
   text-align: right;
-  color: #8b7c6f;
+  color: var(--muted);
   font-style: italic;
 }
 
