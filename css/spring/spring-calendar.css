@@ -20,19 +20,19 @@
 #calendar-nav h2 {
   font-size: 1.8rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #FFD1DC, #B5EAD7); /* spring pink → mint */
+  background: linear-gradient(90deg, #DCC6FF, #B5EAD7); /* lavender → mint */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 8px rgba(255, 200, 210, 0.5);
+  text-shadow: 0 0 8px rgba(220, 200, 255, 0.5);
   margin: 0;
 }
 
 #calendar-nav h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #FFB7C5; /* pastel pink */
+  color: #C5B3FF; /* pastel lavender */
   margin-top: 4px;
-  text-shadow: 0 0 5px rgba(200, 230, 210, 0.4);
+  text-shadow: 0 0 5px rgba(180, 230, 210, 0.4);
 }
 
 /* Navigation Buttons */
@@ -43,16 +43,16 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
-  background: linear-gradient(135deg, #FFD1DC, #B5EAD7);
+  background: linear-gradient(135deg, #DCC6FF, #B5EAD7);
   color: #fff;
-  box-shadow: 0 0 12px rgba(255, 200, 210, 0.4);
+  box-shadow: 0 0 12px rgba(220, 200, 255, 0.4);
   transition: all 0.25s ease;
 }
 
 #calendar-nav button:hover {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #FFD1DC, #B5EAD7);
-  box-shadow: 0 0 18px rgba(255, 220, 220, 0.6);
+  background: linear-gradient(135deg, #DCC6FF, #B5EAD7);
+  box-shadow: 0 0 18px rgba(220, 210, 255, 0.6);
 }
 
 #calendar-nav .prev-btn {
@@ -75,19 +75,19 @@
 }
 
 .day {
-  background-color: rgba(255, 223, 220, 0.9);
-  border: 1px solid rgba(255, 223, 220, 0.5);
+  background-color: rgba(220, 198, 255, 0.9); /* lavender main card */
+  border: 1px solid rgba(220, 198, 255, 0.5);
   border-radius: 10px;
   padding: 8px;
   min-height: 80px;
-  box-shadow: 0 4px 15px rgba(255, 230, 220, 0.25);
+  box-shadow: 0 4px 15px rgba(230, 210, 255, 0.25);
   cursor: pointer;
   transition: all 0.2s ease;
   color: #1a1a1a;
 }
 
 .day:hover {
-  background-color: rgba(255, 245, 220, 0.4);
+  background-color: rgba(230, 220, 255, 0.4);
   color: #1a1a1a;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .today {
-  border: 2px solid #A4DE02;
+  border: 2px solid #A4DE02; /* keep mint green highlight */
   box-shadow: 0 0 12px #A4DE02;
 }
 
@@ -128,7 +128,7 @@
 .weekday {
   text-align: center;
   font-weight: bold;
-  color: #FFB347;
+  color: #C7A3FF; /* pastel purple */
 }
 
 /* ------------------------------ */
@@ -148,7 +148,7 @@
 }
 
 .modal-content {
-  background: linear-gradient(180deg, #FFF9E5, #E0F7FA);
+  background: linear-gradient(180deg, #F3E6FF, #E0F7FA); /* lavender → pale cyan */
   border-radius: 16px;
   padding: 24px;
   max-width: 420px;
@@ -162,9 +162,9 @@
 .modal-content h3 {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #FF6F91;
+  color: #C5B3FF;
   margin-bottom: 16px;
-  border-bottom: 2px dashed rgba(255, 200, 210, 0.3);
+  border-bottom: 2px dashed rgba(220, 200, 255, 0.3);
   padding-bottom: 8px;
 }
 
@@ -188,7 +188,7 @@
 }
 
 .event-item strong {
-  color: #FF6F91;
+  color: #C5B3FF;
   font-size: 1rem;
 }
 
@@ -202,9 +202,9 @@
   position: absolute;
   top: 10px;
   right: 12px;
-  background: rgba(255, 150, 180, 0.3);
+  background: rgba(200, 180, 255, 0.3);
   border: none;
-  color: #FF6F91;
+  color: #C5B3FF;
   font-weight: bold;
   border-radius: 50%;
   width: 30px;
@@ -215,7 +215,7 @@
 }
 
 .close-btn:hover {
-  background: linear-gradient(135deg, #FFD1DC, #FF6F91);
+  background: linear-gradient(135deg, #DCC6FF, #C5B3FF);
   color: #fff;
 }
 
