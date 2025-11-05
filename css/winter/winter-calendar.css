@@ -98,7 +98,7 @@
 
 .event {
   color: #1a1a1a !important; /* force darker text */
-  background: rgba(255, 255, 255, 0.85) !important; /* ensure readable background */
+  background: none; /* ensure readable background */
   font-size: 12px;
   padding: 2px 5px;
   border-radius: 5px;
