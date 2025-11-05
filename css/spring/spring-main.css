@@ -1,145 +1,126 @@
-/* =========================== 🌼 Spring Main — Light Blossom Airy =========================== */
-
-/* HERO */
+/* ===========================
+   🌸 Hero Section (Spring)
+=========================== */
 .hero {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 28px;
-  padding: 50px 30px;
-  margin: 40px auto;
-  max-width: 1100px;
-  border-radius: 32px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
   box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
-  backdrop-filter: blur(12px);
-  color: var(--muted);
+  backdrop-filter: blur(10px);
 }
 
 .hero-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
-  border-radius: var(--radius);
-  padding: 28px;
-  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
-  backdrop-filter: blur(8px);
-  color: var(--muted);
-}
-
-.hero-card h1 { font-size: 2.2rem; margin-bottom: 12px; }
-.hero-card p.lead { font-size: 1.1rem; color: #ffdbec; margin-bottom: 16px; }
-.hero-card h3 { font-size: 1.2rem; color: var(--muted); margin-bottom: 12px; }
-.hero-img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25); align-self: stretch; }
-
-/* SERVICES */
-#services {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07));
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius);
-  padding: 50px 30px;
-  margin: 40px auto;
-  max-width: 1100px;
-  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
-  text-align: center;
-  color: var(--muted);
-}
-
-.services { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
-.service {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
-  transition: transform 0.3s, box-shadow 0.3s;
-  backdrop-filter: blur(8px);
-}
-.service:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(255, 160, 200, 0.35); }
-.service h3 { margin-bottom: 8px; color: var(--muted); }
-.service p { color: #ffdbec; line-height: 1.5; font-size: 0.95rem; }
-
-/* PRICING */
-#pricing {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07));
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius);
-  padding: 50px 30px;
-  margin: 40px auto;
-  max-width: 1100px;
-  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
-  text-align: center;
-}
-#pricing h1 {
-  display: inline-block;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.08));
-  padding: 14px 40px;
-  border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
-  font-size: 1.9rem;
-  color: var(--muted);
-  margin-bottom: 16px;
-}
-#pricing .lead { color: #ffdbec; margin-bottom: 32px; }
-
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
-.card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
-  border-radius: var(--radius);
-  padding: 28px;
-  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
-  text-align: center;
-  transition: transform 0.25s, box-shadow 0.25s;
-  backdrop-filter: blur(8px);
-}
-.card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(255, 160, 200, 0.35); }
-.card h2 { margin-bottom: 12px; font-weight: 700; color: var(--muted); }
-.card p { margin-bottom: 12px; color: #ffdbec; line-height: 1.4; }
-.price { font-size: 1.4rem; font-weight: 700; color: #ffb8d8; margin: 14px 0 18px; }
-
-/* QUOTE FORM */
-#quote { display: flex; justify-content: center; align-items: center; padding: 60px 20px; margin: 50px auto; max-width: 900px; }
-.quote-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.08));
-  border-radius: var(--radius);
-  padding: 38px 40px;
-  max-width: 520px;
-  width: 100%;
-  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.08)
+  );
   box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
   backdrop-filter: blur(8px);
 }
-.quote-card h1 { font-size: 1.9rem; margin-bottom: 18px; color: var(--muted); }
-#quoteForm input, #quoteForm textarea, #quoteForm select {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 16px;
-  border: none;
-  margin-bottom: 14px;
-  background: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 4px 14px rgba(255, 160, 200, 0.25);
-  font-size: 1rem;
+
+.hero-card p.lead {
   color: #ffdbec;
 }
+
+.hero-img {
+  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
+}
+
+/* ===========================
+   🌿 Services Section
+=========================== */
+#services {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.07)
+  );
+  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
+}
+
+.service {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.08)
+  );
+  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
+}
+
+.service:hover {
+  box-shadow: 0 14px 36px rgba(255, 160, 200, 0.35);
+}
+
+.service p {
+  color: #ffdbec;
+}
+
+/* ===========================
+   💸 Pricing Section
+=========================== */
+#pricing {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.07)
+  );
+  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
+}
+
+#pricing .lead {
+  color: #ffdbec;
+}
+
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.08)
+  );
+  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
+}
+
+.card:hover {
+  box-shadow: 0 14px 36px rgba(255, 160, 200, 0.35);
+}
+
+.card p {
+  color: #ffdbec;
+}
+
+.price {
+  color: #ffb8d8;
+}
+
+/* ===========================
+   💬 Quote Request Card
+=========================== */
+.quote-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.20),
+    rgba(255, 255, 255, 0.08)
+  );
+  box-shadow: 0 8px 24px rgba(255, 160, 200, 0.25);
+}
+
+#quoteForm input,
+#quoteForm textarea,
+#quoteForm select {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 14px rgba(255, 160, 200, 0.25);
+  color: #ffdbec;
+}
+
 #quoteForm button {
-  margin-top: 12px;
-  padding: 14px 28px;
-  border-radius: 18px;
-  font-size: 1.1rem;
   background: var(--accent-1);
   color: #3b0016;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
   box-shadow: 0 6px 16px rgba(255, 160, 200, 0.35);
 }
-#quoteForm button:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(255, 160, 200, 0.45); }
 
-/* MOBILE */
-@media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; padding: 30px 20px; gap: 20px; text-align: center; }
-  .hero-card { padding: 20px; }
-  .hero-img { max-height: 260px; border-radius: 20px; }
-}
-
-@media (max-width: 480px) {
-  .hero-card h1 { font-size: 1.5rem; }
-  .quote-card { padding: 26px 20px; border-radius: 20px; }
-  #quoteForm button { padding: 12px 22px; font-size: 1rem; border-radius: 16px; }
+#quoteForm button:hover {
+  box-shadow: 0 12px 28px rgba(255, 160, 200, 0.45);
 }
