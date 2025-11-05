@@ -97,17 +97,17 @@
 }
 
 .event {
-  color: #1a1a1a; /* dark charcoal text */
-  background: rgba(255, 255, 255, 0.8); /* frosty light background so it's still cute */
+  color: #1a1a1a !important; /* force darker text */
+  background: rgba(255, 255, 255, 0.85) !important; /* ensure readable background */
   font-size: 12px;
   padding: 2px 5px;
   border-radius: 5px;
   margin-top: 2px;
   display: block;
-  text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
-  font-weight: 600; /* optional: slightly bolder */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
 }
 
 .today {
