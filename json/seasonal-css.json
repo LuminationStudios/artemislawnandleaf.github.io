@@ -15,7 +15,9 @@
       "name": "spring",
       "cssFiles": [
         "css/spring/spring-main.css",
-        "css/spring/spring-theme.css"
+        "css/spring/spring-theme.css",
+        "css/spring/spring-modal.css",
+        "css/spring/spring-calendar.css"
       ],
       "start": "03-02",
       "end": "06-01"
