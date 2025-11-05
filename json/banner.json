@@ -4,6 +4,12 @@
       "text": "❄️ Snow Season is coming! Book your snow removal early!",
       "background": "linear-gradient(90deg, #aab5ee, #bed9fd)",
       "startDate": "2025-10-01",
+      "endDate": "2025-10-31"
+    },
+    {
+      "text": "❄️ Book your Snow Removal Now! Spots are filling up!",
+      "background": "linear-gradient(90deg, #aab5ee, #bed9fd)",
+      "startDate": "2025-11-01",
       "endDate": "2026-02-28"
     },
     {
