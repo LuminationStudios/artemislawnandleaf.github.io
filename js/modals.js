@@ -55,8 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
           modalTitle.textContent = tier.name;
           modalDetails.innerHTML = tier.details
-            .map((d) => `<li>${d.label}: $${d.price}</li>`)
-            .join("");
+  .map((d) => {
+    const notes = d.notes ? ` <span class="notes">(${d.notes})</span>` : "";
+    return `<li>${d.label}: $${d.price}${notes}</li>`;
+  })
+  .join("");
 
           priceModal.classList.add("show");
         }
