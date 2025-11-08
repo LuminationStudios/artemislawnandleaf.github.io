@@ -6,7 +6,7 @@
       "price": "40-850",
       "season": "fallWinter",
       "details": [
-        { "label": "Small Lawn- 1/4 Acre", "price": "40-80", "notes": "1–2 hours" },
+        { "label": "Small Lawn- 1/4 Acre", "price": "60-100", "notes": "1–2 hours" },
         { "label": "Medium Lawn- 1/2 Acre to 1 Acre", "price": "100-300", "notes": "2–3 hours" },
         { "label": "Large Lawn- 1 Acre and More", "price": "450-850", "notes": "3–4 hours" }
       ]
@@ -26,10 +26,10 @@
     {
       "id": "seasonal",
       "name": "Seasonal Contracts",
-      "price": "50+",
+      "price": "30+ See Details",
       "season": "fallWinter",
       "details": [
-        { "label": "Fall Leaf Removal Contract", "price": "40-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
+        { "label": "Fall Leaf Removal Contract", "price": "60-850", "notes": "Weekly visits; varies by yard size & tree coverage" },
         { "label": "Winter Snow Removal Contract", "price": "30-200", "notes": "Weekly or daily driveway, sidewalk, porch clearing" }
       ]
     }
