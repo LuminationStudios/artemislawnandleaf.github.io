@@ -46,11 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
       msg.style.textAlign = "center";
 
       if (res.ok) {
-        msg.textContent = "✅ Quote sent successfully to Discord!";
+        msg.textContent = "✅ Request Submitted!";
         msg.style.color = "#4CAF50";
         form.reset();
       } else {
-        msg.textContent = "⚠️ Failed to send to Discord.";
+        msg.textContent = "⚠️ Request Failed | Please message us @ (208) 994-5679";
         msg.style.color = "#E53935";
       }
 
