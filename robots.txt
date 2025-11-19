@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow GitHub Pages system files
+Disallow: /404.html
+Disallow: /CNAME
+
+# Sitemap location
+Sitemap: https://artielawnandleaf.com/sitemap.xml
